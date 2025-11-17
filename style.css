@@ -1,24 +1,41 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #f7f7f7;
   margin: 0;
-  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f4f8;
 }
+
 .header {
-  background: #005bbb;
+  background: #0a5ccf;
   color: white;
   padding: 20px;
   text-align: center;
 }
-.hero {
-  background: white;
-  padding: 20px;
-  margin: 10px;
-  border-radius: 6px;
+
+.nav {
+  background: #003f87;
+  padding: 10px;
+  text-align: center;
 }
-.block {
+
+.nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.section {
+  padding: 20px;
   background: white;
-  margin: 10px;
+  margin: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.footer {
+  text-align: center;
   padding: 15px;
-  border-radius: 6px;
+  background: #002f66;
+  color: white;
+  margin-top: 20px;
 }

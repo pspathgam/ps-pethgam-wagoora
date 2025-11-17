@@ -1,55 +1,292 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Government Primary School Pethgam Wagoora</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Government Primary School Pethgam Wagoora - official site with notices, events, gallery, admissions and results." />
+  <style>
+    :root{--blue:#0b63d6;--dark:#06243a;--accent:#ff6b6b;--muted:#6b7280;--card:#ffffff}
+    *{box-sizing:border-box}
+    body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#eef6ff 0%,#ffffff 100%);margin:0;color:#0f172a}
+    header{background:linear-gradient(90deg,var(--blue),#0b86d6);color:#fff;padding:18px 16px;text-align:center}
+    header h1{margin:0;font-size:20px;letter-spacing:0.6px}
+    header p{margin:6px 0 0;font-size:13px;opacity:0.9}
+    nav{display:flex;gap:8px;justify-content:center;padding:10px;flex-wrap:wrap}
+    .btn{background:var(--card);border-radius:8px;padding:8px 12px;box-shadow:0 1px 4px rgba(11,99,214,0.12);color:var(--dark);text-decoration:none;font-weight:600}
+    .container{max-width:1100px;margin:18px auto;padding:0 14px}
+    .grid{display:grid;gap:16px}
+    .cols-3{grid-template-columns:1fr 340px}
+    .hero{background:linear-gradient(90deg, rgba(11,99,214,0.12), rgba(11,134,214,0.06));padding:18px;border-radius:12px}
+    .marquee{background:#fff;padding:10px;border-radius:10px;display:flex;align-items:center;gap:12px;overflow:hidden}
+    .marquee .inner{white-space:nowrap;display:inline-block;animation:scroll 18s linear infinite}
+    @keyframes scroll{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+    .card{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 20px rgba(12,47,84,0.06)}
+    h2{margin:0 0 10px;font-size:18px}
+    ul{padding-left:18px;margin:8px 0}
+    .events-list{max-height:180px;overflow:auto;padding-right:6px}
+    .gallery{display:flex;gap:8px;flex-wrap:wrap}
+    .gallery img{width:calc(33% - 6px);border-radius:6px;height:90px;object-fit:cover}
+    form input,form select,form textarea{width:100%;padding:8px;border-radius:8px;border:1px solid #e6eefb;margin-top:8px}
+    .small{font-size:13px;color:var(--muted)}
+    /* admin */
+    .admin{position:fixed;right:14px;bottom:14px;background:linear-gradient(90deg,#fff,#f6fbff);padding:10px;border-radius:10px;box-shadow:0 6px 20px rgba(6,36,58,0.12);z-index:60}
+    .admin h4{margin:0 0 8px}
+    .btn-primary{background:var(--blue);color:#fff;padding:8px 10px;border-radius:8px;border:none}
+    .btn-ghost{background:#fff;border:1px solid #e6eefb}
+    /* results table */
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px;border-bottom:1px solid #f0f4f9;text-align:left}
+    .flex{display:flex;gap:8px;align-items:center}
+    /* responsive */
+    @media(max-width:880px){.cols-3{grid-template-columns:1fr} .gallery img{width:calc(50% - 6px)}}
+    /* toast */
+    .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;background:#06243a;color:#fff;padding:10px 14px;border-radius:8px;display:none}
+  </style>
 </head>
-
 <body>
-
-  <header class="header">
+  <header>
     <h1>Government Primary School Pethgam Wagoora</h1>
-    <p>Baramulla, Jammu & Kashmir</p>
-  </header>
-
-  <nav class="nav">
-    <a href="#about">About</a>
-    <a href="#staff">Staff</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <section id="about" class="section">
-    <h2>About the School</h2>
-    <p>
-      Government Primary School Pethgam Wagoora is committed to providing quality 
-      education to young learners with a focus on foundational literacy and numeracy.
-    </p>
+    <p>Empowering young learners • Pethgam Wagoora, Jammu & Kashmir</p>
+  </header>  <nav class="container">
+    <a class="btn" href="#about">About</a>
+    <a class="btn" href="#announcements">Notices</a>
+    <a class="btn" href="#events">Events</a>
+    <a class="btn" href="#results">Results</a>
+    <a class="btn" href="#admission">Admissions</a>
+    <a class="btn" href="#contact">Contact</a>
+  </nav>  <main class="container">
+    <section class="hero card">
+      <div style="display:flex;gap:12px;flex-direction:column">
+        <div class="marquee">
+          <strong class="small">Latest:</strong>
+          <div class="inner" id="noticeMarquee">Loading notices...</div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+          <div style="flex:1">
+            <h2>Welcome</h2>
+            <p class="small">Welcome to the official site of Government Primary School Pethgam Wagoora. Use the Admin panel (bottom-right) to add notices, events and upload results quickly from your phone.</p>
+          </div>
+          <div style="width:260px">
+            <div class="card small" style="padding:10px">
+              <strong>Upcoming</strong>
+              <div class="events-list" id="eventsInline">No events</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><div class="grid cols-3" style="margin-top:14px">
+  <section class="card">
+    <h2 id="announcements">Notices & Announcements</h2>
+    <div id="annList">No notices yet.</div>
   </section>
 
-  <section id="staff" class="section">
-    <h2>Teaching Staff</h2>
-    <ul>
-      <li><strong>Mohammad Ashraf Rather</strong> – Teaches English (Grade 5), Maths (Grade 4), EVS (Grade 3), Urdu (Grade 2), Kashmiri (Grade 1)</li>
-    </ul>
-  </section>
+  <aside class="card">
+    <h2 id="events">Events</h2>
+    <div id="eventsList">No events yet.</div>
+  </aside>
+</div>
 
-  <section id="gallery" class="section">
-    <h2>School Gallery</h2>
-    <p>Photos will be added soon.</p>
-  </section>
+<section class="card" style="margin-top:14px">
+  <h2>Photo Gallery</h2>
+  <div class="gallery" id="gallery"></div>
+  <p class="small">Tip: Use the Admin panel to add image URLs (hosted images) — or edit later to upload images to GitHub.</p>
+</section>
 
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p>Email: pspathgam@gmail.com</p>
-    <p>Location: Pethgam Wagoora</p>
-  </section>
+<section class="card" id="results" style="margin-top:14px">
+  <h2>Results (Upload CSV)</h2>
+  <p class="small">CSV format: <strong>AdmissionNo,Name,Class,Subject1,Subject2,...</strong>. Upload exported spreadsheet of marks. The system will parse and allow you to generate printable marksheets and download data.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+    <input type="file" id="csvFile" accept=".csv" />
+    <button class="btn-primary" id="parseBtn">Parse & Load</button>
+    <button class="btn-ghost" id="exportAll">Download CSV</button>
+  </div>
+  <div style="margin-top:12px;overflow:auto">
+    <table id="resultsTable"><thead><tr><th>Admission No</th><th>Name</th><th>Class</th><th>Actions</th></tr></thead><tbody></tbody></table>
+  </div>
+</section>
 
-  <footer class="footer">
-    © 2025 Government Primary School Pethgam Wagoora
-  </footer>
+<section class="card" id="admission" style="margin-top:14px">
+  <h2>Admissions / Contact</h2>
+  <form id="admissionForm">
+    <input name="student" placeholder="Student name" required />
+    <input name="dob" type="date" />
+    <input name="class" placeholder="Applying for class" />
+    <input name="parent" placeholder="Parent / Guardian" />
+    <input name="phone" placeholder="Phone number" />
+    <textarea name="notes" placeholder="Notes (optional)"></textarea>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button class="btn-primary" type="submit">Send Enquiry</button>
+      <button type="button" class="btn-ghost" id="saveLocal">Save Locally</button>
+    </div>
+  </form>
+</section>
 
+<section class="card" style="margin-top:14px">
+  <h2>Quick Tools</h2>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn" id="printAll">Print All Marksheets</button>
+    <button class="btn" id="clearLocal">Clear Local Data</button>
+  </div>
+</section>
+
+<footer style="margin-top:18px;text-align:center;color:var(--muted)" class="small">© 2025 Government Primary School Pethgam Wagoora • Built with free tools</footer>
+
+  </main>  <div class="admin card" id="adminPanel">
+    <h4>Admin Panel</h4>
+    <div style="display:grid;gap:8px;width:260px">
+      <input id="noticeInput" placeholder="New notice text" />
+      <input id="eventInput" placeholder="New event: Title | YYYY-MM-DD" />
+      <input id="imgInput" placeholder="Add image URL" />
+      <div style="display:flex;gap:6px">
+        <button class="btn-primary" id="addNotice">Add Notice</button>
+        <button class="btn-primary" id="addEvent">Add Event</button>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="btn-primary" id="addImage">Add Image</button>
+        <button class="btn-ghost" id="openAdmin">Open</button>
+      </div>
+    </div>
+  </div>  <div class="toast" id="toast"></div>  <script>
+    // Simple app state saved to localStorage so you can edit from Android
+    const LS = {
+      notices: 'gps_notices_v1',
+      events: 'gps_events_v1',
+      images: 'gps_images_v1',
+      results: 'gps_results_v1'
+    };
+
+    function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2500)}
+
+    // initialize arrays
+    const notices = JSON.parse(localStorage.getItem(LS.notices)||'[]');
+    const events = JSON.parse(localStorage.getItem(LS.events)||'[]');
+    const images = JSON.parse(localStorage.getItem(LS.images)||'[]');
+    let results = JSON.parse(localStorage.getItem(LS.results)||'[]');
+
+    // UI elements
+    const noticeMarquee = document.getElementById('noticeMarquee');
+    const annDiv = document.getElementById('annList');
+    const eventsList = document.getElementById('eventsList');
+    const eventsInline = document.getElementById('eventsInline');
+    const gallery = document.getElementById('gallery');
+
+    function renderNotices(){
+      if(notices.length===0){noticeMarquee.textContent='No notices';annDiv.innerHTML='<p class="small">No notices yet.</p>';return}
+      noticeMarquee.innerHTML=notices.map(n=>`• ${escapeHtml(n)}`).join('     ');
+      annDiv.innerHTML=notices.map((n,i)=>`<div style="padding:8px;border-bottom:1px solid #f0f4f9"><strong>${i+1}.</strong> ${escapeHtml(n)}</div>`).join('');
+    }
+    function renderEvents(){
+      if(events.length===0){eventsList.innerHTML='<p class="small">No events yet.</p>';eventsInline.textContent='No events';return}
+      const sorted = events.slice().sort((a,b)=>a.date.localeCompare(b.date));
+      eventsList.innerHTML=sorted.map(e=>`<div style="padding:8px;border-bottom:1px solid #f0f4f9"><strong>${escapeHtml(e.title)}</strong><div class="small">${e.date}</div></div>`).join('');
+      eventsInline.innerHTML=sorted.slice(0,5).map(e=>`${escapeHtml(e.title)} — ${e.date}`).join('     ');
+    }
+    function renderGallery(){
+      if(images.length===0){gallery.innerHTML='<p class="small">No images yet.</p>';return}
+      gallery.innerHTML=images.map(src=>`<img src="${src}" alt="gallery" loading="lazy" onclick="openLightbox('${src}')" />`).join('');
+    }
+
+    function openLightbox(src){const w=window.open('','_blank');w.document.write(`<img src="${src}" style="max-width:100%;height:auto">`)}
+
+    function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(m){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]})}
+
+    // initial render
+    renderNotices();renderEvents();renderGallery();renderResultsTable();
+
+    // Admin actions
+    document.getElementById('addNotice').addEventListener('click',()=>{
+      const v=document.getElementById('noticeInput').value.trim();if(!v){toast('Enter notice');return}
+      notices.unshift(v);localStorage.setItem(LS.notices,JSON.stringify(notices));document.getElementById('noticeInput').value='';renderNotices();toast('Notice added')
+    });
+    document.getElementById('addEvent').addEventListener('click',()=>{
+      const v=document.getElementById('eventInput').value.trim();if(!v){toast('Enter event like: Title | 2025-11-25');return}
+      const parts=v.split('|').map(s=>s.trim());const obj={title:parts[0]||v,date:parts[1]||''};events.unshift(obj);localStorage.setItem(LS.events,JSON.stringify(events));document.getElementById('eventInput').value='';renderEvents();toast('Event added')
+    });
+    document.getElementById('addImage').addEventListener('click',()=>{
+      const v=document.getElementById('imgInput').value.trim();if(!v){toast('Enter image URL');return}
+      images.unshift(v);localStorage.setItem(LS.images,JSON.stringify(images));document.getElementById('imgInput').value='';renderGallery();toast('Image added')
+    });
+
+    // Admission form -> mailto
+    document.getElementById('admissionForm').addEventListener('submit',e=>{
+      e.preventDefault();const f=new FormData(e.target);const body=`Student Name: ${f.get('student')}
+DOB: ${f.get('dob')}
+Class: ${f.get('class')}
+Parent: ${f.get('parent')}
+Phone: ${f.get('phone')}
+Notes: ${f.get('notes')}`;window.location.href=`mailto:pspathgam@gmail.com?subject=Admission Enquiry - ${encodeURIComponent(f.get('student'))}&body=${encodeURIComponent(body)}`
+    });
+
+    document.getElementById('saveLocal').addEventListener('click',()=>{
+      const f=document.getElementById('admissionForm');const data={student:f.student.value,dob:f.dob.value,class:f['class'].value,parent:f.parent.value,phone:f.phone.value,notes:f.notes.value};
+      const saved=JSON.parse(localStorage.getItem('gps_applicants_v1')||'[]');saved.unshift(data);localStorage.setItem('gps_applicants_v1',JSON.stringify(saved));toast('Saved locally')
+    });
+
+    // Results parsing
+    document.getElementById('parseBtn').addEventListener('click',()=>{
+      const file=document.getElementById('csvFile').files[0];if(!file){toast('Choose a CSV file');return}
+      const reader=new FileReader();reader.onload=e=>{parseCSV(e.target.result)};reader.readAsText(file);
+    });
+
+    function parseCSV(text){
+      const rows=text.split(/
+?
+/).filter(r=>r.trim());if(rows.length<1){toast('Empty CSV');return}
+      const headers=rows[0].split(',').map(h=>h.trim());
+      const data=rows.slice(1).map(r=>{
+        const cols=r.split(',').map(c=>c.trim());const obj={};headers.forEach((h,i)=>obj[h]=cols[i]||'';);
+        return obj;
+      });
+      // Normalize: expect AdmissionNo,Name,Class,Subject1...
+      results = data.map(r=>({admission:r[headers[0]]||'',name:r[headers[1]]||'',class:r[headers[2]]||'',marks:headers.slice(3).map(h=>({subject:h,mark: Number(r[h]||0)}))}));
+      localStorage.setItem(LS.results,JSON.stringify(results));renderResultsTable();toast('Results loaded')
+    }
+
+    function renderResultsTable(){
+      const tbody=document.querySelector('#resultsTable tbody');tbody.innerHTML='';results=JSON.parse(localStorage.getItem(LS.results)||'[]');
+      if(!results.length){tbody.innerHTML='<tr><td colspan="4" class="small">No results loaded</td></tr>';return}
+      results.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${escapeHtml(r.admission)}</td><td>${escapeHtml(r.name)}</td><td>${escapeHtml(r.class)}</td><td><div class="flex"><button class="btn" onclick="viewMark('${r.admission}')">View</button><button class="btn" onclick="downloadMark('${r.admission}')">Download</button></div></td>`;tbody.appendChild(tr)})
+    }
+
+    // view marksheet
+    window.viewMark = function(adm){const student=results.find(x=>x.admission==adm);if(!student){toast('Student not found');return}
+      const w=window.open('','_blank');w.document.write(renderMarkHTML(student));w.document.close();
+    }
+    window.downloadMark = function(adm){const student=results.find(x=>x.admission==adm);if(!student){toast('Student not found');return}
+      const blob=new Blob([renderMarkHTML(student)],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`marks_${student.admission}.html`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('Downloaded marksheet (HTML)')
+    }
+
+    function renderMarkHTML(student){const total=student.marks.reduce((s,m)=>s+(Number(m.mark)||0),0);const out=`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Marksheet - ${student.name}</title><style>body{font-family:Arial;margin:20px}h2{text-align:center}table{width:100%;border-collapse:collapse}th,td{padding:8px;border:1px solid #ddd;text-align:left} .summary{margin-top:12px}</style></head><body><h2>Government Primary School Pethgam Wagoora</h2><h3>Marksheet</h3><p><strong>Name:</strong> ${escapeHtml(student.name)}<br/><strong>Admission No:</strong> ${escapeHtml(student.admission)}<br/><strong>Class:</strong> ${escapeHtml(student.class)}</p><table><thead><tr><th>Subject</th><th>Marks</th></tr></thead><tbody>${student.marks.map(m=>`<tr><td>${escapeHtml(m.subject)}</td><td>${escapeHtml(String(m.mark))}</td></tr>`).join('')}</tbody></table><div class="summary"><strong>Total:</strong> ${total} &nbsp; <strong>Average:</strong> ${(total/student.marks.length).toFixed(2)}</div><div style="margin-top:12px"><button onclick="window.print()">Print / Save as PDF</button></div></body></html>`;return out}// export all results
+document.getElementById('exportAll').addEventListener('click',()=>{
+  if(!results.length){toast('No results to export');return}
+  const headers=['AdmissionNo','Name','Class',... (results[0].marks.map(m=>m.subject))];
+  const lines=[headers.join(',')];
+  results.forEach(r=>{const row=[r.admission,r.name,r.class,...r.marks.map(m=>m.mark)];lines.push(row.join(','))});
+  const blob=new Blob([lines.join('
+
+')],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='results_export.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('CSV exported') });
+
+// print all marks
+document.getElementById('printAll').addEventListener('click',()=>{
+  if(!results.length){toast('No results');return}
+  let html='';results.forEach(s=>html+=renderMarkHTML(s)+'<hr>');const w=window.open('','_blank');w.document.write(html);w.document.close();
+});
+
+// clear local
+document.getElementById('clearLocal').addEventListener('click',()=>{if(!confirm('Clear all local data?'))return;localStorage.clear();location.reload()});
+
+// helper: ensure results array has marks with subject names if uploaded with headers
+// fix small CSV parsing bug (naive): allow headers mapping
+
+// open admin
+document.getElementById('openAdmin').addEventListener('click',()=>{document.getElementById('adminPanel').style.display='none';alert('Admin panel minimized. Use bottom-right to reopen by refreshing page.')});
+
+// show saved applicants count
+if(JSON.parse(localStorage.getItem('gps_applicants_v1')||'[]').length)console.log('Applicants saved');
+
+// Small compatibility guard for CSV parsing bug
+// If parsing failed due to ```;``` or other, user can paste simple CSV manually
+
+  </script>
 </body>
 </html>

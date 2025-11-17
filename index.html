@@ -1,275 +1,55 @@
-import React, { useState } from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government Primary School Pethgam Wagoora</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-// Government Primary School Pethgam Wagoora - Single-file React site
-// Tailwind CSS classes are used throughout. This file is a ready-to-drop React component
-// for a static front-end. Replace placeholder data/links with your own. Uses simple
-// state-based 'CMS' arrays for announcements, staff, events, gallery, downloads.
+<body>
 
-export default function SchoolWebsite() {
-  // language: 'en' | 'ur' | 'ks' (english, urdu, kashmiri)
-  const [lang, setLang] = useState('en');
+  <header class="header">
+    <h1>Government Primary School Pethgam Wagoora</h1>
+    <p>Baramulla, Jammu & Kashmir</p>
+  </header>
 
-  // basic school metadata (editable)
-  const school = {
-    name: {
-      en: 'Government Primary School Pethgam Wagoora',
-      ur: 'گورنمنٹ پرائمری اسکول پیتھگام واگورہ',
-      ks: 'سرکاری بنیادی مکتب پتھگام واگورہ',
-    },
-    address: 'Pethgam Wagoora, Budgam District, Jammu & Kashmir',
-    email: 'pspathgam@gmail.com',
-    phone: '+91-00000-00000',
-    logoAlt: 'GPS Pethgam Wagoora Logo',
-  };
+  <nav class="nav">
+    <a href="#about">About</a>
+    <a href="#staff">Staff</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-  // translations (small set; expand as needed)
-  const t = {
-    hero: {
-      en: 'Welcome to our school — where learning blossoms!',
-      ur: 'ہمارے اسکول میں خوش آمدید — جہاں تعلیم پروان چڑھتی ہے!',
-      ks: 'ژٔوان ہند سکوٚل مژ ہال — ژٔتھ چھ تعلیم بومٚوونہ!',
-    },
-    announcements: { en: 'Announcements', ur: 'اعلانات', ks: 'اعلان' },
-    events: { en: 'Upcoming Events', ur: 'آنے والے پروگرام', ks: 'آس پٹھہ پروگرام' },
-    gallery: { en: 'Photo Gallery', ur: 'تصویری گیلری', ks: 'تصاویٖر گیلری' },
-    staff: { en: 'Our Staff', ur: 'ہمارا عملہ', ks: 'اَپژ عملہ' },
-    contact: { en: 'Contact Us', ur: 'رابطہ کریں', ks: 'رابطہ کرن' },
-    admission: { en: 'Admissions', ur: 'داخلہ', ks: 'داخلہ' },
-    downloads: { en: 'Downloads', ur: 'ڈاؤنلوڈ', ks: 'داونلوڈ' },
-    donate: { en: 'Support the School', ur: 'اسکول کی مدد کریں', ks: 'سکول سپورٹ' },
-  };
+  <section id="about" class="section">
+    <h2>About the School</h2>
+    <p>
+      Government Primary School Pethgam Wagoora is committed to providing quality 
+      education to young learners with a focus on foundational literacy and numeracy.
+    </p>
+  </section>
 
-  // sample content arrays (edit via simple UI or replace with CMS later)
-  const [announcements, setAnnouncements] = useState([
-    {
-      id: 1,
-      title: { en: 'Winter vacation schedule 2025–26', ur: 'سرمائی تعطیلات شیڈول 2025–26', ks: 'ونتر چھٹیہ شیڈول 2025–26' },
-      date: '2025-12-01',
-      body: {
-        en: 'School will remain closed for winter vacation from December to February. Check Downloads for official circular.',
-        ur: 'اسکول سرمائی تعطیلات کے لیے دسمبر سے فروری تک بند رہے گا۔ سرکاری سرکلر ڈاؤنلوڈز میں دیکھیں۔',
-        ks: 'سکول ونتر چھٹیہ وانہ دسمبر ہند فروری منز بند رہن۔ رسمی سرکلر ڈاؤنلوڈاں منز وون۔',
-      },
-    },
-    {
-      id: 2,
-      title: { en: 'Summative Assessments: Important dates', ur: 'سمیٹیو اسیسمنٹس: اہم تاریخیں', ks: 'سمیٹیو اسیسمنٹس: مهم تاریخ' },
-      date: '2025-10-10',
-      body: {
-        en: 'Summative Assessments (50 marks) begin from October 10 onwards. Check class notices.',
-        ur: 'سمیٹیو اسیسمنٹس (50 نمبر) 10 اکتوبر سے شروع ہو رہے ہیں۔ کلاس نوٹس چیک کریں۔',
-        ks: 'سمیٹیو اسیسمنٹس (50 نمبر) 10 اکتوبر ہند شروع ہون۔ کلاس نوٹس ژانچ کرو۔',
-      },
-    },
-  ]);
+  <section id="staff" class="section">
+    <h2>Teaching Staff</h2>
+    <ul>
+      <li><strong>Mohammad Ashraf Rather</strong> – Teaches English (Grade 5), Maths (Grade 4), EVS (Grade 3), Urdu (Grade 2), Kashmiri (Grade 1)</li>
+    </ul>
+  </section>
 
-  const [events, setEvents] = useState([
-    { id: 1, date: '2025-11-25', title: { en: 'Annual Sports Day', ur: 'سالانہ کھیلوں کا دن', ks: 'سالانہ کھیل دن' } },
-    { id: 2, date: '2025-01-26', title: { en: 'Republic Day Function', ur: 'یوم جمہوریہ تقریب', ks: 'ریپبلک ڈے تقریب' } },
-  ]);
+  <section id="gallery" class="section">
+    <h2>School Gallery</h2>
+    <p>Photos will be added soon.</p>
+  </section>
 
-  const [staff, setStaff] = useState([
-    { id: 1, name: 'Mohammad Ashraf Rather', role: { en: 'Head Teacher', ur: 'ہیڈ ٹیچر', ks: 'ہیڈ ٹیچر' }, subjects: ['English (Grade 5)', 'Maths (Grade 4)'] },
-    { id: 2, name: 'Ms. Ayesha', role: { en: 'Assistant Teacher', ur: 'اسسٹنٹ ٹیچر', ks: 'اسسٹنٹ ٹیچر' }, subjects: ['EVS (Grade 3)'] },
-  ]);
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <p>Email: pspathgam@gmail.com</p>
+    <p>Location: Pethgam Wagoora</p>
+  </section>
 
-  const gallery = [
-    { id: 1, alt: 'Students at assembly', src: 'https://via.placeholder.com/800x500?text=Assembly' },
-    { id: 2, alt: 'Classroom activities', src: 'https://via.placeholder.com/800x500?text=Classroom' },
-  ];
+  <footer class="footer">
+    © 2025 Government Primary School Pethgam Wagoora
+  </footer>
 
-  const downloads = [
-    { id: 1, title: 'School Calendar 2025', url: '#', size: '120KB' },
-    { id: 2, title: 'Holiday List 2025-26 (Govt)', url: '#', size: '80KB' },
-  ];
-
-  // UI helpers
-  function L(keyObj) {
-    return keyObj[lang] || keyObj['en'];
-  }
-
-  function changeLanguage(to) {
-    setLang(to);
-  }
-
-  // small Admission form (client-only; can be wired to Google Forms / email / backend)
-  const [admissionForm, setAdmissionForm] = useState({ name: '', dob: '', classApplying: '', parentName: '', phone: '' });
-  function submitAdmission(e) {
-    e.preventDefault();
-    // For a free website without backend, we open mailto with prefilled content.
-    const subject = encodeURIComponent('Admission enquiry - ' + admissionForm.name);
-    const body = encodeURIComponent(
-      `Student Name: ${admissionForm.name}\nDOB: ${admissionForm.dob}\nApplying For: ${admissionForm.classApplying}\nParent/Guardian: ${admissionForm.parentName}\nPhone: ${admissionForm.phone}`
-    );
-    window.location.href = `mailto:${school.email}?subject=${subject}&body=${body}`;
-  }
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans text-gray-800">
-      <header className="bg-white shadow">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center">LOGO</div>
-            <div>
-              <h1 className="text-lg font-bold">{L(school.name)}</h1>
-              <p className="text-sm text-gray-600">{school.address}</p>
-            </div>
-          </div>
-
-          <nav className="flex items-center gap-4">
-            <button onClick={() => changeLanguage('en')} className={`px-3 py-1 rounded ${lang === 'en' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}>EN</button>
-            <button onClick={() => changeLanguage('ur')} className={`px-3 py-1 rounded ${lang === 'ur' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}>اردو</button>
-            <button onClick={() => changeLanguage('ks')} className={`px-3 py-1 rounded ${lang === 'ks' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}>كشمیری</button>
-
-            <a href={`mailto:${school.email}`} className="text-sm px-3 py-1 rounded bg-green-50 border">{school.email}</a>
-          </nav>
-        </div>
-      </header>
-
-      <main className="max-w-6xl mx-auto px-4 py-8">
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="md:col-span-2 bg-white rounded-lg p-6 shadow">
-            <h2 className="text-2xl font-semibold mb-2">{L({ en: 'Welcome', ur: 'خوش آمدید', ks: 'خوش آمدید' })}</h2>
-            <p className="mb-4">{t.hero[lang]}</p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 bg-gray-50 rounded">
-                <h3 className="font-semibold">{t.announcements[lang]}</h3>
-                <ul className="mt-2 space-y-3 text-sm">
-                  {announcements.map((a) => (
-                    <li key={a.id} className="border-l-4 border-blue-200 pl-3">
-                      <div className="font-medium">{L(a.title)}</div>
-                      <div className="text-xs text-gray-500">{a.date}</div>
-                      <div className="mt-1 text-sm text-gray-700">{a.body[lang]}</div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="p-4 bg-gray-50 rounded">
-                <h3 className="font-semibold">{t.events[lang]}</h3>
-                <ul className="mt-2 space-y-3 text-sm">
-                  {events.map((e) => (
-                    <li key={e.id} className="flex items-start gap-3">
-                      <div className="w-12 text-center">
-                        <div className="text-xs font-bold">{new Date(e.date).toLocaleDateString()}</div>
-                      </div>
-                      <div>
-                        <div className="font-medium">{L(e.title)}</div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <aside className="bg-white rounded-lg p-6 shadow flex flex-col gap-4">
-            <div>
-              <h3 className="font-semibold">{t.contact[lang]}</h3>
-              <p className="text-sm">{school.address}</p>
-              <p className="text-sm">Email: <a href={`mailto:${school.email}`}>{school.email}</a></p>
-              <p className="text-sm">Phone: {school.phone}</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold">{t.admission[lang]}</h3>
-              <p className="text-sm mb-2">{lang === 'en' ? 'Apply / Enquiry form' : lang === 'ur' ? 'درخواست/اطلاع فارم' : 'درخواست فارم'}</p>
-              <form onSubmit={submitAdmission} className="space-y-2">
-                <input className="w-full p-2 border rounded" placeholder={lang==='en'?'Student name':lang==='ur'?'طالب علم کا نام':'طالب علم ناو'} value={admissionForm.name} onChange={(e)=>setAdmissionForm({...admissionForm,name:e.target.value})} required />
-                <input type="date" className="w-full p-2 border rounded" value={admissionForm.dob} onChange={(e)=>setAdmissionForm({...admissionForm,dob:e.target.value})} />
-                <input className="w-full p-2 border rounded" placeholder={lang==='en'?'Class applying for':lang==='ur'?'درجہ برائے داخلہ':'کلاس ہندا داخلہ'} value={admissionForm.classApplying} onChange={(e)=>setAdmissionForm({...admissionForm,classApplying:e.target.value})} />
-                <input className="w-full p-2 border rounded" placeholder={lang==='en'?'Parent/Guardian name':lang==='ur'?'والد/سرپرست کا نام':'والدین ناو'} value={admissionForm.parentName} onChange={(e)=>setAdmissionForm({...admissionForm,parentName:e.target.value})} />
-                <input className="w-full p-2 border rounded" placeholder={lang==='en'?'Phone':lang==='ur'?'فون نمبر':'فون'} value={admissionForm.phone} onChange={(e)=>setAdmissionForm({...admissionForm,phone:e.target.value})} />
-                <button type="submit" className="w-full py-2 rounded bg-blue-600 text-white">{lang==='en'?'Submit':'جمع کرائیں'}</button>
-              </form>
-            </div>
-          </aside>
-        </section>
-
-        <section className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 bg-white rounded-lg p-6 shadow">
-            <h3 className="text-xl font-semibold mb-4">{t.gallery[lang]}</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {gallery.map((g) => (
-                <div key={g.id} className="rounded overflow-hidden shadow">
-                  <img src={g.src} alt={g.alt} className="w-full h-48 object-cover" />
-                  <div className="p-2 text-sm">{g.alt}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <aside className="bg-white rounded-lg p-6 shadow">
-            <h3 className="text-xl font-semibold mb-4">{t.staff[lang]}</h3>
-            <ul className="space-y-3">
-              {staff.map((s) => (
-                <li key={s.id} className="p-2 border rounded">
-                  <div className="font-medium">{s.name}</div>
-                  <div className="text-sm">{L(s.role)}</div>
-                  <div className="text-sm text-gray-600">{s.subjects.join(', ')}</div>
-                </li>
-              ))}
-            </ul>
-          </aside>
-        </section>
-
-        <section className="mt-8 bg-white rounded-lg p-6 shadow">
-          <h3 className="text-xl font-semibold mb-4">{t.downloads[lang]}</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {downloads.map((d) => (
-              <div key={d.id} className="p-3 border rounded flex items-center justify-between">
-                <div>
-                  <div className="font-medium">{d.title}</div>
-                  <div className="text-xs text-gray-500">{d.size}</div>
-                </div>
-                <div>
-                  <a href={d.url} className="px-3 py-1 border rounded text-sm">{lang==='en'?'Download':lang==='ur'?'ڈاؤنلوڈ':'ڈاونلوڈ'}</a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-8 bg-white rounded-lg p-6 shadow">
-          <h3 className="text-xl font-semibold mb-4">{t.contact[lang]}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <p className="mb-2"><strong>{L(school.name)}</strong></p>
-              <p className="mb-1">{school.address}</p>
-              <p className="mb-1">Email: <a href={`mailto:${school.email}`}>{school.email}</a></p>
-              <p className="mb-1">Phone: {school.phone}</p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-2">{lang==='en'?'Send us a message':'ہمیں پیغام بھیجیں'}</h4>
-              <form onSubmit={(e)=>{e.preventDefault(); alert('Message form is client-side only. It will open your mail client.'); window.location.href = `mailto:${school.email}`;}} className="space-y-2">
-                <input required className="w-full p-2 border rounded" placeholder={lang==='en'?'Your name':''} />
-                <input required className="w-full p-2 border rounded" placeholder={lang==='en'?'Your email':''} />
-                <textarea required className="w-full p-2 border rounded" placeholder={lang==='en'?'Message':''} />
-                <button className="py-2 px-4 rounded bg-blue-600 text-white">{lang==='en'?'Send':'ارسال'}</button>
-              </form>
-            </div>
-          </div>
-        </section>
-
-        <footer className="mt-8 py-6 text-center text-sm text-gray-600">
-          <div>© {new Date().getFullYear()} {L(school.name)}. All rights reserved.</div>
-          <div className="mt-2">Designed for Government Primary School Pethgam Wagoora • Built with free tools</div>
-        </footer>
-      </main>
-
-      {/* Simple floating admin helper for editing lists (client-side only) */}
-      <div className="fixed bottom-6 right-6">
-        <details className="bg-white rounded shadow p-3 w-64">
-          <summary className="cursor-pointer font-medium">Admin (Local Edit)</summary>
-          <div className="mt-2 text-xs text-gray-700">
-            <p className="mb-2">This panel lets you edit sample announcements & events locally in the browser. For a proper CMS, connect this to a backend (Netlify CMS, Firebase, Supabase, Airtable, etc.).</p>
-            <button onClick={() => alert('Add announcement: For demo, please edit the code or connect a CMS.')} className="w-full py-1 rounded bg-gray-100">Add Announcement (demo)</button>
-            <button onClick={() => alert('Export content: copy from browser console.')} className="w-full py-1 mt-1 rounded bg-gray-100">Export Content</button>
-          </div>
-        </details>
-      </div>
-    </div>
-  );
-}
+</body>
+</html>

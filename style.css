@@ -1,41 +1,228 @@
+/*
+ * General Styles for Government Primary School Pethgam Wagoora
+ * File: style.css
+ */
+
+/* 1. Global Reset and Base Styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f0f4f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f9;
 }
 
-.header {
-  background: #0a5ccf;
-  color: white;
-  padding: 20px;
-  text-align: center;
+/* Base Container */
+main {
+    padding: 20px 5%;
+    min-height: 70vh;
 }
 
-.nav {
-  background: #003f87;
-  padding: 10px;
-  text-align: center;
+a {
+    text-decoration: none;
+    color: #007bff; /* Primary Link Color (Blue) */
 }
 
-.nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
+a:hover {
+    color: #0056b3;
 }
 
-.section {
-  padding: 20px;
-  background: white;
-  margin: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
 }
 
-.footer {
-  text-align: center;
-  padding: 15px;
-  background: #002f66;
-  color: white;
-  margin-top: 20px;
+/* 2. Header and Navigation */
+header {
+    background: #007bff; /* Deep Blue Header */
+    color: white;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 3. Hero Sections */
+.hero-main {
+    background: url('hero-bg.jpg') no-repeat center center/cover; /* Replace with your image */
+    background-color: #3498db; /* Fallback color */
+    color: white;
+    padding: 60px 5%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.hero-main h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.hero-main p {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #e74c3c; /* Red/Orange CTA */
+    color: white;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.cta-button:hover {
+    background: #c0392b;
+}
+
+/* Sub-page Hero */
+.hero-sub {
+    background-color: #ecf0f1;
+    padding: 40px 5%;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #007bff;
+}
+
+/* 4. Section Styling (General Content Blocks) */
+section {
+    background-color: white;
+    padding: 30px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.school-history p, .mission-vision p, .our-values ul {
+    margin-bottom: 15px;
+}
+
+.our-values ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.our-values ul li {
+    background: #f7f7f7;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-left: 5px solid #007bff;
+}
+
+/* 5. Announcements Page Specific */
+.announcement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.notice {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 6px;
+    transition: box-shadow 0.3s;
+}
+
+.notice:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.notice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.notice-header h3 {
+    margin: 0;
+    color: #007bff;
+}
+
+.notice .date {
+    font-size: 0.9em;
+    color: #7f8c8d;
+}
+
+.notice.urgent {
+    border-left: 5px solid #e74c3c; /* Red border for urgent notices */
+    background-color: #fcecec;
+}
+
+/* 6. Footer */
+footer {
+    background: #2c3e50; /* Dark Footer */
+    color: white;
+    text-align: center;
+    padding: 20px 5%;
+    font-size: 0.9em;
+    margin-top: 30px;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* 7. Responsiveness */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+
+    .hero-main {
+        padding: 40px 5%;
+    }
+
+    .hero-main h1 {
+        font-size: 2em;
+    }
+
+    .notice-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

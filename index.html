@@ -4,105 +4,451 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Government Primary School Pethgam Wagoora</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --brand:#0f62d0;
-    --accent:#28a745;
-    --muted:#6b7280;
+    --bg:#f7fbff;
     --card:#ffffff;
+    --muted:#6b7280;
+    --brand:#0f62d0;
+    --rain1:#ff8a80; /* red */
+    --rain2:#ffd180; /* orange */
+    --rain3:#fff59d; /* yellow */
+    --rain4:#b9f6ca; /* green */
+    --rain5:#80d8ff; /* blue */
+    --rain6:#b388ff; /* purple */
   }
   *{box-sizing:border-box}
-  body{font-family:'Nunito',sans-serif;margin:0;background:#f3f8ff;color:#172b4d;line-height:1.3}
+  body{font-family:'Nunito',sans-serif;margin:0;background:linear-gradient(180deg,#f3f9ff,#fbfcff);color:#102a43}
 
-  /* Header */
-  header.site-header{background:linear-gradient(90deg,var(--brand),#0b4fb0);color:#fff;padding:18px 14px;text-align:center;position:relative}
-  .site-header .logo{width:84px;height:84px;border-radius:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.18);display:block;margin:0 auto 8px}
-  .site-header h1{margin:0;font-size:20px;font-weight:800}
-  .site-header p.sub{margin:6px 0 0;font-size:13px;opacity:0.95}
+/* Header */
+header.site-header{
+  background: linear-gradient(90deg,var(--brand),#0b4fb0);
+  color:#fff;padding:18px 12px;text-align:center;
+  box-shadow:0 6px 18px rgba(11,68,150,0.12);
+}
+.site-header .logo{width:86px;height:86px;border-radius:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.18);display:block;margin:0 auto 8px}
+.site-header h1{margin:0;font-size:20px;font-weight:800}
+.site-header p.sub{margin:6px 0 0;font-size:13px;opacity:0.95}
 
-  /* Top row - time & notifications */
-  .top-row{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:8px 12px;background:#e9f1ff}
-  .clock{font-weight:700;color:#063c8b}
-  .notifications-scroll{flex:1;margin-left:12px;overflow:hidden;border-radius:8px;background:#fff;padding:6px 10px;box-shadow:0 2px 6px rgba(2,6,23,0.06)}
-  .ticker{white-space:nowrap;display:inline-block;animation:scroll-left 18s linear infinite}
-  @keyframes scroll-left{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+/* Top row */
+.top-row{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:8px 12px;background:linear-gradient(90deg,#eef7ff,#ffffff)}
+.clock{font-weight:700;color:#063c8b}
+.notifications-scroll{flex:1;margin-left:12px;overflow:hidden;border-radius:8px;background:linear-gradient(90deg,#fff,#f7fbff);padding:8px 10px;box-shadow:0 2px 6px rgba(2,6,23,0.04)}
+.ticker{white-space:nowrap;display:inline-block;animation:scroll-left 20s linear infinite}
+@keyframes scroll-left{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
 
-  /* Menu */
-  nav.menu{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px;background:#fff;border-bottom:1px solid #e6eefb}
-  nav.menu a{display:inline-block;padding:10px 14px;background:linear-gradient(180deg,#ffffff,#e6f0ff);border-radius:10px;color:var(--brand);text-decoration:none;font-weight:700;box-shadow: 0 6px 0 rgba(10,60,150,0.12);transform:translateY(0);transition:transform .08s ease}
-  nav.menu a:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(10,60,150,0.08)}
-  nav.menu .menu-logo{width:40px;height:40px;border-radius:8px;object-fit:cover;margin-right:8px;vertical-align:middle}
+/* Menu */
+nav.menu{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px;background:transparent;border-bottom:1px solid rgba(15,86,208,0.06)}
+nav.menu a{display:inline-block;padding:8px 14px;background:linear-gradient(180deg,#ffffff,#eef6ff);border-radius:12px;color:var(--brand);text-decoration:none;font-weight:700;box-shadow: 0 6px 0 rgba(10,60,150,0.06)}
+nav.menu a:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(10,60,150,0.04)}
+nav.menu .menu-logo{width:40px;height:40px;border-radius:8px;object-fit:cover;margin-right:8px;vertical-align:middle}
 
-  /* Layout grid */
-  .container{max-width:1100px;margin:18px auto;padding:0 12px;display:grid;grid-template-columns:1fr 320px;gap:18px}
-  @media (max-width:900px){.container{grid-template-columns:1fr}}
+/* Layout */
+.container{max-width:1100px;margin:18px auto;padding:0 12px;display:grid;grid-template-columns:1fr 320px;gap:18px}
+@media (max-width:900px){.container{grid-template-columns:1fr;padding:12px} nav.menu{justify-content:flex-start;overflow:auto}}
 
-  /* Main sections */
-  .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(18,38,86,0.06)}
-  .hero{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px;text-align:center}
-  .hero h2{margin:6px 0 0;color:var(--brand)}
-  .small{color:var(--muted);font-size:14px}
+/* Cards */
+.card{background:var(--card);padding:18px;border-radius:14px;box-shadow:0 8px 20px rgba(12,40,90,0.05)}
+.hero{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px;text-align:center}
+.hero h2{margin:6px 0 0;color:var(--brand)}
+.small{color:var(--muted);font-size:14px}
 
-  /* admission card */
-  .admission-card{max-width:420px;margin:10px auto;padding:18px;border-radius:12px;text-align:center}
-  .btn-3d{display:inline-block;padding:12px 20px;border-radius:12px;background:linear-gradient(180deg,#1b75e6,#154fb2);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 10px 0 rgba(8,45,110,0.15);border:none}
-  .btn-3d:active{transform:translateY(6px);box-shadow:0 4px 0 rgba(8,45,110,0.08)}
+/* Admission card */
+.admission-card{max-width:480px;margin:14px auto;padding:18px;border-radius:12px;text-align:center}
+.btn-3d{
+  display:inline-block;padding:12px 20px;border-radius:14px;
+  background:linear-gradient(180deg,var(--rain5),#2f6fd8);
+  color:#fff;font-weight:900;cursor:pointer;border:none;
+  box-shadow:0 10px 0 rgba(24,88,200,0.12), 0 12px 24px rgba(20,70,160,0.08);
+}
+.btn-3d:active{transform:translateY(6px);box-shadow:0 4px 0 rgba(24,88,200,0.06)}
+.btn-ghost{background:#fff;border:2px solid #e6f0ff;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;color:var(--brand)}
 
-  /* Student profile widget */
-  .profile{display:flex;gap:12px;align-items:center}
-  .profile img{width:86px;height:86px;border-radius:10px;object-fit:cover;border:4px solid #fff;box-shadow:0 6px 14px rgba(12,40,90,0.06)}
-  .profile .meta{flex:1}
+/* Right column news */
+.vertical-news{height:320px;overflow:hidden;border-radius:10px;background:linear-gradient(180deg,#fff,#f7fbff);padding:10px}
+.news-list{display:block;animation:scroll-up 18s linear infinite}
+.news-item{padding:8px 6px;border-bottom:1px dashed #e6eefb}
+@keyframes scroll-up{0%{transform:translateY(0)}50%{transform:translateY(-50%)}100%{transform:translateY(0)}}
 
-  /* right column - news vertical scroller */
-  .right-column{position:relative;display:flex;flex-direction:column;gap:12px}
-  .vertical-news{height:320px;overflow:hidden;border-radius:10px;background:linear-gradient(180deg,#fff,#f7fbff);padding:10px}
-  .news-list{display:block;animation:scroll-up 18s linear infinite}
-  .news-item{padding:8px 6px;border-bottom:1px dashed #e6eefb}
-  @keyframes scroll-up{0%{transform:translateY(0)}50%{transform:translateY(-50%)}100%{transform:translateY(0)}}
+/* Steps */
+.steps{display:flex;gap:8px;margin-top:12px}
+.step{flex:1;padding:10px;border-radius:10px;text-align:center;background:linear-gradient(180deg,#fff,#f5f9ff);color:var(--muted);font-weight:800;box-shadow:0 6px 0 rgba(10,60,150,0.03)}
+.step.active{background:linear-gradient(90deg,var(--rain4),var(--rain5));color:#08306b}
 
-  /* menu pages section placeholders */
-  .grid-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+/* Popup (hidden by default) */
+#formPopup{
+  position: fixed; inset:0; display:none;
+  background: rgba(6,12,30,0.55); z-index:99999;
+  align-items:center; justify-content:center; padding:18px;
+}
+.wizard{
+  width:100%; max-width:980px; border-radius:12px; background:linear-gradient(180deg,#fff,#fbfcff);
+  display:grid; grid-template-columns:1fr 340px; overflow:hidden; box-shadow:0 30px 60px rgba(8,24,64,0.25);
+}
+@media (max-width:920px){ .wizard{grid-template-columns:1fr} .wizard .right{order:2} }
 
-  /* 2-column small list */
-  .list-compact li{margin:6px 0}
+/* Left form */
+.wizard .left{padding:18px 20px 24px}
+.wizard h3{margin:0 0 10px;color:var(--brand);font-size:18px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{font-weight:700;font-size:13px;margin-top:8px;display:block}
+input[type="text"],input[type="tel"],input[type="date"],select,textarea{
+  width:100%; padding:10px;border-radius:8px;border:1px solid #dbe7ff;background:#fff;margin-top:6px;font-size:14px
+}
+textarea{min-height:80px;resize:vertical}
 
-  /* footer */
-  footer{padding:18px;text-align:center;margin-top:18px;background:#eef6ff;border-top:1px solid #e1ecff}
-  
-  /* success message */
-  .submitted{padding:14px;background:linear-gradient(180deg,#e9fff0,#d7fbe4);border-radius:10px;color:#087a3a;font-weight:800;text-align:center}
+/* Right side preview */
+.wizard .right{background:linear-gradient(180deg,#f7fbff,#f3f9ff);padding:16px;border-left:1px solid rgba(15,86,208,0.03)}
+.preview{width:100%;height:220px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px dashed #e6eefb}
 
-  /* small utilities */
-  .muted{color:var(--muted);font-size:13px}
-  .small{font-size:13px;color:var(--muted)}
+/* photo box */
+.preview img{width:100%;height:100%;object-fit:cover}
+
+/* submitted */
+.submitted{padding:14px;background:linear-gradient(180deg,#e9fff0,#d7fbe4);border-radius:10px;color:#087a3a;font-weight:800;text-align:center}
+
+/* utilities */
+.muted{color:var(--muted);font-size:13px}
+.small{font-size:13px;color:var(--muted)}
+
+/* rainbow accents for child-friendly look */
+.rainbar{height:8px;border-radius:8px;margin-top:8px;display:flex;overflow:hidden}
+.rainbar > div{flex:1;height:8px}
+.r1{background:var(--rain1)} .r2{background:var(--rain2)} .r3{background:var(--rain3)}
+.r4{background:var(--rain4)} .r5{background:var(--rain5)} .r6{background:var(--rain6)}
 
 </style>
 </head>
+<body>
+
+<header class="site-header">
+  <img class="logo" src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" alt="School Logo">
+  <h1>Government Primary School Pethgam Wagoora</h1>
+  <p class="sub">Wagoora Baberashi Road — Near Zonal Education Office</p>
+</header>
+
+<!-- Top row -->
+<div class="top-row">
+  <div class="clock" id="liveClock">—</div>
+  <div class="notifications-scroll" aria-hidden="false">
+    <div class="ticker" id="notifTicker">
+      📢 Admissions Open • 🗓 Winter Vacation: 1 Dec — 28 Feb • ⚠️ Check circulars for exam schedule • 🎉 Children's Day programme • 📌 Upload DOB & Aadhaar
+    </div>
+  </div>
+</div>
+
+<!-- Menu -->
+<nav class="menu" role="navigation" aria-label="Main menu">
+  <img class="menu-logo" src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" alt="">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="#" onclick="openForm();return false;">Admissions</a>
+  <a href="student-profile.html">Student Profile</a>
+  <a href="examinations.html">Examinations</a>
+  <a href="staff.html">Staff</a>
+  <a href="circulars.html">Circulars & Orders</a>
+  <a href="certificates.html">Certificates</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<!-- Main -->
+<div class="container">
+  <main>
+    <section class="card hero">
+      <img src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" alt="logo" style="width:110px;border-radius:12px;display:block;margin:0 auto">
+      <h2>Welcome to GPS Pethgam Wagoora</h2>
+      <div class="small">Excellence in foundational education • Nursery to Grade 5</div>
+      <div class="rainbar" aria-hidden="true"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div><div class="r5"></div><div class="r6"></div></div>
+
+      <div class="admission-card card" style="margin-top:16px">
+        <h3 style="margin:0">Online Admission — 2025</h3>
+        <p class="small">Apply online, upload student photo and download a prefilled A4 admission PDF.</p>
+        <div style="margin-top:14px">
+          <button class="btn-3d" onclick="openForm()">Apply Now</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h3>Student Profile</h3>
+      <div style="display:flex;gap:12px;align-items:center">
+        <img src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" style="width:86px;height:86px;border-radius:10px">
+        <div>
+          <div style="font-weight:800">No student selected</div>
+          <div class="muted">Search by PEN on Student Profile page to view details.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h3>Quick Links</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+        <div class="card small"><strong>Examinations</strong><p class="small">FA1–FA6: 5 marks • SA: 50 marks</p></div>
+        <div class="card small"><strong>Staff Profile</strong><p class="small">View teacher details</p></div>
+        <div class="card small"><strong>Circulars & Orders</strong><p class="small">Important administrative circulars</p></div>
+        <div class="card small"><strong>Certificates</strong><p class="small">Bonafide, Transfer, DOB</p></div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="right-column">
+    <div class="card vertical-news">
+      <h4 style="margin:0 0 8px">News, Views & Events</h4>
+      <div class="news-list" id="newsList" aria-live="polite">
+        <div class="news-item"><strong>14 Nov</strong> - Children's Day celebration in school auditorium</div>
+        <div class="news-item"><strong>01 Dec</strong> - Winter vacation begins</div>
+        <div class="news-item"><strong>05 Jan</strong> - Parent Teacher Meeting (Class 1 & 2)</div>
+        <div class="news-item"><strong>20 Feb</strong> - Annual Sports Day practice</div>
+        <div class="news-item"><strong>28 Feb</strong> - School reopens</div>
+        <!-- duplicates to make scroll continuous -->
+        <div class="news-item"><strong>14 Nov</strong> - Children's Day celebration in school auditorium</div>
+        <div class="news-item"><strong>01 Dec</strong> - Winter vacation begins</div>
+        <div class="news-item"><strong>05 Jan</strong> - Parent Teacher Meeting (Class 1 & 2)</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <h4 style="margin-top:0">Notifications</h4>
+      <ul class="list-compact small">
+        <li>📌 Admission forms available online</li>
+        <li>📌 Upload documents: Aadhaar, DOB certificate</li>
+        <li>📌 Contact school for admission timings</li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<footer style="text-align:center;padding:18px;margin-top:18px;background:linear-gradient(180deg,#eef6ff,#e9f4ff)">
+  <div style="font-weight:800">Government Primary School Pethgam Wagoora</div>
+  <div class="small">Wagoora Baberashi Road — Email: pspethgam@gmail.com</div>
+</footer>
+
+<!-- POPUP: TWO-PAGE WIZARD -->
+<div id="formPopup" role="dialog" aria-hidden="true" aria-labelledby="wizardTitle">
+  <div class="wizard" role="document" aria-modal="true">
+    <!-- LEFT: form -->
+    <div class="left" aria-live="polite">
+      <h3 id="wizardTitle">Admission Form — Page 1 of 2</h3>
+
+      <!-- PAGE 1 -->
+      <div id="page1">
+        <div class="row">
+          <div>
+            <label for="sname">Student Full Name (as per Aadhaar)</label>
+            <input id="sname" type="text" placeholder="First Middle Last">
+          </div>
+          <div>
+            <label for="fname">Father's Name</label>
+            <input id="fname" type="text" placeholder="Father's full name">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="mname">Mother's Name</label>
+            <input id="mname" type="text" placeholder="Mother's full name">
+          </div>
+          <div>
+            <label for="gender">Gender</label>
+            <select id="gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="dob">Date of Birth</label>
+            <input id="dob" type="date">
+          </div>
+          <div>
+            <label for="residence">Place / Residence</label>
+            <input id="residence" type="text" placeholder="Village / Address">
+          </div>
+        </div>
+
+        <label>Tehsil / District</label>
+        <div class="row">
+          <div><input id="tehsil" type="text" placeholder="Tehsil"></div>
+          <div><input id="district" type="text" placeholder="District"></div>
+        </div>
+
+        <label for="contact">Father's Contact Number</label>
+        <input id="contact" type="tel" placeholder="10-digit mobile">
+
+        <label for="aadhaar">Aadhaar Number</label>
+        <input id="aadhaar" type="text" placeholder="Optional">
+
+        <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+          <button class="btn-ghost" type="button" onclick="closeForm()">Close</button>
+          <div style="flex:1"></div>
+          <button class="btn-3d" type="button" onclick="nextPage(2)">Next →</button>
+        </div>
+      </div>
+
+      <!-- PAGE 2 -->
+      <div id="page2" style="display:none">
+        <div class="row">
+          <div>
+            <label for="bankacc">Bank Account No.</label>
+            <input id="bankacc" type="text">
+          </div>
+          <div>
+            <label for="ifsc">IFSC Code</label>
+            <input id="ifsc" type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="category">Category</label>
+            <select id="category"><option>GENERAL</option><option>SC</option><option>ST</option><option>OBC</option></select>
+          </div>
+          <div>
+            <label for="blood">Blood Group</label>
+            <input id="blood" type="text">
+          </div>
+        </div>
+
+        <label for="ration">Ration Card Number / Type (if any)</label>
+        <input id="ration" type="text">
+
+        <label for="joining">Class Joining</label>
+        <select id="joining"><option>Nursery</option><option>KG</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+
+        <label for="pen">PEN (for transferring students)</label>
+        <input id="pen" type="text">
+
+        <label for="declaration">Parent Declaration</label>
+        <textarea id="declaration">I declare that the information provided above is true to the best of my knowledge.</textarea>
+
+        <label>Upload Photo (mobile gallery)</label>
+        <input id="photoUpload" type="file" accept="image/*">
+
+        <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+          <div id="photoBox" class="preview"><span class="small muted">No photo</span></div>
+          <div style="flex:1"></div>
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:8px;">
+          <button class="btn-ghost" type="button" onclick="nextPage(1)">← Back</button>
+          <div style="flex:1"></div>
+          <button class="btn-3d" type="button" onclick="submitAdmission()">Submit Now</button>
+        </div>
+      </div>
+
+      <!-- Submission area -->
+      <div id="submittedBox" style="display:none;margin-top:14px">
+        <div class="submitted">✔ Form submitted successfully</div>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:10px">
+          <button class="btn-3d" type="button" onclick="generatePDF()">Download PDF</button>
+          <button class="btn-ghost" type="button" onclick="closeForm()">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: preview & steps -->
+    <aside class="right">
+      <div style="padding:18px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:64px;height:64px;border-radius:8px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center">
+            <img id="previewLogo" src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" style="width:100%;height:100%;object-fit:cover" alt="">
+          </div>
+          <div>
+            <div style="font-weight:800">Admission Form</div>
+            <div class="small muted">Fill all required details carefully</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <div class="steps">
+            <div class="step active" id="step1">1 • Student Details</div>
+            <div class="step" id="step2">2 • Family & Docs</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <div class="small muted">Preview</div>
+          <div style="margin-top:8px">
+            <div class="preview" id="pdfPreviewArea">
+              <div style="text-align:center">
+                <div style="font-weight:800;color:var(--brand)">GPS Pethgam</div>
+                <div class="small muted">PDF will include entered data and uploaded photo</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- jsPDF CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script>
-/* SAFE WIZARD & POPUP CONTROLS - drop into the end of index.html BEFORE </body> */
+/* Live clock */
+function updateClock(){
+  const el = document.getElementById('liveClock');
+  const d = new Date();
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const day = days[d.getDay()];
+  const date = d.toLocaleDateString();
+  const time = d.toLocaleTimeString();
+  if(el) el.textContent = `${day} • ${date} • ${time}`;
+}
+setInterval(updateClock,1000);
+updateClock();
 
-/* Helper: safe console wrapper */
-const safeLog = (...args) => { try { console.log(...args); } catch(e){} };
-
-/* Ensure popup element exists */
-const POPUP_ID = 'formPopup';
-function getPopup(){ return document.getElementById(POPUP_ID); }
-
-/* Make sure buttons inside popup do not accidentally submit any forms */
-function normalizePopupButtons() {
-  const pop = getPopup();
+/* Wizard functions */
+function openForm(){
+  const pop = document.getElementById('formPopup');
   if(!pop) return;
-  // convert <button> without type to type="button"
-  pop.querySelectorAll('button').forEach(b => {
-    if(!b.getAttribute('type')) b.setAttribute('type','button');
-  });
-  // also ensure clickable areas accept pointer events
-  pop.style.pointerEvents = 'auto';
-  const wizard = pop.querySelector('.wizard');
-  if(wizard) wizard.style.pointerEvents = 'auto';
+  pop.style.display = 'flex';
+  pop.setAttribute('aria-hidden','false');
+  showPage(1);
+  // ensure buttons are not submitting form
+  pop.querySelectorAll('button').forEach(b=>{ if(!b.type) b.type='button' });
+  // attach preview handler
+  const file = document.getElementById('photoUpload');
+  if(file && !file._attached){ file.addEventListener('change', handlePreview); file._attached=true; }
+}
+function closeForm(){
+  const pop = document.getElementById('formPopup');
+  if(!pop) return;
+  pop.style.display = 'none';
+  pop.setAttribute('aria-hidden','true');
+  // reset submitted box
+  document.getElementById('submittedBox').style.display = 'none';
+  // reset step visuals
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('step2').classList.remove('active');
+}
+
+/* show page */
+function showPage(n){
+  const p1 = document.getElementById('page1'), p2 = document.getElementById('page2');
+  if(p1) p1.style.display = (n===1?'block':'none');
+  if(p2) p2.style.display = (n===2?'block':'none');
+  document.getElementById('wizardTitle').innerText = `Admission Form — Page ${n} of 2`;
+  document.getElementById('step1').classList.toggle('active', n===1);
+  document.getElementById('step2').classList.toggle('active', n===2);
+}
+
+/* next page alias */
+function nextPage(n){ showPage(n); }
+
+/* photo preview */
+function handlePreview(e){
+  const file = e.target.files && e.target.files[0];
+  const box = document.getElementById('photoBox');
+  if(!box) return;
+  if(!file){ box.innerHTML = '<span class="small muted">No photo</span>'; delete box.dataset.img; return; }
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    box.innerHTML = `<img src="${ev.target.result}" alt="photo">`;
+    box.dataset.img = ev.target.result; // store for PDF
+    if(wizard) wizard.style.pointerEvents = 'auto';
 }
 
 /* Open popup and reset view */

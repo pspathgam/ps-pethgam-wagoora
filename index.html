@@ -1,140 +1,483 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Government Primary School Pethgam Wagoora</title>
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
 
 <style>
-/* GLOBAL */
-body {
-    font-family: 'Nunito', sans-serif;
-    margin: 0;
-    background: #f5f7fa;
+  :root{
+    --brand:#0f62d0;
+    --accent:#28a745;
+    --muted:#6b7280;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;margin:0;background:#f3f8ff;color:#172b4d;line-height:1.3}
+
+  /* Header */
+  header.site-header{background:linear-gradient(90deg,var(--brand),#0b4fb0);color:#fff;padding:18px 14px;text-align:center;position:relative}
+  .site-header .logo{width:84px;height:84px;border-radius:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.18);display:block;margin:0 auto 8px}
+  .site-header h1{margin:0;font-size:20px;font-weight:800}
+  .site-header p.sub{margin:6px 0 0;font-size:13px;opacity:0.95}
+
+  /* Top row - time & notifications */
+  .top-row{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:8px 12px;background:#e9f1ff}
+  .clock{font-weight:700;color:#063c8b}
+  .notifications-scroll{flex:1;margin-left:12px;overflow:hidden;border-radius:8px;background:#fff;padding:6px 10px;box-shadow:0 2px 6px rgba(2,6,23,0.06)}
+  .ticker{white-space:nowrap;display:inline-block;animation:scroll-left 18s linear infinite}
+  @keyframes scroll-left{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+
+  /* Menu */
+  nav.menu{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px;background:#fff;border-bottom:1px solid #e6eefb}
+  nav.menu a{display:inline-block;padding:10px 14px;background:linear-gradient(180deg,#ffffff,#e6f0ff);border-radius:10px;color:var(--brand);text-decoration:none;font-weight:700;box-shadow: 0 6px 0 rgba(10,60,150,0.12);transform:translateY(0);transition:transform .08s ease}
+  nav.menu a:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(10,60,150,0.08)}
+  nav.menu .menu-logo{width:40px;height:40px;border-radius:8px;object-fit:cover;margin-right:8px;vertical-align:middle}
+
+  /* Layout grid */
+  .container{max-width:1100px;margin:18px auto;padding:0 12px;display:grid;grid-template-columns:1fr 320px;gap:18px}
+  @media (max-width:900px){.container{grid-template-columns:1fr}}
+
+  /* Main sections */
+  .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(18,38,86,0.06)}
+  .hero{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px;text-align:center}
+  .hero h2{margin:6px 0 0;color:var(--brand)}
+  .small{color:var(--muted);font-size:14px}
+
+  /* admission card */
+  .admission-card{max-width:420px;margin:10px auto;padding:18px;border-radius:12px;text-align:center}
+  .btn-3d{display:inline-block;padding:12px 20px;border-radius:12px;background:linear-gradient(180deg,#1b75e6,#154fb2);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 10px 0 rgba(8,45,110,0.15);border:none}
+  .btn-3d:active{transform:translateY(6px);box-shadow:0 4px 0 rgba(8,45,110,0.08)}
+
+  /* Student profile widget */
+  .profile{display:flex;gap:12px;align-items:center}
+  .profile img{width:86px;height:86px;border-radius:10px;object-fit:cover;border:4px solid #fff;box-shadow:0 6px 14px rgba(12,40,90,0.06)}
+  .profile .meta{flex:1}
+
+  /* right column - news vertical scroller */
+  .right-column{position:relative;display:flex;flex-direction:column;gap:12px}
+  .vertical-news{height:320px;overflow:hidden;border-radius:10px;background:linear-gradient(180deg,#fff,#f7fbff);padding:10px}
+  .news-list{display:block;animation:scroll-up 18s linear infinite}
+  .news-item{padding:8px 6px;border-bottom:1px dashed #e6eefb}
+  @keyframes scroll-up{0%{transform:translateY(0)}50%{transform:translateY(-50%)}100%{transform:translateY(0)}}
+
+  /* menu pages section placeholders */
+  .grid-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+
+  /* 2-column small list */
+  .list-compact li{margin:6px 0}
+
+  /* footer */
+  footer{padding:18px;text-align:center;margin-top:18px;background:#eef6ff;border-top:1px solid #e1ecff}
+
+  /* popup overlay & form wizard */
+  #formPopup{display:none;position:fixed;inset:0;background:rgba(4,10,30,0.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:12px}
+  .wizard{width:100%;max-width:880px;background:#fff;border-radius:12px;display:grid;grid-template-columns:1fr 360px;overflow:hidden}
+  @media (max-width:900px){.wizard{grid-template-columns:1fr}}
+  .wizard .left{padding:18px 18px 28px}
+  .wizard h3{margin:6px 0 12px;color:var(--brand)}
+  .wizard .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .wizard label{font-weight:700;font-size:13px;margin-top:8px;display:block}
+  .wizard input[type="text"],.wizard input[type="tel"],.wizard input[type="date"],.wizard select,.wizard textarea{width:100%;padding:10px;border:1px solid #d3dceb;border-radius:8px}
+  .wizard textarea{min-height:80px;resize:vertical}
+  .wizard .right{background:#f7fbff;padding:18px;border-left:1px solid #eef6ff}
+  .wizard .preview{width:100%;height:220px;background:#eaf3ff;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .wizard .preview img{max-width:100%;max-height:100%;object-fit:cover}
+  .wizard .steps{display:flex;gap:8px;margin-top:12px}
+  .wizard .step{flex:1;padding:8px;border-radius:8px;text-align:center;background:#f1f7ff;color:var(--muted);font-weight:700}
+  .wizard .step.active{background:linear-gradient(180deg,#dfefff,#cfe4ff);color:var(--brand)}
+
+  .wizard .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+  .btn-ghost{background:#fff;border:2px solid #cfe1ff;padding:10px 14px;border-radius:10px;font-weight:700;color:var(--brand);cursor:pointer}
+
+  /* success message */
+  .submitted{padding:14px;background:linear-gradient(180deg,#e9fff0,#d7fbe4);border-radius:10px;color:#087a3a;font-weight:800;text-align:center}
+
+  /* small utilities */
+  .muted{color:var(--muted);font-size:13px}
+  .small{font-size:13px;color:var(--muted)}
+
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <img class="logo" src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" alt="School Logo">
+  <h1>Government Primary School Pethgam Wagoora</h1>
+  <p class="sub">Wagoora Babareshi Road — Near Zonal Education Office</p>
+</header>
+
+<!-- Top row: clock + horizontal notifications -->
+<div class="top-row">
+  <div class="clock" id="liveClock">—</div>
+  <div class="notifications-scroll">
+    <div class="ticker" id="notifTicker">
+      📢 Admissions Open | 🗓️ Winter Vacation: 1 Dec — 28 Feb | ⚠️ Check circulars for exam schedule | 🎉 Children's Day programme on 14 Nov |
+    </div>
+  </div>
+</div>
+
+<!-- Menu -->
+<nav class="menu">
+  <img class="menu-logo" src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" alt="logo">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="admission.html">Admissions</a>
+  <a href="student-profile.html">Student Profile</a>
+  <a href="examinations.html">Examinations</a>
+  <a href="staff.html">Staff</a>
+  <a href="circulars.html">Circulars & Orders</a>
+  <a href="certificates.html">Certificates</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<!-- Main container -->
+<div class="container">
+
+  <!-- Left main column -->
+  <main>
+
+    <!-- Hero / Admission card -->
+    <section class="card hero">
+      <img src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" alt="logo" style="width:110px;border-radius:12px;display:block;margin:0 auto">
+      <h2>Welcome to GPS Pethgam Wagoora</h2>
+      <div class="small">Excellence in foundational education • Nursery to Grade 5</div>
+
+      <div style="margin-top:14px" class="admission-card card">
+        <h3 style="margin:0 0 6px">Online Admission — 2025</h3>
+        <div class="small">Apply online. Upload student photo. Download pre-filled admission PDF.</div>
+        <div style="margin-top:12px">
+          <button class="btn-3d" onclick="openForm()">Apply Now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Student profile quick -->
+    <section class="card" style="margin-top:14px">
+      <h3>Student Profile</h3>
+      <div class="profile">
+        <img src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" alt="avatar">
+        <div class="meta">
+          <div style="font-weight:800">No student selected</div>
+          <div class="muted">Use Student Profile page to view details or search by PEN</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Examinations / Quick links -->
+    <section class="card" style="margin-top:14px">
+      <h3>Quick Links</h3>
+      <div class="grid-two">
+        <div class="card small">
+          <strong>Examinations</strong>
+          <p class="small">FA1–FA6 (5 marks each) • SA (50 marks)</p>
+        </div>
+        <div class="card small">
+          <strong>Staff Profile</strong>
+          <p class="small">View teacher details and contact</p>
+        </div>
+        <div class="card small">
+          <strong>Circulars & Orders</strong>
+          <p class="small">Important administrative circulars</p>
+        </div>
+        <div class="card small">
+          <strong>Certificates</strong>
+          <p class="small">Download bonafide, transfer, DOB certificates</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Right column (news / events) -->
+  <aside class="right-column">
+
+    <div class="card vertical-news">
+      <h4 style="margin:0 0 8px">News, Views & Events</h4>
+      <div class="news-list" id="newsList">
+        <div class="news-item"><strong>14 Nov</strong> - Children's Day celebration in school auditorium</div>
+        <div class="news-item"><strong>01 Dec</strong> - Winter vacation begins</div>
+        <div class="news-item"><strong>05 Jan</strong> - Parent Teacher Meeting (Class 1 & 2)</div>
+        <div class="news-item"><strong>20 Feb</strong> - Annual Sports Day practice</div>
+        <div class="news-item"><strong>28 Feb</strong> - School reopens</div>
+
+        <!-- duplicated items to create continuous scroll -->
+        <div class="news-item"><strong>14 Nov</strong> - Children's Day celebration in school auditorium</div>
+        <div class="news-item"><strong>01 Dec</strong> - Winter vacation begins</div>
+        <div class="news-item"><strong>05 Jan</strong> - Parent Teacher Meeting (Class 1 & 2)</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top:0">Notifications</h4>
+      <ul class="list-compact">
+        <li>📌 Admission forms available online</li>
+        <li>📌 Upload documents: Aadhaar, DOB certificate</li>
+        <li>📌 Contact school for admission timings</li>
+      </ul>
+    </div>
+
+  </aside>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div style="font-weight:800">Government Primary School Pethgam Wagoora</div>
+  <div class="small">Wagoora Baberashi Road — Near Zonal Education Office • Email: pspethgam@gmail.com</div>
+</footer>
+
+<!-- POPUP — Two-page Admission Wizard -->
+<div id="formPopup" role="dialog" aria-hidden="true">
+  <div class="wizard card">
+
+    <!-- LEFT: form pages -->
+    <div class="left">
+      <h3 id="wizardTitle">Admission Form — Page 1 of 2</h3>
+
+      <!-- PAGE 1 -->
+      <div id="page1">
+        <div class="row">
+          <div>
+            <label>Student Full Name (as per Aadhaar)</label>
+            <input type="text" id="sname" placeholder="First Middle Last">
+          </div>
+          <div>
+            <label>Father's Name</label>
+            <input type="text" id="fname" placeholder="Father's full name">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Mother's Name</label>
+            <input type="text" id="mname" placeholder="Mother's full name">
+          </div>
+          <div>
+            <label>Gender</label>
+            <select id="gender">
+              <option value="">Select</option><option>Male</option><option>Female</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Date of Birth</label>
+            <input type="date" id="dob">
+          </div>
+          <div>
+            <label>Place / Residence</label>
+            <input type="text" id="residence" placeholder="Village / Address">
+          </div>
+        </div>
+
+        <label>Tehsil / District</label>
+        <div class="row">
+          <div><input type="text" id="tehsil" placeholder="Tehsil"></div>
+          <div><input type="text" id="district" placeholder="District"></div>
+        </div>
+
+        <label>Father's Contact Number</label>
+        <input type="tel" id="contact" placeholder="10-digit mobile">
+
+        <label>Aadhaar Number</label>
+        <input type="text" id="aadhaar" placeholder="Optional">
+
+        <div style="margin-top:8px;display:flex;gap:8px;">
+          <button class="btn-ghost" onclick="closeForm()">Close</button>
+          <div style="flex:1"></div>
+          <button class="btn-3d" onclick="nextPage(2)">Next →</button>
+        </div>
+      </div>
+
+      <!-- PAGE 2 -->
+      <div id="page2" style="display:none">
+        <div class="row">
+          <div>
+            <label>Bank Account No.</label>
+            <input type="text" id="bankacc">
+          </div>
+          <div>
+            <label>IFSC Code</label>
+            <input type="text" id="ifsc">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Category</label>
+            <select id="category">
+              <option>GENERAL</option><option>SC</option><option>ST</option><option>OBC</option>
+            </select>
+          </div>
+          <div>
+            <label>Blood Group</label>
+            <input type="text" id="blood">
+          </div>
+        </div>
+
+        <label>Ration Card Number / Type (if any)</label>
+        <input type="text" id="ration">
+
+        <label>Class Joining</label>
+        <select id="joining">
+          <option>Nursery</option><option>KG</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+        </select>
+
+        <label>PEN (for transferring students)</label>
+        <input type="text" id="pen">
+
+        <label>Parent Declaration (short)</label>
+        <textarea id="declaration">I declare that the information provided above is true to the best of my knowledge.</textarea>
+
+        <label>Upload Photo (mobile gallery)</label>
+        <input type="file" id="photoUpload" accept="image/*" onchange="handlePreview(event)">
+
+        <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+          <div id="photoBox" class="preview"><span class="small muted">No photo</span></div>
+          <div style="flex:1"></div>
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:8px;">
+          <button class="btn-ghost" onclick="nextPage(1)">← Back</button>
+          <div style="flex:1"></div>
+          <button class="btn-3d" onclick="submitAdmission()">Submit Now</button>
+        </div>
+      </div>
+
+      <!-- After submission -->
+      <div id="submittedBox" style="display:none;margin-top:12px">
+        <div class="submitted">✔ Form submitted successfully</div>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:10px">
+          <button class="btn-3d" onclick="generatePDF()">Download PDF</button>
+          <button class="btn-ghost" onclick="closeForm()">Close</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: sidebar preview + steps -->
+    <aside class="right">
+      <div style="padding:18px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:64px;height:64px;border-radius:8px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center">
+            <img id="previewLogo" src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div>
+            <div style="font-weight:800">Admission Form</div>
+            <div class="small muted">Fill all required details carefully</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <div class="steps">
+            <div class="step active" id="step1">1 • Student Details</div>
+            <div class="step" id="step2">2 • Family & Docs</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <div class="small muted">Preview</div>
+          <div style="margin-top:8px">
+            <div class="preview" id="pdfPreviewArea">
+              <div style="text-align:center">
+                <div style="font-weight:800;color:var(--brand)">GPS Pethgam</div>
+                <div class="small muted">Preview of PDF will include entered data</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+/* Live clock */
+function updateClock(){
+  const el=document.getElementById('liveClock');
+  const d=new Date();
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const day=days[d.getDay()];
+  const date = d.toLocaleDateString();
+  const time = d.toLocaleTimeString();
+  el.textContent = `${day} • ${date} • ${time}`;
+}
+setInterval(updateClock,1000);
+updateClock();
+
+/* Wizard control */
+function openForm(){
+  document.getElementById('formPopup').style.display='flex';
+  document.getElementById('formPopup').setAttribute('aria-hidden','false');
+  showPage(1);
+}
+function closeForm(){
+  document.getElementById('formPopup').style.display='none';
+  document.getElementById('formPopup').setAttribute('aria-hidden','true');
 }
 
-/* HEADER */
-header {
-    background: #1a73e8;
-    color: white;
-    text-align: center;
-    padding: 25px 10px;
+/* navigate pages */
+function showPage(n){
+  document.getElementById('page1').style.display=(n===1?'block':'none');
+  document.getElementById('page2').style.display=(n===2?'block':'none');
+  document.getElementById('step1').classList.toggle('active', n===1);
+  document.getElementById('step2').classList.toggle('active', n===2);
+  document.getElementById('wizardTitle').innerText = `Admission Form — Page ${n} of 2`;
+}
+function nextPage(n){
+  showPage(n);
 }
 
-header img {
-    width: 80px;
-    margin-bottom: 10px;
+/* photo preview */
+function handlePreview(e){
+  const file = e.target.files[0];
+  const box = document.getElementById('photoBox');
+  if(!file) { box.innerHTML='<span class="small muted">No photo</span>'; return; }
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    box.innerHTML = `<img src="${ev.target.result}" style="width:100%;height:100%;object-fit:cover">`;
+    // store dataURL for PDF
+    box.dataset.img = ev.target.result;
+  };
+  reader.readAsDataURL(file);
 }
 
-.menu {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    background: #0f5ac3;
-    padding: 10px;
+/* simple validation and submit */
+function submitAdmission(){
+  // basic validation example
+  const sname = document.getElementById('sname').value.trim();
+  const fname = document.getElementById('fname').value.trim();
+  const contact = document.getElementById('contact').value.trim();
+  if(!sname || !fname){ alert('Please fill Student and Father name.'); return; }
+  // show submitted UI
+  document.getElementById('page1').style.display='none';
+  document.getElementById('page2').style.display='none';
+  document.getElementById('submittedBox').style.display='block';
 }
 
-.menu a {
-    color: white;
-    text-decoration: none;
-    margin: 8px;
-    padding: 10px 20px;
-    background: #1a73e8;
-    border-radius: 6px;
-    font-weight: 700;
-    transition: 0.3s;
-}
-
-.menu a:hover {
-    background: #0d4da8;
-}
-
-/* SECTIONS */
-.section {
-    padding: 40px 20px;
-    max-width: 1100px;
-    margin: auto;
-}
-
-h2 {
-    text-align: center;
-    color: #0f4ab3;
-    margin-bottom: 20px;
-}
-
-/* ABOUT */
-.about-card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 3px 7px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-/* ADMISSION BUTTON CARD */
-.admission-card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 3px 7px rgba(0,0,0,0.1);
-    text-align: center;
-    max-width: 350px;
-    margin: auto;
-}
-
-.btn {
-    background: #1a73e8;
-    color: white;
-    padding: 10px;
-    border-radius: 6px;
-    margin-top: 15px;
-    cursor: pointer;
-    font-weight: bold;
-    display: inline-block;
-}
-
-.btn:hover { background: #0d4ba3; }
-
-/* POPUP FORM */
-#formPopup {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.form-box {
-    background: white;
-    padding: 25px;
-    width: 90%;
-    max-width: 420px;
-    border-radius: 12px;
-    text-align: center;
-    position: relative;
-}
-
-.form-box input {
-    width: 90%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
-
-.close-btn {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    font-size: 20px;
-    cursor: pointer;
-}
+/* generate two-page PDF using jsPDF */
+async function generatePDF(){
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({ unit:'pt', format:'a4' });
+  const pageW = pdf.internal.pageSize.getWidth();
+  const margin = 36;
+  pdf.setFontSize(14);
+  // --- Page 1 ---
+  pdf.text('GOVERNMENT PRIMARY SCHOOL PETHGAM WAGOORA', pageW/2, 50, {align:'center'});
+  pdf.setFontSize(11);
+  let y = 90;
+  function addLine(label, value){
+    pdf.text(label, margin, y);
+    pdf.text(String(value||''), margin+22}
 
 .success-box {
     display: none;

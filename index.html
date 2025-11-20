@@ -3,122 +3,50 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Government Primary School Pethgam Wagoora</title>
+<title>Government Primary School Pethgam Wagoora — Admissions</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
-
 <style>
   :root{
-    --bg:#f7fbff;
-    --card:#ffffff;
-    --muted:#6b7280;
-    --brand:#0f62d0;
-    --rain1:#ff8a80; /* red */
-    --rain2:#ffd180; /* orange */
-    --rain3:#fff59d; /* yellow */
-    --rain4:#b9f6ca; /* green */
-    --rain5:#80d8ff; /* blue */
-    --rain6:#b388ff; /* purple */
+    --bg:#f7fbff; --card:#ffffff; --muted:#6b7280; --brand:#0f62d0;
+    --rain1:#ff8a80; --rain2:#ffd180; --rain3:#fff59d; --rain4:#b9f6ca; --rain5:#80d8ff; --rain6:#b388ff;
   }
   *{box-sizing:border-box}
   body{font-family:'Nunito',sans-serif;margin:0;background:linear-gradient(180deg,#f3f9ff,#fbfcff);color:#102a43}
-
-/* Header */
-header.site-header{
-  background: linear-gradient(90deg,var(--brand),#0b4fb0);
-  color:#fff;padding:18px 12px;text-align:center;
-  box-shadow:0 6px 18px rgba(11,68,150,0.12);
-}
-.site-header .logo{width:86px;height:86px;border-radius:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.18);display:block;margin:0 auto 8px}
-.site-header h1{margin:0;font-size:20px;font-weight:800}
-.site-header p.sub{margin:6px 0 0;font-size:13px;opacity:0.95}
-
-/* Top row */
-.top-row{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:8px 12px;background:linear-gradient(90deg,#eef7ff,#ffffff)}
-.clock{font-weight:700;color:#063c8b}
-.notifications-scroll{flex:1;margin-left:12px;overflow:hidden;border-radius:8px;background:linear-gradient(90deg,#fff,#f7fbff);padding:8px 10px;box-shadow:0 2px 6px rgba(2,6,23,0.04)}
-.ticker{white-space:nowrap;display:inline-block;animation:scroll-left 20s linear infinite}
-@keyframes scroll-left{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-
-/* Menu */
-nav.menu{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px;background:transparent;border-bottom:1px solid rgba(15,86,208,0.06)}
-nav.menu a{display:inline-block;padding:8px 14px;background:linear-gradient(180deg,#ffffff,#eef6ff);border-radius:12px;color:var(--brand);text-decoration:none;font-weight:700;box-shadow: 0 6px 0 rgba(10,60,150,0.06)}
-nav.menu a:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(10,60,150,0.04)}
-nav.menu .menu-logo{width:40px;height:40px;border-radius:8px;object-fit:cover;margin-right:8px;vertical-align:middle}
-
-/* Layout */
-.container{max-width:1100px;margin:18px auto;padding:0 12px;display:grid;grid-template-columns:1fr 320px;gap:18px}
-@media (max-width:900px){.container{grid-template-columns:1fr;padding:12px} nav.menu{justify-content:flex-start;overflow:auto}}
-
-/* Cards */
-.card{background:var(--card);padding:18px;border-radius:14px;box-shadow:0 8px 20px rgba(12,40,90,0.05)}
-.hero{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px;text-align:center}
-.hero h2{margin:6px 0 0;color:var(--brand)}
-.small{color:var(--muted);font-size:14px}
-
-/* Admission card */
-.admission-card{max-width:480px;margin:14px auto;padding:18px;border-radius:12px;text-align:center}
-.btn-3d{
-  display:inline-block;padding:12px 20px;border-radius:14px;
-  background:linear-gradient(180deg,var(--rain5),#2f6fd8);
-  color:#fff;font-weight:900;cursor:pointer;border:none;
-  box-shadow:0 10px 0 rgba(24,88,200,0.12), 0 12px 24px rgba(20,70,160,0.08);
-}
-.btn-3d:active{transform:translateY(6px);box-shadow:0 4px 0 rgba(24,88,200,0.06)}
-.btn-ghost{background:#fff;border:2px solid #e6f0ff;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;color:var(--brand)}
-
-/* Right column news */
-.vertical-news{height:320px;overflow:hidden;border-radius:10px;background:linear-gradient(180deg,#fff,#f7fbff);padding:10px}
-.news-list{display:block;animation:scroll-up 18s linear infinite}
-.news-item{padding:8px 6px;border-bottom:1px dashed #e6eefb}
-@keyframes scroll-up{0%{transform:translateY(0)}50%{transform:translateY(-50%)}100%{transform:translateY(0)}}
-
-/* Steps */
-.steps{display:flex;gap:8px;margin-top:12px}
-.step{flex:1;padding:10px;border-radius:10px;text-align:center;background:linear-gradient(180deg,#fff,#f5f9ff);color:var(--muted);font-weight:800;box-shadow:0 6px 0 rgba(10,60,150,0.03)}
-.step.active{background:linear-gradient(90deg,var(--rain4),var(--rain5));color:#08306b}
-
-/* Popup (hidden by default) */
-#formPopup{
-  position: fixed; inset:0; display:none;
-  background: rgba(6,12,30,0.55); z-index:99999;
-  align-items:center; justify-content:center; padding:18px;
-}
-.wizard{
-  width:100%; max-width:980px; border-radius:12px; background:linear-gradient(180deg,#fff,#fbfcff);
-  display:grid; grid-template-columns:1fr 340px; overflow:hidden; box-shadow:0 30px 60px rgba(8,24,64,0.25);
-}
-@media (max-width:920px){ .wizard{grid-template-columns:1fr} .wizard .right{order:2} }
-
-/* Left form */
-.wizard .left{padding:18px 20px 24px}
-.wizard h3{margin:0 0 10px;color:var(--brand);font-size:18px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-label{font-weight:700;font-size:13px;margin-top:8px;display:block}
-input[type="text"],input[type="tel"],input[type="date"],select,textarea{
-  width:100%; padding:10px;border-radius:8px;border:1px solid #dbe7ff;background:#fff;margin-top:6px;font-size:14px
-}
-textarea{min-height:80px;resize:vertical}
-
-/* Right side preview */
-.wizard .right{background:linear-gradient(180deg,#f7fbff,#f3f9ff);padding:16px;border-left:1px solid rgba(15,86,208,0.03)}
-.preview{width:100%;height:220px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px dashed #e6eefb}
-
-/* photo box */
-.preview img{width:100%;height:100%;object-fit:cover}
-
-/* submitted */
-.submitted{padding:14px;background:linear-gradient(180deg,#e9fff0,#d7fbe4);border-radius:10px;color:#087a3a;font-weight:800;text-align:center}
-
-/* utilities */
-.muted{color:var(--muted);font-size:13px}
-.small{font-size:13px;color:var(--muted)}
-
-/* rainbow accents for child-friendly look */
-.rainbar{height:8px;border-radius:8px;margin-top:8px;display:flex;overflow:hidden}
-.rainbar > div{flex:1;height:8px}
-.r1{background:var(--rain1)} .r2{background:var(--rain2)} .r3{background:var(--rain3)}
-.r4{background:var(--rain4)} .r5{background:var(--rain5)} .r6{background:var(--rain6)}
-
+  header.site-header{ background: linear-gradient(90deg,var(--brand),#0b4fb0); color:#fff;padding:18px 12px;text-align:center; box-shadow:0 6px 18px rgba(11,68,150,0.12)}
+  .logo{width:86px;height:86px;border-radius:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.18);display:block;margin:0 auto 8px}
+  .site-header h1{margin:0;font-size:20px;font-weight:800}
+  .site-header p.sub{margin:6px 0 0;font-size:13px;opacity:0.95}
+  .container{max-width:1100px;margin:18px auto;padding:0 12px;display:grid;grid-template-columns:1fr 320px;gap:18px}
+  @media (max-width:900px){.container{grid-template-columns:1fr;padding:12px}}
+  .card{background:var(--card);padding:18px;border-radius:14px;box-shadow:0 8px 20px rgba(12,40,90,0.05)}
+  .hero{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px;text-align:center}
+  .hero h2{margin:6px 0 0;color:var(--brand)}
+  .small{color:var(--muted);font-size:14px}
+  .rainbar{height:8px;border-radius:8px;margin-top:8px;display:flex;overflow:hidden}
+  .rainbar > div{flex:1;height:8px}
+  .r1{background:var(--rain1)} .r2{background:var(--rain2)} .r3{background:var(--rain3)}
+  .r4{background:var(--rain4)} .r5{background:var(--rain5)} .r6{background:var(--rain6)}
+  nav.menu{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px;background:transparent;border-bottom:1px solid rgba(15,86,208,0.06)}
+  nav.menu a{display:inline-block;padding:8px 14px;border-radius:12px;color:var(--brand);text-decoration:none;font-weight:700;background:linear-gradient(180deg,#fff,#eef6ff)}
+  .btn-3d{display:inline-block;padding:12px 20px;border-radius:14px;background:linear-gradient(180deg,var(--rain5),#2f6fd8);color:#fff;font-weight:900;cursor:pointer;border:none;box-shadow:0 10px 0 rgba(24,88,200,0.12), 0 12px 24px rgba(20,70,160,0.08)}
+  .btn-ghost{background:#fff;border:2px solid #e6f0ff;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;color:var(--brand)}
+  /* Popup */
+  #formPopup{ position: fixed; inset:0; display:none; background: rgba(6,12,30,0.55); z-index:99999; align-items:center; justify-content:center; padding:18px;}
+  .wizard{ width:100%; max-width:980px; border-radius:12px; background:linear-gradient(180deg,#fff,#fbfcff); display:grid; grid-template-columns:1fr 340px; overflow:hidden; box-shadow:0 30px 60px rgba(8,24,64,0.25);}
+  @media (max-width:920px){ .wizard{grid-template-columns:1fr} .wizard .right{order:2} }
+  .wizard .left{padding:18px 20px 24px}
+  .wizard h3{margin:0 0 10px;color:var(--brand);font-size:18px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  label{font-weight:700;font-size:13px;margin-top:8px;display:block}
+  input[type="text"],input[type="tel"],input[type="date"],select,textarea{ width:100%; padding:10px;border-radius:8px;border:1px solid #dbe7ff;background:#fff;margin-top:6px;font-size:14px}
+  textarea{min-height:80px;resize:vertical}
+  .preview{width:100%;height:220px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px dashed #e6eefb}
+  .submitted{padding:14px;background:linear-gradient(180deg,#e9fff0,#d7fbe4);border-radius:10px;color:#087a3a;font-weight:800;text-align:center}
+  .muted{color:var(--muted);font-size:13px}
+  .small{font-size:13px;color:var(--muted)}
+  .steps{display:flex;gap:8px;margin-top:12px}
+  .step{flex:1;padding:10px;border-radius:10px;text-align:center;background:linear-gradient(180deg,#fff,#f5f9ff);color:var(--muted);font-weight:800;box-shadow:0 6px 0 rgba(10,60,150,0.03)}
+  .step.active{background:linear-gradient(90deg,var(--rain4),var(--rain5));color:#08306b}
 </style>
 </head>
 <body>
@@ -129,31 +57,14 @@ textarea{min-height:80px;resize:vertical}
   <p class="sub">Wagoora Baberashi Road — Near Zonal Education Office</p>
 </header>
 
-<!-- Top row -->
-<div class="top-row">
-  <div class="clock" id="liveClock">—</div>
-  <div class="notifications-scroll" aria-hidden="false">
-    <div class="ticker" id="notifTicker">
-      📢 Admissions Open • 🗓 Winter Vacation: 1 Dec — 28 Feb • ⚠️ Check circulars for exam schedule • 🎉 Children's Day programme • 📌 Upload DOB & Aadhaar
-    </div>
-  </div>
-</div>
-
-<!-- Menu -->
 <nav class="menu" role="navigation" aria-label="Main menu">
   <img class="menu-logo" src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" alt="">
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
+  <a href="#">Home</a>
+  <a href="#">About</a>
   <a href="#" onclick="openForm();return false;">Admissions</a>
-  <a href="student-profile.html">Student Profile</a>
-  <a href="examinations.html">Examinations</a>
-  <a href="staff.html">Staff</a>
-  <a href="circulars.html">Circulars & Orders</a>
-  <a href="certificates.html">Certificates</a>
-  <a href="contact.html">Contact</a>
+  <a href="#">Contact</a>
 </nav>
 
-<!-- Main -->
 <div class="container">
   <main>
     <section class="card hero">
@@ -170,52 +81,16 @@ textarea{min-height:80px;resize:vertical}
         </div>
       </div>
     </section>
-
-    <section class="card" style="margin-top:14px">
-      <h3>Student Profile</h3>
-      <div style="display:flex;gap:12px;align-items:center">
-        <img src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" style="width:86px;height:86px;border-radius:10px">
-        <div>
-          <div style="font-weight:800">No student selected</div>
-          <div class="muted">Search by PEN on Student Profile page to view details.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="card" style="margin-top:14px">
-      <h3>Quick Links</h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
-        <div class="card small"><strong>Examinations</strong><p class="small">FA1–FA6: 5 marks • SA: 50 marks</p></div>
-        <div class="card small"><strong>Staff Profile</strong><p class="small">View teacher details</p></div>
-        <div class="card small"><strong>Circulars & Orders</strong><p class="small">Important administrative circulars</p></div>
-        <div class="card small"><strong>Certificates</strong><p class="small">Bonafide, Transfer, DOB</p></div>
-      </div>
-    </section>
   </main>
 
   <aside class="right-column">
     <div class="card vertical-news">
       <h4 style="margin:0 0 8px">News, Views & Events</h4>
-      <div class="news-list" id="newsList" aria-live="polite">
-        <div class="news-item"><strong>14 Nov</strong> - Children's Day celebration in school auditorium</div>
+      <div class="news-list" aria-live="polite">
+        <div class="news-item"><strong>14 Nov</strong> - Children's Day celebration</div>
         <div class="news-item"><strong>01 Dec</strong> - Winter vacation begins</div>
-        <div class="news-item"><strong>05 Jan</strong> - Parent Teacher Meeting (Class 1 & 2)</div>
-        <div class="news-item"><strong>20 Feb</strong> - Annual Sports Day practice</div>
-        <div class="news-item"><strong>28 Feb</strong> - School reopens</div>
-        <!-- duplicates to make scroll continuous -->
-        <div class="news-item"><strong>14 Nov</strong> - Children's Day celebration in school auditorium</div>
-        <div class="news-item"><strong>01 Dec</strong> - Winter vacation begins</div>
-        <div class="news-item"><strong>05 Jan</strong> - Parent Teacher Meeting (Class 1 & 2)</div>
+        <div class="news-item"><strong>05 Jan</strong> - Parent Teacher Meeting</div>
       </div>
-    </div>
-
-    <div class="card" style="margin-top:12px">
-      <h4 style="margin-top:0">Notifications</h4>
-      <ul class="list-compact small">
-        <li>📌 Admission forms available online</li>
-        <li>📌 Upload documents: Aadhaar, DOB certificate</li>
-        <li>📌 Contact school for admission timings</li>
-      </ul>
     </div>
   </aside>
 </div>
@@ -228,11 +103,9 @@ textarea{min-height:80px;resize:vertical}
 <!-- POPUP: TWO-PAGE WIZARD -->
 <div id="formPopup" role="dialog" aria-hidden="true" aria-labelledby="wizardTitle">
   <div class="wizard" role="document" aria-modal="true">
-    <!-- LEFT: form -->
     <div class="left" aria-live="polite">
       <h3 id="wizardTitle">Admission Form — Page 1 of 2</h3>
 
-      <!-- PAGE 1 -->
       <div id="page1">
         <div class="row">
           <div>
@@ -286,7 +159,6 @@ textarea{min-height:80px;resize:vertical}
         </div>
       </div>
 
-      <!-- PAGE 2 -->
       <div id="page2" style="display:none">
         <div class="row">
           <div>
@@ -337,7 +209,6 @@ textarea{min-height:80px;resize:vertical}
         </div>
       </div>
 
-      <!-- Submission area -->
       <div id="submittedBox" style="display:none;margin-top:14px">
         <div class="submitted">✔ Form submitted successfully</div>
         <div style="display:flex;gap:8px;justify-content:center;margin-top:10px">
@@ -347,7 +218,6 @@ textarea{min-height:80px;resize:vertical}
       </div>
     </div>
 
-    <!-- RIGHT: preview & steps -->
     <aside class="right">
       <div style="padding:18px">
         <div style="display:flex;align-items:center;gap:12px">
@@ -383,33 +253,33 @@ textarea{min-height:80px;resize:vertical}
   </div>
 </div>
 
-<!-- jsPDF CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- pdf-lib (for editing existing PDF in-browser) -->
+<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
 <script>
-/* Live clock */
+/* Path to the uploaded PDF template (use exactly this path in your environment) */
+const TEMPLATE_PDF_URL = '/mnt/data/NEW ADMISSION FORM PS Pethgam.pdf';
+
+/* live clock */
 function updateClock(){
   const el = document.getElementById('liveClock');
+  if(!el) return;
   const d = new Date();
   const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const day = days[d.getDay()];
-  const date = d.toLocaleDateString();
-  const time = d.toLocaleTimeString();
-  if(el) el.textContent = `${day} • ${date} • ${time}`;
+  el.textContent = `${days[d.getDay()]} • ${d.toLocaleDateString()} • ${d.toLocaleTimeString()}`;
 }
 setInterval(updateClock,1000);
-updateClock();
 
-/* Wizard functions */
+/* Global in-memory store for the form */
+const formState = { photoDataUrl: null };
+
 function openForm(){
   const pop = document.getElementById('formPopup');
   if(!pop) return;
   pop.style.display = 'flex';
   pop.setAttribute('aria-hidden','false');
   showPage(1);
-  // ensure buttons are not submitting form
-  pop.querySelectorAll('button').forEach(b=>{ if(!b.type) b.type='button' });
-  // attach preview handler
+  // attach preview handler (only once)
   const file = document.getElementById('photoUpload');
   if(file && !file._attached){ file.addEventListener('change', handlePreview); file._attached=true; }
 }
@@ -418,14 +288,13 @@ function closeForm(){
   if(!pop) return;
   pop.style.display = 'none';
   pop.setAttribute('aria-hidden','true');
-  // reset submitted box
   document.getElementById('submittedBox').style.display = 'none';
-  // reset step visuals
+  document.getElementById('page1').style.display = 'block';
+  document.getElementById('page2').style.display = 'none';
   document.getElementById('step1').classList.add('active');
   document.getElementById('step2').classList.remove('active');
 }
 
-/* show page */
 function showPage(n){
   const p1 = document.getElementById('page1'), p2 = document.getElementById('page2');
   if(p1) p1.style.display = (n===1?'block':'none');
@@ -434,106 +303,175 @@ function showPage(n){
   document.getElementById('step1').classList.toggle('active', n===1);
   document.getElementById('step2').classList.toggle('active', n===2);
 }
-
-/* next page alias */
 function nextPage(n){ showPage(n); }
 
-/* photo preview */
+/* Photo preview handler */
 function handlePreview(e){
   const file = e.target.files && e.target.files[0];
   const box = document.getElementById('photoBox');
   if(!box) return;
-  if(!file){ box.innerHTML = '<span class="small muted">No photo</span>'; delete box.dataset.img; return; }
+  if(!file){ box.innerHTML = '<span class="small muted">No photo</span>'; formState.photoDataUrl = null; return; }
   const reader = new FileReader();
   reader.onload = function(ev){
-    box.innerHTML = `<img src="${ev.target.result}" alt="photo">`;
-    box.dataset.img = ev.target.result; // store for PDF
+    box.innerHTML = `<img src="${ev.target.result}" alt="photo" style="width:100%;height:100%;object-fit:cover">`;
+    formState.photoDataUrl = ev.target.result;
   };
   reader.readAsDataURL(file);
 }
 
-/* submit (basic validation) */
+/* Collect data and show submitted area */
 function submitAdmission(){
-  const sname = (document.getElementById('sname')||{value:''}).value.trim();
-  const fname = (document.getElementById('fname')||{value:''}).value.trim();
-  if(!sname || !fname){ alert('Please enter Student full name and Father name.'); return; }
+  // collect fields
+  formState.sname = document.getElementById('sname').value || '';
+  formState.fname = document.getElementById('fname').value || '';
+  formState.mname = document.getElementById('mname').value || '';
+  formState.gender = document.getElementById('gender').value || '';
+  formState.dob = document.getElementById('dob').value || '';
+  formState.residence = document.getElementById('residence').value || '';
+  formState.tehsil = document.getElementById('tehsil').value || '';
+  formState.district = document.getElementById('district').value || '';
+  formState.contact = document.getElementById('contact').value || '';
+  formState.aadhaar = document.getElementById('aadhaar').value || '';
+  formState.bankacc = document.getElementById('bankacc').value || '';
+  formState.ifsc = document.getElementById('ifsc').value || '';
+  formState.category = document.getElementById('category').value || '';
+  formState.blood = document.getElementById('blood').value || '';
+  formState.ration = document.getElementById('ration').value || '';
+  formState.joining = document.getElementById('joining').value || '';
+  formState.pen = document.getElementById('pen').value || '';
+  formState.declaration = document.getElementById('declaration').value || '';
+
   // show submitted box
-  document.getElementById('page1').style.display='none';
-  document.getElementById('page2').style.display='none';
-  document.getElementById('submittedBox').style.display='block';
+  document.getElementById('submittedBox').style.display = 'block';
+  // hide pages
+  document.getElementById('page1').style.display = 'none';
+  document.getElementById('page2').style.display = 'none';
+  // update preview area text
+  const preview = document.getElementById('pdfPreviewArea');
+  preview.innerHTML = `<div style="text-align:left;padding:12px;font-size:13px"><strong>Student:</strong> ${escapeHtml(formState.sname)}<br><strong>Father:</strong> ${escapeHtml(formState.fname)}<br><strong>DOB:</strong> ${escapeHtml(formState.dob)}<br><em>Click Download PDF to get the filled form.</em></div>`;
 }
 
-/* PDF generation (2 A4 pages) */
+/* Utility: escape text for display only */
+function escapeHtml(s){ return (s+'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
+
+/* Generate PDF by loading template and placing text/image on top
+   NOTE: Template URL must be accessible to the browser. */
 async function generatePDF(){
   try{
-    if(!window.jspdf || !window.jspdf.jsPDF){ alert('PDF library not loaded yet. Try again.'); return; }
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({ unit:'pt', format:'a4' });
-    const pageW = pdf.internal.pageSize.getWidth();
-    const margin = 36;
-    pdf.setFontSize(14);
-    // Page 1 title
-    pdf.text('GOVERNMENT PRIMARY SCHOOL PETHGAM WAGOORA', pageW/2, 50, {align:'center'});
-    pdf.setFontSize(11);
-    let y = 90;
-    const fields = [
-      ['Student Name', document.getElementById('sname')?.value],
-      ['Father Name', document.getElementById('fname')?.value],
-      ['Mother Name', document.getElementById('mname')?.value],
-      ['Gender', document.getElementById('gender')?.value],
-      ['Date of Birth', document.getElementById('dob')?.value],
-      ['Residence', document.getElementById('residence')?.value],
-      ['Tehsil', document.getElementById('tehsil')?.value],
-      ['District', document.getElementById('district')?.value],
-      ['Contact', document.getElementById('contact')?.value],
-      ['Aadhaar', document.getElementById('aadhaar')?.value]
-    ];
-    fields.forEach(([label,val])=>{
-      pdf.text(`${label}:`, margin, y);
-      pdf.text(String(val||''), margin + 160, y);
-      y += 18;
-      if(y > pdf.internal.pageSize.getHeight() - 160){ pdf.addPage(); y = 80; }
-    });
-    // add photo top-right
-    const box = document.getElementById('photoBox');
-    const dataUrl = box && box.dataset && box.dataset.img;
-    if(dataUrl){
-      pdf.addImage(dataUrl, 'JPEG', pageW - margin - 140, 100, 120, 160);
+    // ensure we have submission data
+    if(!formState.sname && !formState.fname){
+      alert('Please fill the form and submit before downloading.');
+      return;
     }
-    // signature area
-    const footerY = pdf.internal.pageSize.getHeight() - 120;
-    pdf.text('Parent/Guardian Signature', margin, footerY);
-    pdf.text('Head of Institution', pageW - margin - 160, footerY);
-    pdf.line(margin, footerY + 8, margin + 180, footerY + 8);
-    pdf.line(pageW - margin - 220, footerY + 8, pageW - margin - 20, footerY + 8);
 
-    // Page 2 - APAAR consent
-    pdf.addPage();
-    pdf.setFontSize(14);
-    pdf.text('APAAR Consent & Declaration', pageW/2, 50, {align:'center'});
-    pdf.setFontSize(11);
-    const consent = [
-      'I hereby declare that the information provided above is true to the best of my knowledge.',
-      'I consent to share Aadhaar and demographic information for APAAR ID generation and opening of DigiLocker account for my child.',
-      'I understand UIDAI may perform Aadhaar-based authentication (e-KYC) and share the response with Ministry of Education.'
-    ];
-    let ty = 90;
-    consent.forEach(p=>{
-      const lines = pdf.splitTextToSize(p, pageW - margin*2);
-      pdf.text(lines, margin, ty);
-      ty += lines.length * 16 + 8;
+    // fetch template PDF from provided path
+    const existingPdfBytes = await fetch(TEMPLATE_PDF_URL).then(r=>{
+      if(!r.ok) throw new Error('Cannot load template PDF at ' + TEMPLATE_PDF_URL);
+      return r.arrayBuffer();
     });
-    pdf.save('Admission_GPS_Pethgam.pdf');
+
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
+    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+
+    // We'll write onto page 1 (index 0). If you have 2 pages in template and want to fill page 2, similar steps can be added.
+    const pages = pdfDoc.getPages();
+    const page = pages[0];
+    const { width, height } = page.getSize();
+
+    // choose a readable font and size
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+    // helper to draw text with % placements. xPct, yPct: 0..1
+    function drawTextAt(page, text, xPct, yPct, opts={}){
+      const size = opts.size || 10;
+      const color = opts.color || rgb(0,0,0);
+      const x = xPct * width;
+      const y = yPct * height;
+      page.drawText(text, { x, y, size, font: opts.bold ? fontBold : font, color, maxWidth: opts.maxWidth || (width*0.9) });
+    }
+
+    // approximate placements (tweak if you want)
+    // Note: PDF origin is bottom-left. Using yPct measured from bottom.
+    // Example placements (you may need to adjust these to match your blank form precisely)
+    drawTextAt(page, formState.sname || '', 0.12, 0.78, {size:10});        // Student name row (left)
+    drawTextAt(page, formState.fname || '', 0.12, 0.72, {size:10});        // Father's name
+    drawTextAt(page, formState.mname || '', 0.12, 0.66, {size:10});        // Mother's name
+    drawTextAt(page, formState.residence || '', 0.12, 0.60, {size:9});     // Residence
+    drawTextAt(page, formState.tehsil || '', 0.12, 0.54, {size:9});        // Tehsil
+    drawTextAt(page, formState.district || '', 0.55, 0.54, {size:9});      // District (right side)
+    drawTextAt(page, formState.contact || '', 0.12, 0.48, {size:10});      // Father's Contact
+    drawTextAt(page, formState.aadhaar || '', 0.12, 0.42, {size:9});       // Aadhaar
+    drawTextAt(page, formatDateForPdf(formState.dob) || '', 0.55, 0.42, {size:10}); // DOB in figures (right-ish)
+    drawTextAt(page, formState.bankacc || '', 0.12, 0.34, {size:9});       // Bank account
+    drawTextAt(page, formState.ifsc || '', 0.55, 0.34, {size:9});          // IFSC (right)
+    drawTextAt(page, formState.category || '', 0.12, 0.28, {size:9});      // Category
+    drawTextAt(page, formState.blood || '', 0.55, 0.28, {size:9});         // Blood group
+    drawTextAt(page, formState.ration || '', 0.12, 0.22, {size:9});        // Ration card
+    drawTextAt(page, formState.joining || '', 0.12, 0.16, {size:9});       // Class joining
+    drawTextAt(page, formState.pen || '', 0.55, 0.16, {size:9});           // PEN
+    // Declaration (multi-line)
+    const decl = (formState.declaration||'').slice(0,300);
+    page.drawText(decl, { x: 0.12*width, y: 0.10*height, size:9, font, maxWidth: width*0.76, lineHeight:11 });
+
+    // embed photo if available and place near top-right (approx coords)
+    if(formState.photoDataUrl){
+      // remove data prefix and detect mime
+      const imgData = formState.photoDataUrl;
+      let img;
+      if(imgData.startsWith('data:image/png')) {
+        img = await pdfDoc.embedPng(imgData);
+      } else {
+        // treat as jpeg otherwise
+        img = await pdfDoc.embedJpg(imgData);
+      }
+      // set image size to fit photo box (approx)
+      const imgWidth = 85; // in PDF points ~ adjust as needed
+      const imgHeight = 95;
+      const px = width * 0.72; // x position (from left)
+      const py = height * 0.62; // y position (from bottom)
+      page.drawImage(img, { x: px, y: py, width: imgWidth, height: imgHeight });
+    }
+
+    // Save and download
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Admission_Filled_' + (formState.sname ? formState.sname.replace(/\s+/g,'_') : 'student') + '.pdf';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+
   }catch(err){
-    console.error('PDF error', err);
-    alert('Unable to generate PDF right now.');
+    console.error(err);
+    alert('Error generating PDF: ' + (err.message || err));
   }
 }
 
-/* Accessibility: Esc closes popup */
-document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeForm(); });
+/* small util to format date into DD/MM/YYYY for the DOB field on the form */
+function formatDateForPdf(d){
+  if(!d) return '';
+  try{
+    const dt = new Date(d);
+    const dd = String(dt.getDate()).padStart(2,'0');
+    const mm = String(dt.getMonth()+1).padStart(2,'0');
+    const yy = String(dt.getFullYear());
+    return `${dd}/${mm}/${yy}`;
+  }catch(e){ return d; }
+}
 
+/* Init: attach a dummy clock element if not present */
+(function ensureClock(){
+  if(!document.getElementById('liveClock')){
+    const el = document.createElement('div');
+    el.id = 'liveClock';
+    el.style.display='none';
+    document.body.appendChild(el);
+  }
+})();
 </script>
 </body>
 </html>
-                  

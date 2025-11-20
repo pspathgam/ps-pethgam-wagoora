@@ -1,107 +1,249 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Government Primary School Pethgam Wagoora</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --green:#0C4B33;
-      --gold:#F2C94C;
-      --muted:#666;
-      --bg:#f7f7f7;
-      --maxw:1100px;
-    }
-    body{font-family:Roboto, sans-serif;margin:0;background:var(--bg);color:#222}
-    .topbar{background:var(--green);color:#fff;padding:8px 12px;font-size:14px}
-    .topbar .wrap{max-width:var(--maxw);margin:0 auto;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-    .logo {display:flex;align-items:center;gap:12px}
-    .logo img{height:56px;border-radius:6px}
-    header{background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.08)}
-    .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px}
-    nav a{margin:0 8px;text-decoration:none;color:var(--green);font-weight:600}
-    .hero{max-width:var(--maxw);margin:18px auto;padding:26px;background:#fff;border-radius:8px}
-    .grid{display:grid;grid-template-columns:1fr 320px;gap:18px}
-    .card{background:#fff;padding:14px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
-    footer{max-width:var(--maxw);margin:18px auto;padding:18px;color:var(--muted);font-size:14px}
-    @media(max-width:800px){ .grid{grid-template-columns:1fr} .logo img{height:48px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Government Primary School Pethgam Wagoora</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* GLOBAL */
+body {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    background: #f5f7fa;
+}
+
+/* HEADER */
+header {
+    background: #1a73e8;
+    color: white;
+    text-align: center;
+    padding: 25px 10px;
+}
+
+header img {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: #0f5ac3;
+    padding: 10px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin: 8px;
+    padding: 10px 20px;
+    background: #1a73e8;
+    border-radius: 6px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    background: #0d4da8;
+}
+
+/* SECTIONS */
+.section {
+    padding: 40px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+h2 {
+    text-align: center;
+    color: #0f4ab3;
+    margin-bottom: 20px;
+}
+
+/* ABOUT */
+.about-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* ADMISSION BUTTON CARD */
+.admission-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 350px;
+    margin: auto;
+}
+
+.btn {
+    background: #1a73e8;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.btn:hover { background: #0d4ba3; }
+
+/* POPUP FORM */
+#formPopup {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.form-box {
+    background: white;
+    padding: 25px;
+    width: 90%;
+    max-width: 420px;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+}
+
+.form-box input {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.success-box {
+    display: none;
+    margin-top: 15px;
+    padding: 10px;
+    background: #d4f7d4;
+    border-radius: 8px;
+    color: #0b8c0b;
+    font-weight: bold;
+}
+
+/* FOOTER */
+footer {
+    background: #1a73e8;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin-top: 40px;
+}
+</style>
+
 </head>
 <body>
 
-  <div class="topbar">
-    <div class="wrap">
-      <div>📧 <strong>Email:</strong> pspethgam@gmail.com</div>
-      <div>|</div>
-      <div>🆔 <strong>UDISE:</strong> 01022202207</div>
-      <div>|</div>
-      <div>📞 <strong>Contact:</strong> 7006261694, 9596449881</div>
+<header>
+    <img src="https://raw.githubusercontent.com/pspathgam/ps-pethgam-wagoora/main/assets/images/school-logo.png" alt="School Logo">
+    <h1>Government Primary School Pethgam Wagoora</h1>
+    <p>Nursing to Grade 5 | Samagra Shiksha</p>
+</header>
+
+<!-- MENU -->
+<nav class="menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="admission.html">Admissions</a>
+    <a href="staff.html">Staff</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<!-- ABOUT -->
+<section class="section">
+    <h2>About Our School</h2>
+    <div class="about-card">
+        Government Primary School Pethgam Wagoora provides child-friendly, joyful, 
+        activity-based learning for all students from Nursery to Grade 5.
     </div>
+</section>
+
+<!-- ADMISSION CARD -->
+<section class="section">
+    <h2>📘 Online Admission – 2025</h2>
+
+    <div class="admission-card">
+        <h3>New Admission</h3>
+        <p>Fill the form online, upload photo & download PDF.</p>
+        <div class="btn" onclick="openForm()">Apply Now</div>
+    </div>
+</section>
+
+<!-- POPUP FORM -->
+<div id="formPopup">
+  <div class="form-box">
+
+    <div class="close-btn" onclick="closeForm()">✖</div>
+
+    <h3>Admission Form</h3>
+
+    <input id="studentName" type="text" placeholder="Student Name">
+    <input id="fatherName" type="text" placeholder="Father Name">
+    <input id="motherName" type="text" placeholder="Mother Name">
+    <input id="dob" type="text" placeholder="Date of Birth (DD/MM/YYYY)">
+    <input id="contact" type="text" placeholder="Parent Contact Number">
+
+    <label>Upload Photo</label>
+    <input id="photoUpload" type="file" accept="image/*">
+
+    <div class="btn" onclick="submitForm()">Submit</div>
+
+    <div class="success-box" id="successBox">
+      ✔ Submitted Successfully  
+      <div class="btn" onclick="generatePDF()">Download PDF</div>
+    </div>
+
   </div>
+</div>
 
-  <header>
-    <div class="nav">
-      <div class="logo">
-        <img src="https://pspathgam.github.io/ps-pethgam-wagoora/assets/images/school-logo.png.png" alt="School Logo">
-        <div>
-          <div style="font-weight:600;color:var(--green);font-family:Poppins, sans-serif">Government Primary School</div>
-          <div style="font-size:13px;color:var(--muted)">Pethgam Wagoora</div>
-        </div>
-      </div>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="admissions.html">Admissions</a>
-        <a href="staff.html">Staff</a>
-        <a href="students.html">Students</a>
-        <a href="notices.html">Notices</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
+<footer>
+    © 2025 Government Primary School Pethgam Wagoora
+</footer>
 
-  <main class="hero">
-    <div class="grid">
-      <div>
-        <h1 style="margin-top:0;color:var(--green);font-family:Poppins, sans-serif">Welcome to Government Primary School Pethgam Wagoora</h1>
-        <p style="color:var(--muted)">This is the official website. Use the navigation above to view admissions, staff, notices and student services. The site is under development — more features will be added soon.</p>
+<!-- SCRIPT -->
+<script>
+function openForm() {
+    document.getElementById("formPopup").style.display = "flex";
+}
 
-        <div class="card" style="margin-top:12px">
-          <h3 style="margin:0 0 6px 0">Latest Notice</h3>
-          <p style="margin:0;color:var(--muted)">No notices yet. Add notices via <em>notices.html</em>.</p>
-        </div>
+function closeForm() {
+    document.getElementById("formPopup").style.display = "none";
+}
 
-        <div class="card" style="margin-top:12px">
-          <h3 style="margin:0 0 6px 0">Admissions</h3>
-          <p style="margin:0;color:var(--muted)">Admissions open for Nursery to Class 5. Use Admissions page to download form.</p>
-        </div>
-      </div>
+function submitForm() {
+    document.getElementById("successBox").style.display = "block";
+}
 
-      <aside>
-        <div class="card">
-          <h4 style="margin:0 0 8px 0">Quick links</h4>
-          <ul style="padding-left:18px;margin:0;color:var(--muted)">
-            <li><a href="admissions.html">Admission Form</a></li>
-            <li><a href="notices.html">Notices & Circulars</a></li>
-            <li><a href="contact.html">Contact School</a></li>
-          </ul>
-        </div>
-
-        <div class="card" style="margin-top:12px">
-          <h4 style="margin:0 0 6px 0">School Timings</h4>
-          <p style="margin:0;color:var(--muted)">8:30 AM — 2:00 PM (Mon—Fri)</p>
-        </div>
-      </aside>
-    </div>
-  </main>
-
-  <footer>
-    <div style="max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
-      <div>© Government Primary School Pethgam Wagoora</div>
-      <div>Contact: 7006261694 | Email: pspethgam@gmail.com</div>
-    </div>
-  </footer>
+function generatePDF() {
+    alert("PDF Download will be added later.");
+}
+</script>
 
 </body>
 </html>

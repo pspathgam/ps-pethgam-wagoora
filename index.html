@@ -1,79 +1,107 @@
- <!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Government Primary School Pethgam Wagoora</title>
-
-    <link rel="stylesheet" href="css/dashboard.css" />
-    <link rel="stylesheet" href="css/urdu.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Government Primary School Pethgam Wagoora</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --green:#0C4B33;
+      --gold:#F2C94C;
+      --muted:#666;
+      --bg:#f7f7f7;
+      --maxw:1100px;
+    }
+    body{font-family:Roboto, sans-serif;margin:0;background:var(--bg);color:#222}
+    .topbar{background:var(--green);color:#fff;padding:8px 12px;font-size:14px}
+    .topbar .wrap{max-width:var(--maxw);margin:0 auto;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .logo {display:flex;align-items:center;gap:12px}
+    .logo img{height:56px;border-radius:6px}
+    header{background:#fff;box-shadow:0 1px 6px rgba(0,0,0,0.08)}
+    .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px}
+    nav a{margin:0 8px;text-decoration:none;color:var(--green);font-weight:600}
+    .hero{max-width:var(--maxw);margin:18px auto;padding:26px;background:#fff;border-radius:8px}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:18px}
+    .card{background:#fff;padding:14px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+    footer{max-width:var(--maxw);margin:18px auto;padding:18px;color:var(--muted);font-size:14px}
+    @media(max-width:800px){ .grid{grid-template-columns:1fr} .logo img{height:48px}}
+  </style>
 </head>
-
 <body>
 
-    <!-- Top Bar -->
-    <header class="topbar">
-        <span class="menu-btn" onclick="toggleSidebar()">☰</span>
-        <h1>GPS Pethgam Wagoora</h1>
-        <button class="lang-btn" onclick="toggleLanguage()">اردو / EN</button>
-    </header>
+  <div class="topbar">
+    <div class="wrap">
+      <div>📧 <strong>Email:</strong> pspethgam@gmail.com</div>
+      <div>|</div>
+      <div>🆔 <strong>UDISE:</strong> 01022202207</div>
+      <div>|</div>
+      <div>📞 <strong>Contact:</strong> 7006261694, 9596449881</div>
+    </div>
+  </div>
 
-    <!-- Sidebar -->
-    <aside id="sidebar" class="sidebar">
-        <a href="index.html">Dashboard</a>
-        <a href="pages/announcements.html">Announcements</a>
-        <a href="pages/events.html">Events</a>
-        <a href="pages/results.html">Results</a>
-        <a href="pages/gallery.html">Gallery</a>
-        <a href="pages/staff.html">Staff</a>
-        <a href="pages/about.html">About</a>
-        <a href="pages/contact.html">Contact</a>
-        <a href="pages/admin.html">Admin Panel</a>
-    </aside>
+  <header>
+    <div class="nav">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="School Logo">
+        <div>
+          <div style="font-weight:600;color:var(--green);font-family:Poppins, sans-serif">Government Primary School</div>
+          <div style="font-size:13px;color:var(--muted)">Pethgam Wagoora</div>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="staff.html">Staff</a>
+        <a href="students.html">Students</a>
+        <a href="notices.html">Notices</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Page Content -->
-    <main id="main-content">
+  <main class="hero">
+    <div class="grid">
+      <div>
+        <h1 style="margin-top:0;color:var(--green);font-family:Poppins, sans-serif">Welcome to Government Primary School Pethgam Wagoora</h1>
+        <p style="color:var(--muted)">This is the official website. Use the navigation above to view admissions, staff, notices and student services. The site is under development — more features will be added soon.</p>
 
-        <!-- Announcements Scroller -->
-        <div class="announce-strip">
-            <marquee id="announce-marquee">Loading announcements...</marquee>
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin:0 0 6px 0">Latest Notice</h3>
+          <p style="margin:0;color:var(--muted)">No notices yet. Add notices via <em>notices.html</em>.</p>
         </div>
 
-        <!-- Dashboard Cards -->
-        <section class="cards">
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin:0 0 6px 0">Admissions</h3>
+          <p style="margin:0;color:var(--muted)">Admissions open for Nursery to Class 5. Use Admissions page to download form.</p>
+        </div>
+      </div>
 
-            <div class="card">
-                <h3>Students</h3>
-                <p>Loading...</p>
-            </div>
+      <aside>
+        <div class="card">
+          <h4 style="margin:0 0 8px 0">Quick links</h4>
+          <ul style="padding-left:18px;margin:0;color:var(--muted)">
+            <li><a href="admissions.html">Admission Form</a></li>
+            <li><a href="notices.html">Notices & Circulars</a></li>
+            <li><a href="contact.html">Contact School</a></li>
+          </ul>
+        </div>
 
-            <div class="card">
-                <h3>Staff</h3>
-                <p>6 Teachers</p>
-            </div>
+        <div class="card" style="margin-top:12px">
+          <h4 style="margin:0 0 6px 0">School Timings</h4>
+          <p style="margin:0;color:var(--muted)">8:30 AM — 2:00 PM (Mon—Fri)</p>
+        </div>
+      </aside>
+    </div>
+  </main>
 
-            <div class="card">
-                <h3>Latest Result</h3>
-                <p id="latest-result">Loading...</p>
-            </div>
+  <footer>
+    <div style="max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+      <div>© Government Primary School Pethgam Wagoora</div>
+      <div>Contact: 7006261694 | Email: pspethgam@gmail.com</div>
+    </div>
+  </footer>
 
-            <div class="card">
-                <h3>Upcoming Event</h3>
-                <p id="upcoming-event">Loading...</p>
-            </div>
-
-        </section>
-
-        <!-- Gallery Preview -->
-        <section class="gallery-preview">
-            <h2>Latest Gallery</h2>
-            <div id="preview-gallery" class="gallery-grid">
-                Loading...
-            </div>
-        </section>
-
-    </main>
-
-    <script src="js/dashboard.js"></script>
 </body>
-</html>             
+</html>

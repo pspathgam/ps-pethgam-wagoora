@@ -71,27 +71,7 @@
 
   /* footer */
   footer{padding:18px;text-align:center;margin-top:18px;background:#eef6ff;border-top:1px solid #e1ecff}
-
-  /* popup overlay & form wizard */
-  #formPopup{display:none;position:fixed;inset:0;background:rgba(4,10,30,0.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:12px}
-  .wizard{width:100%;max-width:880px;background:#fff;border-radius:12px;display:grid;grid-template-columns:1fr 360px;overflow:hidden}
-  @media (max-width:900px){.wizard{grid-template-columns:1fr}}
-  .wizard .left{padding:18px 18px 28px}
-  .wizard h3{margin:6px 0 12px;color:var(--brand)}
-  .wizard .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .wizard label{font-weight:700;font-size:13px;margin-top:8px;display:block}
-  .wizard input[type="text"],.wizard input[type="tel"],.wizard input[type="date"],.wizard select,.wizard textarea{width:100%;padding:10px;border:1px solid #d3dceb;border-radius:8px}
-  .wizard textarea{min-height:80px;resize:vertical}
-  .wizard .right{background:#f7fbff;padding:18px;border-left:1px solid #eef6ff}
-  .wizard .preview{width:100%;height:220px;background:#eaf3ff;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .wizard .preview img{max-width:100%;max-height:100%;object-fit:cover}
-  .wizard .steps{display:flex;gap:8px;margin-top:12px}
-  .wizard .step{flex:1;padding:8px;border-radius:8px;text-align:center;background:#f1f7ff;color:var(--muted);font-weight:700}
-  .wizard .step.active{background:linear-gradient(180deg,#dfefff,#cfe4ff);color:var(--brand)}
-
-  .wizard .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
-  .btn-ghost{background:#fff;border:2px solid #cfe1ff;padding:10px 14px;border-radius:10px;font-weight:700;color:var(--brand);cursor:pointer}
-
+  
   /* success message */
   .submitted{padding:14px;background:linear-gradient(180deg,#e9fff0,#d7fbe4);border-radius:10px;color:#087a3a;font-weight:800;text-align:center}
 
@@ -587,6 +567,210 @@ function generatePDF() {
     alert("PDF Download will be added later.");
 }
 </script>
+<script>
+/* SAFE WIZARD & POPUP CONTROLS - drop into the end of index.html BEFORE </body> */
 
+/* Helper: safe console wrapper */
+const safeLog = (...args) => { try { console.log(...args); } catch(e){} };
+
+/* Ensure popup element exists */
+const POPUP_ID = 'formPopup';
+function getPopup(){ return document.getElementById(POPUP_ID); }
+
+/* Make sure buttons inside popup do not accidentally submit any forms */
+function normalizePopupButtons() {
+  const pop = getPopup();
+  if(!pop) return;
+  // convert <button> without type to type="button"
+  pop.querySelectorAll('button').forEach(b => {
+    if(!b.getAttribute('type')) b.setAttribute('type','button');
+  });
+  // also ensure clickable areas accept pointer events
+  pop.style.pointerEvents = 'auto';
+  const wizard = pop.querySelector('.wizard');
+  if(wizard) wizard.style.pointerEvents = 'auto';
+}
+
+/* Open popup and reset view */
+function openForm() {
+  const pop = getPopup();
+  if(!pop) { safeLog('openForm: popup not found'); return; }
+  pop.style.display = 'flex';
+  pop.setAttribute('aria-hidden','false');
+  showPage(1);
+  normalizePopupButtons();
+  safeLog('Popup opened.');
+}
+
+/* Close popup */
+function closeForm() {
+  const pop = getPopup();
+  if(!pop) { safeLog('closeForm: popup not found'); return; }
+  pop.style.display = 'none';
+  pop.setAttribute('aria-hidden','true');
+  safeLog('Popup closed.');
+}
+
+/* Show a page number (1 or 2) */
+function showPage(n) {
+  const p1 = document.getElementById('page1');
+  const p2 = document.getElementById('page2');
+  if(p1) p1.style.display = (n===1 ? 'block' : 'none');
+  if(p2) p2.style.display = (n===2 ? 'block' : 'none');
+  // steps UI
+  const s1 = document.getElementById('step1'), s2 = document.getElementById('step2');
+  if(s1) s1.classList.toggle('active', n===1);
+  if(s2) s2.classList.toggle('active', n===2);
+  const title = document.getElementById('wizardTitle');
+  if(title) title.innerText = `Admission Form — Page ${n} of 2`;
+  safeLog('Showing page', n);
+}
+
+/* Next/back navigation (exposed to inline onclick if present) */
+function nextPage(n) { showPage(n); }
+
+/* Photo preview helper for page 2 file input */
+function handlePreview(e) {
+  try {
+    const file = e.target.files && e.target.files[0];
+    const box = document.getElementById('photoBox');
+    if(!box) return;
+    if(!file) { box.innerHTML = '<span class="small muted">No photo</span>'; delete box.dataset.img; return; }
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      box.innerHTML = `<img src="${ev.target.result}" style="width:100%;height:100%;object-fit:cover">`;
+      box.dataset.img = ev.target.result; // store dataURL for PDF
+    };
+    reader.readAsDataURL(file);
+  } catch(err) {
+    safeLog('handlePreview error', err);
+  }
+}
+
+/* Submit the admission form (basic validation) */
+function submitAdmission() {
+  try {
+    const sname = (document.getElementById('sname')||{value:''}).value.trim();
+    const fname = (document.getElementById('fname')||{value:''}).value.trim();
+    if(!sname || !fname) { alert('Please enter Student name and Father name.'); return; }
+    // hide pages, show submitted box
+    const p1 = document.getElementById('page1'), p2 = document.getElementById('page2'), sub = document.getElementById('submittedBox');
+    if(p1) p1.style.display = 'none';
+    if(p2) p2.style.display = 'none';
+    if(sub) sub.style.display = 'block';
+    safeLog('Form submitted (UI only).');
+  } catch(err) {
+    safeLog('submitAdmission error', err);
+    alert('An error occurred. Please try again.');
+  }
+}
+
+/* Generate 2-page PDF using jsPDF (uses stored photo in #photoBox dataset.img) */
+async function generatePDF(){
+  try {
+    if(!window.jspdf || !window.jspdf.jsPDF) {
+      alert('PDF library not loaded yet. Try again in a moment.');
+      return;
+    }
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ unit:'pt', format:'a4' });
+    const pageW = pdf.internal.pageSize.getWidth();
+    const margin = 36;
+    pdf.setFontSize(14);
+    // Page 1 content
+    pdf.text('GOVERNMENT PRIMARY SCHOOL PETHGAM WAGOORA', pageW/2, 50, { align:'center' });
+    pdf.setFontSize(11);
+    let y = 90;
+    function line(a,b){ pdf.text(a, margin, y); pdf.text(String(b||''), margin+220, y); y+=18; }
+    line('Student Name:', document.getElementById('sname')?.value);
+    line('Father Name:', document.getElementById('fname')?.value);
+    line('Mother Name:', document.getElementById('mname')?.value);
+    line('DOB:', document.getElementById('dob')?.value);
+    line('Contact:', document.getElementById('contact')?.value);
+    line('Tehsil:', document.getElementById('tehsil')?.value);
+    // add photo if present
+    const box = document.getElementById('photoBox');
+    const dataUrl = box && box.dataset && box.dataset.img;
+    if(dataUrl){
+      pdf.addImage(dataUrl, 'JPEG', pageW - margin - 140, 100, 120, 160);
+    }
+    // signature lines
+    const footerY = pdf.internal.pageSize.getHeight() - 120;
+    pdf.text('Parent Signature', margin, footerY);
+    pdf.text('Head of Institution', pageW - margin - 180, footerY);
+    pdf.line(margin, footerY+6, margin+180, footerY+6);
+    pdf.line(pageW - margin - 220, footerY+6, pageW - margin - 20, footerY+6);
+    // Page 2: consent text
+    pdf.addPage();
+    pdf.setFontSize(14);
+    pdf.text('APAAR Consent & Declaration', pageW/2, 50, { align:'center' });
+    pdf.setFontSize(11);
+    const paragraphs = [
+      'I hereby declare that the information provided above is true to the best of my knowledge.',
+      'I consent to provide Aadhaar and demographic information for APAAR ID generation and DigiLocker account opening for my child.',
+      'I understand UIDAI may use Aadhaar for e-KYC authentication and share the response with the Ministry of Education on successful authentication.'
+    ];
+    let ty = 100;
+    paragraphs.forEach(p=>{
+      const lines = pdf.splitTextToSize(p, pageW - margin*2);
+      pdf.text(lines, margin, ty);
+      ty += lines.length * 16 + 6;
+    });
+    pdf.save('Admission_GPS_Pethgam.pdf');
+  } catch(e){
+    safeLog('generatePDF error', e);
+    alert('Unable to generate PDF right now.');
+  }
+}
+function generateAdmissionPDF(){ generatePDF(); } // compatibility
+
+/* Attach handlers for any inline-less buttons (safe attach) */
+function attachPopupHandlers(){
+  const pop = getPopup();
+  if(!pop) return;
+  // wire any elements with data-action attribute (if present)
+  pop.querySelectorAll('[data-action]').forEach(el=>{
+    const act = el.getAttribute('data-action');
+    el.addEventListener('click', function(ev){
+      ev.preventDefault();
+      if(act === 'next') nextPage(Number(el.dataset.page||2));
+      else if(act === 'back') nextPage(Number(el.dataset.page||1));
+      else if(act === 'submit') submitAdmission();
+      else if(act === 'close') closeForm();
+      else if(act === 'open') openForm();
+    });
+  });
+  // wire file input preview if exists
+  const file = pop.querySelector('#photoUpload');
+  if(file) file.removeEventListener('change', handlePreview);
+  if(file) file.addEventListener('change', handlePreview);
+}
+
+/* Initialize: called once DOM is ready */
+function initPopupFix() {
+  try {
+    // make sure popup exists
+    if(!getPopup()){
+      safeLog('initPopupFix: popup element not found in DOM yet.');
+    } else {
+      normalizePopupButtons();
+      attachPopupHandlers();
+      safeLog('initPopupFix: handlers attached.');
+    }
+  } catch(err) {
+    safeLog('initPopupFix error', err);
+  }
+}
+
+/* Run init after a short delay so DOM is parsed (safe) */
+setTimeout(initPopupFix, 250);
+
+/* Also run on DOMContentLoaded to be safe */
+document.addEventListener('DOMContentLoaded', initPopupFix);
+
+/* allow Esc to close popup */
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeForm(); });
+
+</script>
 </body>
 </html>

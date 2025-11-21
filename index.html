@@ -1,208 +1,209 @@
-<!DOCTYPE html><html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Government Primary School Pethgam Wagoora</title>
-<style>
- body { font-family: Arial, sans-serif; margin: 0; padding: 0; background:#f5f5f5; }
- header { background:#004aad; color:#fff; padding:15px; text-align:center; }
- nav { background:#022f66; color:#fff; padding:10px; }
- .marquee-box { background:#fff3cd; padding:10px; overflow:hidden; white-space:nowrap; }
- .marquee-box span { display:inline-block; padding-left:100%; animation: scroll 15s linear infinite; }
- @keyframes scroll { 0%{transform:translateX(0);}100%{transform:translateX(-100%);} }
- .container { width:90%; margin:auto; }
- .section { background:#fff; padding:20px; margin:20px 0; border-radius:6px; }
- .btn { background:#004aad; color:#fff; padding:10px 15px; border:none; cursor:pointer; border-radius:5px; }
- #admissionForm { display:none; padding:20px; background:#e9f2ff; border-radius:6px; }
- label { display:block; margin-top:10px; }
- input, select { width:100%; padding:8px; margin-top:5px; }
- footer { background:#004aad; color:#fff; padding:15px; margin-top:30px; text-align:center; }
-</style>
-</head>
-<body>
-<header><h1>Government Primary School Pethgam Wagoora</h1></header><nav>
- <strong>Quick Links:</strong> Home | Admission | Gallery | Contact
-</nav><div class="marquee-box">
- <span>Winter Vacations from 1st Dec to End Feb • Summer Break 1st July to 10th July • New Academic Session starts 1st November • FA-1 to FA-6 throughout session • SA from 1st Monday after 10th November</span>
-</div><div class="container"><div class="section" id="news">
- <h2>News & Announcements</h2>
- <ul>
-  <li>Admission Open for New Session</li>
-  <li>New Updated Calendar Released</li>
-  <li>Mid-Day Meal Enhanced Nutrition Program</li>
- </ul>
-</div><div class="section" id="events">
- <h2>Events</h2>
- <ul>
-  <li>Children's Day Celebration</li>
-  <li>Independence Day Program</li>
-  <li>Annual Sports Day</li>
- </ul>
-</div><div class="section" id="admission">
- <h2>Admission Form</h2>
- <button class="btn" onclick="openForm()">Apply Now</button>
- <button class="btn" onclick="closeForm()">Close Form</button> <div id="admissionForm">
-  <h3>Student Admission Form</h3>
-  <form id="formData">
-   <label>Student Name</label>
-   <input type="text" required /><label>Father's Name</label>
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Government Primary School Pethgam Wagoora</title>
-<link rel="stylesheet" href="style.css">
-
-<style>
-/* 3D Menu Buttons */
-nav ul li a {
-    background: linear-gradient(to bottom, #64b5f6, #1976d2);
-    padding: 10px 18px;
-    color: white;
-    border-radius: 8px;
-    font-weight: bold;
-    box-shadow: 0 4px #0d47a1;
-    transition: 0.1s;
-}
-
-nav ul li a:active {
-    box-shadow: 0 2px #0d47a1;
-    transform: translateY(2px);
-}
-
-/* Popup form container */
-#admissionForm {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-    background: rgba(0,0,0,0.6);
-    padding: 20px;
-    z-index: 9999;
-}
-
-.form-box {
-    background: white;
-    padding: 20px;
-    max-width: 900px;
-    margin: 40px auto;
-    border-radius: 12px;
-}
-
-/* Wizard buttons */
-.step-btn.active {
-    background: #007bff;
-    color: white;
-}
-.step-btn {
-    padding: 8px 15px;
-    border-radius: 6px;
-    background: #eee;
-    margin-right: 5px;
-    cursor: pointer;
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Government Primary School Pethgam Wagoora</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-
 <body>
 
-<!-- HEADER -->
-<header>
-    <div class="logo">GPS Pethgam Wagoora</div>
-    <nav>
-        <ul>
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="student.html">Student Profile</a></li>
-            <li><a href="exams.html">Examinations</a></li>
-            <li><a href="staff.html">Staff</a></li>
-            <li><a href="circulars.html">Circulars</a></li>
-            <li><a href="certificates.html">Certificates</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-    </nav>
-</header>
+  <!-- Top contact bar -->
+  <div class="topbar">
+    <div class="left">
+      <div><strong>Phone:</strong> 7006261694 | 9596449881</div>
+      <div><strong>Email:</strong> <a href="mailto:pspethgam@gmail.com">pspethgam@gmail.com</a></div>
+      <div class="udise"><strong>UDISE:</strong> 01022202207</div>
+    </div>
+    <div class="right">
+      <div>HOI: Mohammad Ashraf Rather</div>
+    </div>
+  </div>
 
-<!-- HERO -->
-<section class="hero-main">
-    <h1>Welcome to Government Primary School Pethgam Wagoora</h1>
-    <p>Excellence in foundational education • Nursery to Grade 5</p>
-    <button class="cta-button" onclick="openForm()">Apply Now</button>
-</section>
-
-<!-- SCHOOL SUMMARY -->
-<section class="school-info">
-    <h2>Online Admission — 2025</h2>
-    <p>Apply online, upload photo & download pre-filled admission form.</p>
-</section>
-
-<!-- ADMISSION FORM POPUP -->
-<div id="admissionForm">
-    <div class="form-box">
-
-        <h2>Admission Form — Page <span id="wizardTitle">1</span> of 2</h2>
-
+  <!-- Header + nav -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="assets/images/logo.png" alt="GPS Pethgam Wagoora Logo" onerror="this.src='https://via.placeholder.com/64'">
         <div>
-            <span id="step1" class="step-btn active" onclick="showPage(1)">1 — Student Details</span>
-            <span id="step2" class="step-btn" onclick="showPage(2)">2 — Family Details</span>
+          <h1>Government Primary School Pethgam Wagoora</h1>
+          <p>Quality Education for Every Child</p>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a class="btn" href="index.html">Home</a>
+        <a class="btn" href="about.html">About</a>
+        <a class="btn" href="admissions.html">Admissions</a>
+        <a class="btn" href="academics.html">Academics</a>
+        <a class="btn" href="students.html">Students</a>
+        <a class="btn" href="teachers.html">Teachers</a>
+        <a class="btn" href="gallery.html">Gallery</a>
+        <a class="btn" href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero banner">
+      <div class="slides">
+        <div class="slide" style="background-image:url('assets/images/hero1.jpg')">
+          <div class="content">
+            <h2>Welcome to Government Primary School Pethgam Wagoora</h2>
+            <p>Creating a safe, inclusive and learning-focused environment for our children.</p>
+            <div class="cta-row">
+              <a class="cta" href="admissions.html">Apply Online</a>
+              <a class="cta" href="students.html">Check Results</a>
+            </div>
+          </div>
+        </div>
+        <div class="slide" style="background-image:url('assets/images/hero2.jpg')">
+          <div class="content">
+            <h2>Holistic education that builds character</h2>
+            <p>Activities, learning material and support for every student.</p>
+            <div class="cta-row">
+              <a class="cta" href="academics.html">Syllabus & Time Table</a>
+            </div>
+          </div>
+        </div>
+        <div class="slide" style="background-image:url('assets/images/hero3.jpg')">
+          <div class="content">
+            <h2>Community driven progress</h2>
+            <p>Parents, teachers, and local community working together.</p>
+            <div class="cta-row">
+              <a class="cta" href="contact.html">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ticker / notifications -->
+    <div class="ticker" role="region" aria-label="Latest announcements">
+      <div class="label">Announcements</div>
+      <div class="marquee">
+        <p>
+          Admissions open for Nursery to Grade 5 — Apply online | School reopens on 1st November 2025 | Parent-teacher meeting on 10 December 2025 | Mid-day meal schedule updated.
+        </p>
+      </div>
+    </div>
+
+    <!-- Quick links -->
+    <section class="quick-links">
+      <div class="card">
+        <div class="icon">A</div>
+        <h3>Admissions 2025–26</h3>
+        <p>Online forms & guidance.</p>
+        <a href="admissions.html">Open</a>
+      </div>
+      <div class="card">
+        <div class="icon">B</div>
+        <h3>Biometric Attendance</h3>
+        <p>Teacher & Student attendance portal (Android).</p>
+        <a href="students.html">Open</a>
+      </div>
+      <div class="card">
+        <div class="icon">S</div>
+        <h3>Syllabus & Time Table</h3>
+        <p>Download class-wise syllabus.</p>
+        <a href="academics.html">Open</a>
+      </div>
+      <div class="card">
+        <div class="icon">R</div>
+        <h3>Results</h3>
+        <p>Academic results & mark sheets.</p>
+        <a href="students.html">Open</a>
+      </div>
+    </section>
+
+    <!-- News & events -->
+    <section>
+      <h3>News & Events</h3>
+      <div class="news-grid news-scroll" style="overflow:auto;white-space:nowrap">
+        <article class="news-item" style="display:inline-block; width:320px; margin-right:10px">
+          <h4>Sports Day 2025</h4>
+          <p>Students participated in athletics and traditional games. Photos uploaded to gallery.</p>
+        </article>
+        <article class="news-item" style="display:inline-block; width:320px; margin-right:10px">
+          <h4>Mid-day Meal Update</h4>
+          <p>New menu implemented from 1st Nov 2025. Nutritional guidelines followed.</p>
+        </article>
+        <article class="news-item" style="display:inline-block; width:320px; margin-right:10px">
+          <h4>Admission Notice</h4>
+          <p>Nursery to Grade 5 admissions open. Required documents listed on Admissions page.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Principal + stats -->
+    <section style="margin-top:14px;">
+      <div class="two-col">
+        <div class="principal">
+          <h3>Principal's Message</h3>
+          <p>Welcome to Government Primary School Pethgam Wagoora. Our focus is on fostering curiosity, kindness and excellence in every child. Parents and community are key partners in this journey.</p>
+          <p><strong>- Mohammad Ashraf Rather (HOI)</strong></p>
         </div>
 
-        <!-- PAGE 1 -->
-        <div id="page1">
-            <h3>Student Details</h3>
+        <aside class="stats">
+          <h4>School At A Glance</h4>
+          <div class="counter"><strong class="count-to" data-to="320">0</strong><span>Students Enrolled</span></div>
+          <div class="counter"><strong class="count-to" data-to="12">0</strong><span>Teachers</span></div>
+          <div class="counter"><strong class="count-to" data-to="10">0</strong><span>Classrooms</span></div>
+          <div class="counter"><strong class="count-to" data-to="4500">0</strong><span>Library Books</span></div>
+        </aside>
+      </div>
+    </section>
 
-            <label>First Name</label>
-            <input type="text" id="stu_first" class="input">
+    <!-- Gallery preview -->
+    <section style="margin-top:14px;">
+      <h3>Gallery</h3>
+      <div class="gallery-grid">
+        <img src="assets/images/gallery1.jpg" alt="gallery" onerror="this.src='https://via.placeholder.com/320x180'">
+        <img src="assets/images/gallery2.jpg" alt="gallery" onerror="this.src='https://via.placeholder.com/320x180'">
+        <img src="assets/images/gallery3.jpg" alt="gallery" onerror="this.src='https://via.placeholder.com/320x180'">
+        <img src="assets/images/gallery4.jpg" alt="gallery" onerror="this.src='https://via.placeholder.com/320x180'">
+      </div>
+      <p style="margin-top:8px"><a href="gallery.html">View full gallery</a></p>
+    </section>
 
-            <label>Last Name</label>
-            <input type="text" id="stu_last" class="input">
+  </main>
 
-            <label>Date of Birth</label>
-            <input type="date" id="dob_fig" class="input">
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="inner">
+      <div>
+        <h4>Government Primary School Pethgam Wagoora</h4>
+        <small>Address: Pethgam Wagoora, (add full postal address here)</small>
+        <small>Phone: 7006261694 | 9596449881 | Email: <a href="mailto:pspethgam@gmail.com">pspethgam@gmail.com</a></small>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <small><a href="admissions.html">Admissions</a> • <a href="academics.html">Academics</a> • <a href="contact.html">Contact</a></small>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <small>Facebook / X / Instagram (add links)</small>
+      </div>
+    </div>
+    <div style="max-width:1200px;margin:auto;padding-top:12px"><small>&copy; 2025 Government Primary School Pethgam Wagoora. All rights reserved.</small></div>
+  </footer>
 
-            <label>Upload Photo</label>
-            <input type="file" id="photoUpload" accept="image/*">
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
 
-            <div id="photoBox" style="width:120px;height:140px;border:1px solid #ccc;margin-top:10px;"></div>
 
-            <button onclick="nextPage(2)" class="cta-button">Next →</button>
-            <button onclick="closeForm()" class="cta-button" style="background:#777;">Close</button>
-        </div>
 
-        <!-- PAGE 2 -->
-        <div id="page2" style="display:none;">
-            <h3>Family Details</h3>
 
-            <label>Father's Name</label>
-            <input type="text" id="father_name" class="input">
 
-            <label>Mother's Name</label>
-            <input type="text" id="mother_name" class="input">
 
-            <button onclick="submitAdmission()" class="cta-button">Submit</button>
-            <button onclick="closeForm()" class="cta-button" style="background:#777;">Close</button>
-        </div>
 
-        <div id="submittedBox" style="display:none;">
-            <h3>Form Submitted</h3>
+
+
+
             <p>Your form has been recorded.</p>
         </div>
 
@@ -253,19 +254,3 @@ function submitAdmission(){
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            

@@ -4,18 +4,18 @@
    ======================================================= */
 
 // OPEN FORM
-function openForm() {
+function openAdmissionForm() {
     document.getElementById("admissionForm").style.display = "block";
     window.scrollTo(0, 0);
 }
 
 // CLOSE FORM
-function closeForm() {
+function closeAdmissionForm() {
     document.getElementById("admissionForm").style.display = "none";
 }
 
 // SUBMIT FORM
-function submitAdmission(event) {
+function submitAdmissionfmForm(event) {
     event.preventDefault();
 
     alert("🎉 Admission Form Submitted Successfully!\nYou may download the PDF or take screenshot for your hard copy.");

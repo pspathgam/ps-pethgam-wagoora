@@ -407,7 +407,7 @@
     // form state & handlers
  const formState = { photoDataUrl: null };
 
-    function openForm(){
+    function openAdmissionForm(){
       const pop = document.getElementById('formPopup');
       if(!pop) return;
       pop.style.display = 'flex';
@@ -420,7 +420,7 @@
       const sub = document.getElementById('submittedBox'); if(sub) sub.style.display='none';
     }
 
-    function closeForm(){
+    function closeAdmissionForm(){
       const pop = document.getElementById('formPopup');
       if(!pop) return;
       pop.style.display = 'none';
@@ -465,7 +465,7 @@ function nextPage(n){ showPage(n); }
       reader.readAsDataURL(file);
     }
 
-    function submitAdmission(){
+    function submitAdmissionForm(){
       // collect minimal required for validation
       const first = (document.getElementById('stu_first')?.value || '').trim();
       const last = (document.getElementById('stu_last')?.value || '').trim();
@@ -635,9 +635,9 @@ function nextPage(n){ showPage(n); }
     }
 
     // close popup with Esc
-    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeForm(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeAdmissionForm(); });
 
-    // attach file listener on DOM ready (in case openForm is not called before user selects)
+    // attach file listener on DOM ready (in case openAdmissionForm is not called before user selects)
     document.addEventListener('DOMContentLoaded', ()=>{
       const file = document.getElementById('photoUpload');
       if(file && !file._attached){ file.addEventListener('change', handlePreview); file._attached = true; }

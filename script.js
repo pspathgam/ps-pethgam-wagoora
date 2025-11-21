@@ -3,18 +3,18 @@
    MASTER SCRIPT FOR ADMISSION FORM
    ======================================================= */
 
-// OPEN FORM
+// OPEN ADMISSION FORM
 function openAdmissionForm() {
     document.getElementById("admissionForm").style.display = "block";
     window.scrollTo(0, 0);
 }
 
-// CLOSE FORM
+// CLOSE ADMISSION FORM
 function closeAdmissionForm() {
     document.getElementById("admissionForm").style.display = "none";
 }
 
-// SUBMIT FORM
+// SUBMIT ADMISSION FORM
 function submitAdmissionfmForm(event) {
     event.preventDefault();
 

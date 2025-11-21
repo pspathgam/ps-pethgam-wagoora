@@ -77,8 +77,17 @@
     .news-list{display:block;animation:scroll-up 18s linear infinite}
     @keyframes scroll-up{0%{transform:translateY(0)}33%{transform:translateY(-33%)}66%{transform:translateY(-66%)}100%{transform:translateY(0)}}
 
-    /* popup */
-    #formPopup{ position: fixed; inset:0; display:none; background: rgba(6,12,30,0.55); z-index:99999; display:flex; align-items:center; justify-content:center; padding:18px;}
+    /* popup - hidden by default */
+    #formPopup{
+      position: fixed;
+      inset:0;
+      display:none;           /* ensure hidden on load */
+      background: rgba(6,12,30,0.55);
+      z-index:99999;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
     .wizard{ width:100%; max-width:980px; border-radius:12px; background:linear-gradient(180deg,#fff,#fbfcff); display:grid; grid-template-columns:1fr 340px; overflow:hidden; box-shadow:0 30px 60px rgba(8,24,64,0.25);}
     @media (max-width:920px){ .wizard{grid-template-columns:1fr} .wizard .right{order:2} }
     .wizard .left{padding:18px 20px 24px}
@@ -98,6 +107,7 @@
     @media (max-width:520px){
       .logo{width:64px;height:64px}
       .container{grid-template-columns:1fr}
+      .wizard{ padding:12px }
     }
   </style>
 </head>
@@ -381,7 +391,7 @@
       const el = document.getElementById('liveClock');
       if(!el) return;
       const d = new Date();
-      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const days = ['Sunday','Monday','Tuesday','Wednesday',https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@300;400;700;800&display=swap'Thursday','Friday','Saturday'];
       el.textContent = `${days[d.getDay()]} • ${d.toLocaleDateString()} • ${d.toLocaleTimeString()}`;
     }
     setInterval(updateClock,1000);
@@ -395,7 +405,7 @@
     }
 
     // form state & handlers
-    const formState = { photoDataUrl: null };
+ const formState = { photoDataUrl: null };
 
     function openForm(){
       const pop = document.getElementById('formPopup');
@@ -406,13 +416,16 @@
       // attach change listener once
       const file = document.getElementById('photoUpload');
       if(file && !file._attached){ file.addEventListener('change', handlePreview); file._attached = true; }
+      // ensure submitted box hidden on open
+      const sub = document.getElementById('submittedBox'); if(sub) sub.style.display='none';
     }
+
     function closeForm(){
       const pop = document.getElementById('formPopup');
       if(!pop) return;
       pop.style.display = 'none';
       pop.setAttribute('aria-hidden','true');
-      // reset UI
+// reset pages
       document.getElementById('submittedBox').style.display = 'none';
       document.getElementById('page1').style.display = 'block';
       document.getElementById('page2').style.display = 'none';
@@ -424,43 +437,53 @@
       const p1 = document.getElementById('page1'), p2 = document.getElementById('page2');
       if(p1) p1.style.display = (n===1 ? 'block' : 'none');
       if(p2) p2.style.display = (n===2 ? 'block' : 'none');
-      document.getElementById('wizardTitle').innerText = `Admission Form — Page ${n} of 2`;
-      document.getElementById('step1').classList.toggle('active', n===1);
-      document.getElementById('step2').classList.toggle('active', n===2);
+      const title = document.getElementById('wizardTitle');
+      if(title) title.innerText = `Admission Form — Page ${n} of 2`;
+      const s1 = document.getElementById('step1'), s2 = document.getElementById('step2');
+      if(s1) s1.classList.toggle('active', n===1);
+      if(s2) s2.classList.toggle('active', n===2);
     }
-    function nextPage(n){ showPage(n); }
+function nextPage(n){ showPage(n); }
 
     function handlePreview(e){
       const file = e.target.files && e.target.files[0];
       const box = document.getElementById('photoBox');
       const previewArea = document.getElementById('pdfPreviewArea');
       if(!box) return;
-      if(!file){ box.innerHTML = '<span class="muted">No photo</span>'; formState.photoDataUrl = null; previewArea.innerHTML = '<div class="small muted">No photo</div>'; return; }
+      if(!file){
+        box.innerHTML = '<span class="muted">No photo</span>';
+        formState.photoDataUrl = null;
+        if(previewArea) previewArea.innerHTML = '<div class="small muted">No photo</div>';
+        return;
+      }
       const reader = new FileReader();
       reader.onload = function(ev){
         formState.photoDataUrl = ev.target.result;
         box.innerHTML = `<img src="${ev.target.result}" style="width:100%;height:100%;object-fit:cover">`;
-        previewArea.innerHTML = `<div style="text-align:center"><img src="${ev.target.result}" style="width:120px;height:140px;object-fit:cover;border-radius:6px;border:1px solid #ddd"></div>`;
+        if(previewArea) previewArea.innerHTML = `<div style="text-align:center"><img src="${ev.target.result}" style="width:120px;height:140px;object-fit:cover;border-radius:6px;border:1px solid #ddd"></div>`;
       };
       reader.readAsDataURL(file);
     }
 
     function submitAdmission(){
-      // collect minimal required for demo validation
-      formState.sname = (document.getElementById('stu_first').value || '') + ' ' + (document.getElementById('stu_last').value || '');
-      formState.fname = document.getElementById('father_name').value || '';
-      formState.dob = document.getElementById('dob_fig').value || '';
-      if(!formState.sname.trim() || !formState.fname.trim()){
+      // collect minimal required for validation
+      const first = (document.getElementById('stu_first')?.value || '').trim();
+      const last = (document.getElementById('stu_last')?.value || '').trim();
+      const father = (document.getElementById('father_name')?.value || '').trim();
+      const dob = (document.getElementById('dob_fig')?.value || '').trim();
+
+      const fullname = (first + ' ' + last).trim();
+      if(!fullname || !father){
         alert('Please enter Student name and Father name.');
         return;
-      }
+    }
+// show submitted UI
       document.getElementById('submittedBox').style.display = 'block';
       document.getElementById('page1').style.display = 'none';
       document.getElementById('page2').style.display = 'none';
 
-      // show a small preview summary
       const preview = document.getElementById('pdfPreviewArea');
-      preview.innerHTML = `<div style="text-align:left;padding:12px;font-size:13px"><strong>Student:</strong> ${escapeHtml(formState.sname)}<br><strong>Father:</strong> ${escapeHtml(formState.fname)}<br><strong>DOB:</strong> ${escapeHtml(formState.dob)}<br><em>Click Download PDF to get the filled form.</em></div>`;
+      if(preview) preview.innerHTML = `<div style="text-align:left;padding:12px;font-size:13px"><strong>Student:</strong> ${escapeHtml(fullname)}<br><strong>Father:</strong> ${escapeHtml(father)}<br><strong>DOB:</strong> ${escapeHtml(dob)}<br><em>Click Download PDF to get the filled form.</em></div>`;
     }
 
     function escapeHtml(s){ return (s+'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
@@ -476,36 +499,35 @@
 
         // collect all values
         const data = {
-          stu_first: document.getElementById('stu_first').value||'',
-          stu_middle: document.getElementById('stu_middle').value||'',
-          stu_last: document.getElementById('stu_last').value||'',
-          aad_first: document.getElementById('aad_first').value||'',
-          aad_middle: document.getElementById('aad_middle').value||'',
-          aad_last: document.getElementById('aad_last').value||'',
-          father_name: document.getElementById('father_name').value||'',
-          mother_name: document.getElementById('mother_name').value||'',
-          residence: document.getElementById('residence').value||'',
-          tehsil: document.getElementById('tehsil').value||'',
-          district: document.getElementById('district').value||'',
-          father_contact: document.getElementById('father_contact').value||'',
-          mother_contact: document.getElementById('mother_contact').value||'',
-          aadhaar_no: document.getElementById('aadhaar_no').value||'',
-          dob_fig: document.getElementById('dob_fig').value||'',
-          dob_words: document.getElementById('dob_words').value||'',
-          bank_acc: document.getElementById('bank_acc').value||'',
-          bank_name: document.getElementById('bank_name').value||'',
-          bank_branch: document.getElementById('bank_branch').value||'',
-          ifsc: document.getElementById('ifsc').value||'',
-          category: document.getElementById('category').value||'',
-          blood_group: document.getElementById('blood_group').value||'',
-          ration_no: document.getElementById('ration_no').value||'',
-          ration_type: document.getElementById('ration_type').value||'',
-          class_join: document.getElementById('class_join').value||'',
-          pen_no: document.getElementById('pen_no').value||'',
-          declaration_text: document.getElementById('declaration_text').value||'',
+          stu_first: document.getElementById('stu_first')?.value||'',
+          stu_middle: document.getElementById('stu_middle')?.value||'',
+          stu_last: document.getElementById('stu_last')?.value||'',
+          aad_first: document.getElementById('aad_first')?.value||'',
+          aad_middle: document.getElementById('aad_middle')?.value||'',
+          aad_last: document.getElementById('aad_last')?.value||'',
+          father_name: document.getElementById('father_name')?.value||'',
+          mother_name: document.getElementById('mother_name')?.value||'',
+          residence: document.getElementById('residence')?.value||'',
+          tehsil: document.getElementById('tehsil')?.value||'',
+          district: document.getElementById('district')?.value||'',
+          father_contact: document.getElementById('father_contact')?.value||'',
+          mother_contact: document.getElementById('mother_contact')?.value||'',
+          aadhaar_no: document.getElementById('aadhaar_no')?.value||'',
+          dob_fig: document.getElementById('dob_fig')?.value||'',
+          dob_words: document.getElementById('dob_words')?.value||'',
+          bank_acc: document.getElementById('bank_acc')?.value||'',
+          bank_name: document.getElementById('bank_name')?.value||'',
+          bank_branch: document.getElementById('bank_branch')?.value||'',
+          ifsc: document.getElementById('ifsc')?.value||'',
+          category: document.getElementById('category')?.value||'',
+          blood_group: document.getElementById('blood_group')?.value||'',
+          ration_no: document.getElementById('ration_no')?.value||'',
+          ration_type: document.getElementById('ration_type')?.value||'',
+          class_join: document.getElementById('class_join')?.value||'',
+          pen_no: document.getElementById('pen_no')?.value||'',
+          declaration_text: document.getElementById('declaration_text')?.value||'',
         };
-
-        // Page 1
+// Page 1
         pdf.setFontSize(14); pdf.setFont('helvetica','bold');
         pdf.text('GOVERNMENT PRIMARY SCHOOL PETHGAM WAGOORA', W/2, y, {align:'center'});
         y+=18;
@@ -550,9 +572,8 @@
           }catch(e){
             try{ pdf.addImage(formState.photoDataUrl, 'PNG', W - M - 140, 150, 120, 150); }catch(e2){}
           }
-        }
-
-        // signature lines
+    }
+// signature lines
         const footY = H - 120;
         pdf.setFont('helvetica','normal');
         pdf.text('Signature of Parent/Guardian', M + 8, footY);
@@ -594,7 +615,7 @@
         pdf.text('Signature of HOI: ____________________   Date: __ / __ / __', M + 8, yy);
 
         // Save
-        const nameForFile = (data.stu_first || 'student').replace(/\s+/g,'_');
+        const nameForFile = ((data.stu_first || 'student').replace(/\s+/g,'_'));
         pdf.save(`Admission_Form_${nameForFile}.pdf`);
       }catch(err){
         console.error(err);
@@ -615,7 +636,22 @@
 
     // close popup with Esc
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeForm(); });
+
+    // attach file listener on DOM ready (in case openForm is not called before user selects)
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const file = document.getElementById('photoUpload');
+      if(file && !file._attached){ file.addEventListener('change', handlePreview); file._attached = true; }
+    });
   </script>
-  <script src="script.js"></script>
+
 </body>
-</html>                    
+</html>
+
+
+
+
+          
+
+          
+ 
+                

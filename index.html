@@ -4,6 +4,224 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Government Primary School Pethgam Wagoora</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { margin:0; font-family:"Nunito", sans-serif; background:#f6f7fb; }
+
+    /* Topbar */
+    .topbar {
+      background:#003566; color:white; padding:6px 10px;
+      display:flex; justify-content:space-between; flex-wrap:wrap;
+      font-size:14px;
+    }
+
+    /* MENU BUTTONS (NEW COLORS) */
+    .nav .btn {
+      padding:10px 16px;
+      background:#0077b6;
+      color:white;
+      border-radius:6px;
+      margin:0 4px;
+      text-decoration:none;
+      transition:0.3s;
+      font-weight:700;
+    }
+    .nav .btn:hover { background:#0096c7; }
+
+    /* HERO SLIDER */
+    .hero { height:260px; overflow:hidden; position:relative; }
+    .slides { display:flex; width:300%; animation:slide 18s infinite; }
+    @keyframes slide {
+      0% { transform:translateX(0%); }
+      33% { transform:translateX(-100%); }
+      66% { transform:translateX(-200%); }
+      100% { transform:translateX(0%); }
+    }
+    .slide {
+      width:100%; height:260px; background-size:cover;
+      background-position:center; position:relative;
+      display:flex; align-items:center; padding:20px;
+      color:white;
+    }
+    .slide .content { background:rgba(0,0,0,0.45); padding:20px; border-radius:8px; }
+
+    /* YELLOW SCROLLING NOTIFICATIONS */
+    .ticker {
+      background:#ffeb3b;
+      padding:6px;
+      display:flex;
+      align-items:center;
+      border-bottom:2px solid #d4c000;
+    }
+    .ticker .label { font-weight:bold; margin-right:10px; }
+    .marquee {
+      overflow:hidden; white-space:nowrap;
+    }
+    .marquee p {
+      display:inline-block;
+      animation:marq 12s linear infinite;
+      font-weight:700;
+      color:#333;
+    }
+    @keyframes marq {
+      0% { transform:translateX(100%); }
+      100% { transform:translateX(-100%); }
+    }
+
+    /* COLOURED CARDS */
+    .quick-links {
+      display:flex; gap:12px; padding:12px; flex-wrap:wrap;
+    }
+    .card {
+      flex:1; min-width:200px;
+      background:#ffffff;
+      padding:14px;
+      border-radius:10px;
+      text-align:center;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+      border-top:4px solid #0077b6;
+    }
+    .card:nth-child(2){ border-top-color:#ff6b6b; }
+    .card:nth-child(3){ border-top-color:#43aa8b; }
+    .card:nth-child(4){ border-top-color:#f3722c; }
+    .card .icon { font-size:32px; font-weight:800; }
+
+    /* SCROLLING GALLERY */
+    .scroll-gallery {
+      white-space:nowrap;
+      overflow-x:auto;
+      padding:10px;
+    }
+    .scroll-gallery img {
+      width:260px;
+      height:150px;
+      object-fit:cover;
+      margin-right:10px;
+      border-radius:10px;
+      display:inline-block;
+    }
+
+    /* OUR HEROES SECTION */
+    .heroes {
+      padding:14px;
+    }
+    .hero-grid {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .hero-card {
+      width:200px;
+      background:white;
+      border-radius:12px;
+      padding:12px;
+      text-align:center;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    }
+    .hero-card img {
+      width:100%; height:180px; object-fit:cover;
+      border-radius:10px;
+    }
+    .hero-card h4 { margin:6px 0 2px; }
+    .hero-card small { color:#444; }
+
+    /* ADMIN PANEL BUTTON */
+    .admin-btn {
+      background:#d62828;
+      color:white;
+      padding:10px 16px;
+      border-radius:6px;
+      text-decoration:none;
+      font-weight:800;
+      display:inline-block;
+      margin:10px;
+    }
+  </style>
+
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div>
+    <strong>Phone:</strong> 7006261694 | 9596449881 |
+    <strong>Email:</strong> pspethgam@gmail.com
+  </div>
+  <div><strong>UDISE:</strong> 01022202207</div>
+</div>
+
+<!-- HEADER -->
+<header style="background:white; padding:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+  <div style="display:flex; align-items:center;">
+    <img src="assets/images/logo.png" width="64" height="64" onerror="this.src='https://via.placeholder.com/64'">
+    <div style="margin-left:10px;">
+      <h2 style="margin:0;">Government Primary School Pethgam Wagoora</h2>
+      <small>Quality Education for Every Child</small>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" style="margin-top:10px;">
+    <a class="btn" href="index.html">Home</a>
+    <a class="btn" href="about.html">About</a>
+    <a class="btn" href="admissions.html">Admissions</a>
+    <a class="btn" href="academics.html">Academics</a>
+    <a class="btn" href="students.html">Students</a>
+    <a class="btn" href="teachers.html">Teachers</a>
+    <a class="btn" href="gallery.html">Gallery</a>
+    <a class="btn" href="contact.html">Contact</a>
+
+    <!-- NEW ADMIN PANEL BUTTON -->
+    <a class="admin-btn" href="admin.html">ADMIN PANEL</a>
+  </nav>
+</header>
+
+<!-- HERO SLIDER -->
+<section class="hero">
+  <div class="slides">
+    <div class="slide" style="background-image:url('assets/images/hero1.jpg')">
+      <div class="content">
+        <h2>Welcome to GPS Pethgam Wagoora</h2>
+        <p>Safe, inclusive & joyful learning environment.</p>
+      </div>
+    </div>
+    <div class="slide" style="background-image:url('assets/images/hero2.jpg')">
+      <div class="content">
+        <h2>Holistic Education</h2>
+        <p>Activities and learning for every child.</p>
+      </div>
+    </div>
+    <div class="slide" style="background-image:url('assets/images/hero3.jpg')">
+      <div class="content">
+        <h2>Community Support</h2>
+        <p>Parents & community together for growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YELLOW NOTIFICATION SCROLLER -->
+<div class="ticker">
+  <div class="label">Announcements:</div>
+  <div class="marquee">
+    <p>Admissions Open | School Reopens 1 Nov | PTM on 10 Dec | Mid-Day Meal Updated</p>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Government Primary School Pethgam Wagoora</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>

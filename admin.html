@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel – GPS Pethgam Wagoora</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+<style>
+    body{font-family:"Nunito",sans-serif;background:#f6f7fb;margin:0;padding:0;}
+    h2{background:#003566;color:white;padding:10px;border-radius:6px;}
+    .section{padding:15px;margin:15px;background:white;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+    label{display:block;margin-top:10px;font-weight:700;}
+    input, select, textarea{
+        width:100%;padding:8px;margin-top:4px;
+        border:1px solid #ccc;border-radius:6px;font-size:14px;
+    }
+    button{
+        background:#003566;color:white;padding:10px 16px;
+        border:none;border-radius:6px;margin-top:14px;font-weight:700;
+        cursor:pointer;
+    }
+    button:hover{background:#001f3f;}
+    .grid{
+        display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+        gap:12px;
+    }
+    .photo-box{
+        width:120px;height:120px;border:2px dashed #888;border-radius:10px;
+        display:flex;align-items:center;justify-content:center;margin-top:10px;
+        font-size:12px;color:#444;background:#fafafa;
+    }
+</style>
+</head>
+<body>
+
+<h2 style="text-align:center;">ADMIN PANEL – GPS Pethgam Wagoora</h2>
+
+<!-- ************************************************************ -->
+<!-- ****************** STUDENT PROFILE SECTION ***************** -->
+<!-- ************************************************************ -->
+
+<div class="section">
+<h2>Update Student Profile</h2>
+
+<div class="grid">
+
+    <div>
+        <label>Student Photo</label>
+        <div class="photo-box">Photo Placeholder</div>
+        <input type="file">
+    </div>
+
+    <div>
+        <label>Student Name – First</label>
+        <input type="text">
+        <label>Middle</label><input type="text">
+        <label>Last</label><input type="text">
+    </div>
+
+    <div>
+        <label>Name as per Aadhaar – First</label><input type="text">
+        <label>Middle</label><input type="text">
+        <label>Last</label><input type="text">
+    </div>
+
+    <div>
+        <label>Father's Name – First</label><input type="text">
+        <label>Middle</label><input type="text">
+        <label>Last</label><input type="text">
+    </div>
+
+    <div>
+        <label>Mother's Name – First</label><input type="text">
+        <label>Middle</label><input type="text">
+        <label>Last</label><input type="text">
+    </div>
+
+    <div>
+        <label>Residence</label><input type="text">
+        <label>Tehsil</label><input type="text">
+        <label>District</label><input type="text">
+    </div>
+
+    <div>
+        <label>Father's Contact Number</label><input type="text">
+        <label>Mother's Contact Number</label><input type="text">
+    </div>
+
+    <div>
+        <label>Aadhaar Number</label><input type="text">
+        <label>Date of Birth (DD MM YYYY)</label><input type="text">
+        <label>DOB in Words</label><input type="text">
+    </div>
+
+    <div>
+        <label>Bank Account Number</label><input type="text">
+        <label>Bank Branch</label><input type="text">
+        <label>IFSC Code</label><input type="text">
+        <label>Bank Name</label><input type="text">
+    </div>
+
+    <div>
+        <label>Category</label>
+        <select>
+            <option>SC</option>
+            <option>ST</option>
+            <option>OBC</option>
+            <option>GENERAL</option>
+        </select>
+
+        <label>Blood Group</label>
+        <input type="text">
+
+        <label>Ration Card Number</label>
+        <input type="text">
+
+        <label>Ration Card Type</label>
+        <input type="text">
+    </div>
+
+    <div>
+        <label>Class Joining</label><input type="text">
+        <label>PEN Number (Transfer)</label><input type="text">
+        <label>APAAR ID</label><input type="text">
+    </div>
+
+</div>
+
+<button>Save Student Profile</button>
+</div>
+
+<!-- ************************************************************ -->
+<!-- ******************** STAFF PROFILE SECTION ***************** -->
+<!-- ************************************************************ -->
+
+<div class="section">
+<h2>Update Staff Profile</h2>
+
+<div class="grid">
+    <div>
+        <label>Name</label><input type="text">
+        <label>Code</label><input type="text">
+    </div>
+
+    <div>
+        <label>Qualification – Academic</label><input type="text">
+        <label>Professional</label><input type="text">
+    </div>
+
+    <div>
+        <label>Designation</label><input type="text">
+        <label>Date of Appointment</label><input type="date">
+        <label>Date of Promotion</label><input type="date">
+        <label>Date of Joining This Institution</label><input type="date">
+    </div>
+</div>
+
+<button>Save Staff Profile</button>
+</div>
+
+
+<!-- ************************************************************ -->
+<!-- ******************** RESULT ENTRY SECTION ****************** -->
+<!-- ************************************************************ -->
+
+<div class="section">
+<h2>Enter Student Result</h2>
+
+<label>Student Name</label><input type="text">
+<label>Admission No.</label><input type="text">
+
+<h3>Subjects</h3>
+
+<div class="grid">
+    <div><label>English</label><input type="number" placeholder="FA1–FA6 + SA"></div>
+    <div><label>Maths</label><input type="number"></div>
+    <div><label>EVS</label><input type="number"></div>
+    <div><label>Urdu & Kashmiri</label><input type="number"></div>
+</div>
+
+<h3>FA Marks (5 marks each)</h3>
+
+<div class="grid">
+    <input type="number" placeholder="FA1">
+    <input type="number" placeholder="FA2">
+    <input type="number" placeholder="FA3">
+    <input type="number" placeholder="FA4">
+    <input type="number" placeholder="FA5">
+    <input type="number" placeholder="FA6">
+</div>
+
+<label>Total (30)</label><input type="number">
+
+<label>Co-Curricular (20)</label><input type="number">
+
+<label>SA (50)</label><input type="number">
+
+<button>Generate Marksheet PDF</button>
+</div>
+
+
+<!-- ************************************************************ -->
+<!-- ************* NOTIFICATIONS + NEWS & EVENTS **************** -->
+<!-- ************************************************************ -->
+
+<div class="section">
+<h2>Notifications & Announcements</h2>
+<label>New Notification</label>
+<textarea rows="3"></textarea>
+<button>Add Notification</button>
+</div>
+
+<div class="section">
+<h2>News & Events</h2>
+<label>Add News Item</label>
+<textarea rows="3"></textarea>
+<button>Save News</button>
+</div>
+
+
+<!-- ************************************************************ -->
+<!-- ********************* PHOTO GALLERY ************************ -->
+<!-- ************************************************************ -->
+
+<div class="section">
+<h2>Upload Photos to Gallery</h2>
+<input type="file" multiple>
+<button>Upload Photos</button>
+</div>
+
+</body>
+</html>

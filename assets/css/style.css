@@ -8,7 +8,7 @@
   --accent: #00a88a;      /* teal */
   --muted: #6b7280;
   --bg: #f6fbff;
-  --card: #ffffff;
+  --card: #F7C948;
   --glass: rgba(255,255,255,0.55);
   --glass-2: rgba(255,255,255,0.35);
   --shadow: 0 10px 30px rgba(13,38,76,0.08);
@@ -88,7 +88,7 @@ body{
   transition: transform 220ms var(--ease), box-shadow 220ms var(--ease);
   cursor:pointer;
   font-weight:700;
-  color: #08315f;
+  color: #72bf6a;
   text-decoration:none;
   display:inline-flex;
   align-items:center;

@@ -7,127 +7,242 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
 <style>
-    body{font-family:"Nunito",sans-serif;background:#f6f7fb;margin:0;padding:0;}
-    h2{background:#003566;color:white;padding:10px;border-radius:6px;}
-    .section{padding:15px;margin:15px;background:white;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-    label{display:block;margin-top:10px;font-weight:700;}
-    input, select, textarea{
-        width:100%;padding:8px;margin-top:4px;
-        border:1px solid #ccc;border-radius:6px;font-size:14px;
+    /* Base Styles */
+    body {
+        font-family: "Nunito", sans-serif;
+        background: #f6f7fb;
+        margin: 0;
+        padding: 0;
     }
-    button{
-        background:#003566;color:white;padding:10px 16px;
-        border:none;border-radius:6px;margin-top:14px;font-weight:700;
-        cursor:pointer;
+    h2 {
+        background: #003566;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px 8px 0 0;
+        margin: -15px -15px 15px -15px; /* Adjust for section padding */
+        font-weight: 800;
+        font-size: 1.5rem;
     }
-    button:hover{background:#001f3f;}
-    .grid{
-        display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-        gap:12px;
+    h3 {
+        color: #003566;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 5px;
+        margin-top: 20px;
+        font-weight: 700;
     }
-    .photo-box{
-        width:120px;height:120px;border:2px dashed #888;border-radius:10px;
-        display:flex;align-items:center;justify-content:center;margin-top:10px;
-        font-size:12px;color:#444;background:#fafafa;
+    .section {
+        padding: 15px;
+        margin: 20px auto;
+        max-width: 1200px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: 700;
+        color: #333;
+        font-size: 0.9rem;
+    }
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 4px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+    }
+    input:focus, select:focus, textarea:focus {
+        border-color: #003566;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 53, 102, 0.2);
+    }
+    /* Button Styling */
+    button {
+        background: #003566;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 6px;
+        margin-top: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.1s;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+    button:hover {
+        background: #001f3f;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    button:active {
+        transform: translateY(1px);
+    }
+
+    /* Grid Layout */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Specific elements */
+    .photo-box {
+        width: 120px;
+        height: 120px;
+        border: 3px dashed #888;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        font-size: 12px;
+        color: #444;
+        background: #fcfcfc;
+    }
+    .result-group {
+        border: 1px solid #e0e0e0;
+        padding: 15px;
+        border-radius: 8px;
+        background: #f9f9f9;
+    }
+    .result-input-small {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+    .text-center-heading {
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 20px;
+        padding: 15px 0;
+        border-radius: 0;
+    }
+    .document-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .document-list button {
+        background: #ffc300;
+        color: #000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+    .document-list button:hover {
+        background: #e6b100;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+        .grid {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
 </head>
 <body>
 
-<h2 style="text-align:center;">ADMIN PANEL – GPS Pethgam Wagoora</h2>
+<h1 class="text-center-heading">ADMIN PANEL – GPS Pethgam Wagoora</h1>
 
 <!-- ************************************************************ -->
 <!-- ****************** STUDENT PROFILE SECTION ***************** -->
 <!-- ************************************************************ -->
 
 <div class="section">
-<h2>Update Student Profile</h2>
+    <h2>Update Student Profile</h2>
 
-<div class="grid">
+    <div class="grid">
 
-    <div>
-        <label>Student Photo</label>
-        <div class="photo-box">Photo Placeholder</div>
-        <input type="file">
+        <!-- Photo & ID -->
+        <div class="col-span-1">
+            <label>Student Photo</label>
+            <div class="photo-box">Photo Placeholder</div>
+            <input type="file" id="student-photo-upload">
+            <label>APAAR ID</label><input type="text" id="student-apaar-id">
+        </div>
+
+        <!-- Name Details -->
+        <div class="col-span-1">
+            <label>Student Name</label>
+            <input type="text" placeholder="First Name" id="student-name-first">
+            <input type="text" placeholder="Middle Name" id="student-name-middle" class="mt-2">
+            <input type="text" placeholder="Last Name" id="student-name-last" class="mt-2">
+        </div>
+
+        <!-- Aadhaar Name -->
+        <div class="col-span-1">
+            <label>Name as per Aadhaar</label>
+            <input type="text" placeholder="First Name" id="aadhaar-name-first">
+            <input type="text" placeholder="Middle Name" id="aadhaar-name-middle" class="mt-2">
+            <input type="text" placeholder="Last Name" id="aadhaar-name-last" class="mt-2">
+        </div>
+
+        <!-- Parent Names -->
+        <div class="col-span-1">
+            <label>Father's Name</label><input type="text" id="father-name-first" placeholder="First Name">
+            <input type="text" id="father-name-middle" placeholder="Middle Name" class="mt-2">
+            <input type="text" id="father-name-last" placeholder="Last Name" class="mt-2">
+        </div>
+        <div class="col-span-1">
+            <label>Mother's Name</label><input type="text" id="mother-name-first" placeholder="First Name">
+            <input type="text" id="mother-name-middle" placeholder="Middle Name" class="mt-2">
+            <input type="text" id="mother-name-last" placeholder="Last Name" class="mt-2">
+        </div>
+
+        <!-- Contact & Residence -->
+        <div class="col-span-1">
+            <label>Father's Contact Number</label><input type="tel" id="father-contact">
+            <label>Mother's Contact Number</label><input type="tel" id="mother-contact">
+            <label>Residence</label><input type="text" id="residence">
+        </div>
+
+        <!-- Location & ID -->
+        <div class="col-span-1">
+            <label>Tehsil</label><input type="text" id="tehsil">
+            <label>District</label><input type="text" id="district">
+            <label>Aadhaar Number</label><input type="text" id="aadhaar-number">
+        </div>
+
+        <!-- DOB & Enrollment -->
+        <div class="col-span-1">
+            <label>Date of Birth (DD MM YYYY)</label><input type="text" id="dob-numeric">
+            <label>DOB in Words</label><input type="text" id="dob-words">
+            <label>Class Joining</label><input type="text" id="class-joining">
+            <label>PEN Number (Transfer)</label><input type="text" id="pen-number">
+        </div>
+
+        <!-- Bank & Other Details -->
+        <div class="col-span-1">
+            <label>Bank Account Number</label><input type="text" id="bank-ac-number">
+            <label>Bank Name</label><input type="text" id="bank-name">
+            <label>Bank Branch</label><input type="text" id="bank-branch">
+            <label>IFSC Code</label><input type="text" id="ifsc-code">
+        </div>
+
+        <!-- Category & Health -->
+        <div class="col-span-1">
+            <label>Category</label>
+            <select id="category">
+                <option value="SC">SC</option>
+                <option value="ST">ST</option>
+                <option value="OBC">OBC</option>
+                <option value="GENERAL" selected>GENERAL</option>
+            </select>
+            <label>Blood Group</label><input type="text" id="blood-group">
+            <label>Ration Card Number</label><input type="text" id="ration-card-number">
+            <label>Ration Card Type</label><input type="text" id="ration-card-type">
+        </div>
+
     </div>
 
-    <div>
-        <label>Student Name – First</label>
-        <input type="text">
-        <label>Middle</label><input type="text">
-        <label>Last</label><input type="text">
-    </div>
-
-    <div>
-        <label>Name as per Aadhaar – First</label><input type="text">
-        <label>Middle</label><input type="text">
-        <label>Last</label><input type="text">
-    </div>
-
-    <div>
-        <label>Father's Name – First</label><input type="text">
-        <label>Middle</label><input type="text">
-        <label>Last</label><input type="text">
-    </div>
-
-    <div>
-        <label>Mother's Name – First</label><input type="text">
-        <label>Middle</label><input type="text">
-        <label>Last</label><input type="text">
-    </div>
-
-    <div>
-        <label>Residence</label><input type="text">
-        <label>Tehsil</label><input type="text">
-        <label>District</label><input type="text">
-    </div>
-
-    <div>
-        <label>Father's Contact Number</label><input type="text">
-        <label>Mother's Contact Number</label><input type="text">
-    </div>
-
-    <div>
-        <label>Aadhaar Number</label><input type="text">
-        <label>Date of Birth (DD MM YYYY)</label><input type="text">
-        <label>DOB in Words</label><input type="text">
-    </div>
-
-    <div>
-        <label>Bank Account Number</label><input type="text">
-        <label>Bank Branch</label><input type="text">
-        <label>IFSC Code</label><input type="text">
-        <label>Bank Name</label><input type="text">
-    </div>
-
-    <div>
-        <label>Category</label>
-        <select>
-            <option>SC</option>
-            <option>ST</option>
-            <option>OBC</option>
-            <option>GENERAL</option>
-        </select>
-
-        <label>Blood Group</label>
-        <input type="text">
-
-        <label>Ration Card Number</label>
-        <input type="text">
-
-        <label>Ration Card Type</label>
-        <input type="text">
-    </div>
-
-    <div>
-        <label>Class Joining</label><input type="text">
-        <label>PEN Number (Transfer)</label><input type="text">
-        <label>APAAR ID</label><input type="text">
-    </div>
-
-</div>
-
-<button>Save Student Profile</button>
+    <button id="save-student-profile-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+        Save Student Profile
+    </button>
 </div>
 
 <!-- ************************************************************ -->
@@ -135,28 +250,39 @@
 <!-- ************************************************************ -->
 
 <div class="section">
-<h2>Update Staff Profile</h2>
+    <h2>Update Staff Profile</h2>
 
-<div class="grid">
-    <div>
-        <label>Name</label><input type="text">
-        <label>Code</label><input type="text">
+    <div class="grid">
+        <div>
+            <label>Name</label><input type="text" id="staff-name">
+            <label>Code</label><input type="text" id="staff-code">
+            <label>Designation</label>
+            <select id="staff-designation">
+                <option value="HOI">HOI (Head of Institution)</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Aaya">Aaya</option>
+                <option value="Cook">Cook</option>
+                <option value="Other">Other (Specify)</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Qualification – Academic</label><input type="text" id="staff-qual-academic">
+            <label>Qualification – Professional</label><input type="text" id="staff-qual-professional">
+            <label>Date of Appointment</label><input type="date" id="staff-date-appointment">
+        </div>
+
+        <div>
+            <label>Date of Promotion</label><input type="date" id="staff-date-promotion">
+            <label>Date of Joining This Institution</label><input type="date" id="staff-date-joining">
+            <label>Other Specification (if 'Other' is chosen)</label><input type="text" id="staff-other-spec">
+        </div>
     </div>
 
-    <div>
-        <label>Qualification – Academic</label><input type="text">
-        <label>Professional</label><input type="text">
-    </div>
-
-    <div>
-        <label>Designation</label><input type="text">
-        <label>Date of Appointment</label><input type="date">
-        <label>Date of Promotion</label><input type="date">
-        <label>Date of Joining This Institution</label><input type="date">
-    </div>
-</div>
-
-<button>Save Staff Profile</button>
+    <button id="save-staff-profile-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+        Save Staff Profile
+    </button>
 </div>
 
 
@@ -165,57 +291,95 @@
 <!-- ************************************************************ -->
 
 <div class="section">
-<h2>Enter Student Result</h2>
+    <h2>Enter Student Result</h2>
 
-<label>Student Name</label><input type="text">
-<label>Admission No.</label><input type="text">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div><label>Student Name</label><input type="text" id="result-student-name"></div>
+        <div><label>Admission No.</label><input type="text" id="result-admission-no"></div>
+        <div><label>Class/Grade</label><input type="text" id="result-class-grade"></div>
+    </div>
 
-<h3>Subjects</h3>
+    <h3 class="mt-4">Subject-wise Marks Entry</h3>
 
-<div class="grid">
-    <div><label>English</label><input type="number" placeholder="FA1–FA6 + SA"></div>
-    <div><label>Maths</label><input type="number"></div>
-    <div><label>EVS</label><input type="number"></div>
-    <div><label>Urdu & Kashmiri</label><input type="number"></div>
+    <div id="subject-marks-container" class="space-y-6">
+        <!-- Subject blocks will be generated here by JavaScript for all 5 subjects -->
+    </div>
+
+    <button id="update-results-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+        Update Student Results
+    </button>
 </div>
 
-<h3>FA Marks (5 marks each)</h3>
+<!-- ************************************************************ -->
+<!-- ****************** DOCUMENT GENERATION ********************* -->
+<!-- ************************************************************ -->
 
-<div class="grid">
-    <input type="number" placeholder="FA1">
-    <input type="number" placeholder="FA2">
-    <input type="number" placeholder="FA3">
-    <input type="number" placeholder="FA4">
-    <input type="number" placeholder="FA5">
-    <input type="number" placeholder="FA6">
+<div class="section">
+    <h2>Document & Certificate Generation</h2>
+
+    <p class="text-sm text-gray-600 mb-4">Select the required document to generate the final PDF/Printable output.</p>
+
+    <div class="document-list">
+        <button onclick="generateDocument('roll-statement')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            Roll Statement
+        </button>
+        <button onclick="generateDocument('staff-statement')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><path d="M20 8v.01"></path><path d="M23 11V7"></path><path d="M20 4h.01"></path></svg>
+            Staff Statement
+        </button>
+        <button onclick="generateDocument('class-result')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            Class Result
+        </button>
+        <button onclick="generateDocument('school-result')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 17.5L22 12l-5.5-5.5"></path><path d="M2 12.01L10 12"></path><path d="M2 16.01L10 16"></path><path d="M2 8.01L10 8"></path></svg>
+            School Result
+        </button>
+        <button onclick="generateDocument('marks-sheet')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="7" y1="4" x2="7" y2="21"></line><line x1="17" y1="4" x2="17" y2="21"></line><line x1="3" y1="8" x2="21" y2="8"></line><line x1="3" y1="12" x2="21" y2="12"></line></svg>
+            Marks Sheet
+        </button>
+        <button onclick="generateDocument('bonafide-certificate')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            Bonafide Certificate
+        </button>
+        <button onclick="generateDocument('dob-certificate')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M12 15l-3 3 3 3"></path><path d="M15 18H9"></path></svg>
+            Date of Birth Certificate
+        </button>
+        <button onclick="generateDocument('duty-certificate')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M10 16L17 9l-3.5-3.5a1.41 1.41 0 0 0-2 0L7 12V16h4"></path></svg>
+            Duty Certificate
+        </button>
+    </div>
+
+    <div id="document-status" style="margin-top: 20px; padding: 10px; background: #f0f0ff; border: 1px solid #c0c0ff; border-radius: 6px; display: none;"></div>
 </div>
-
-<label>Total (30)</label><input type="number">
-
-<label>Co-Curricular (20)</label><input type="number">
-
-<label>SA (50)</label><input type="number">
-
-<button>Generate Marksheet PDF</button>
-</div>
-
 
 <!-- ************************************************************ -->
 <!-- ************* NOTIFICATIONS + NEWS & EVENTS **************** -->
 <!-- ************************************************************ -->
 
 <div class="section">
-<h2>Notifications & Announcements</h2>
-<label>New Notification</label>
-<textarea rows="3"></textarea>
-<button>Add Notification</button>
+    <h2>Notifications & Announcements</h2>
+    <label for="new-notification">New Notification</label>
+    <textarea id="new-notification" rows="3" placeholder="Enter important circulars or student announcements here..."></textarea>
+    <button id="add-notification-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8L2 12l4 4"></path><path d="M22 12H2"></path><path d="M18 8L22 12l-4 4"></path></svg>
+        Add Notification
+    </button>
 </div>
 
 <div class="section">
-<h2>News & Events</h2>
-<label>Add News Item</label>
-<textarea rows="3"></textarea>
-<button>Save News</button>
+    <h2>News & Events</h2>
+    <label for="new-news-item">Add News Item</label>
+    <textarea id="new-news-item" rows="3" placeholder="Enter news, event summaries, or important dates..."></textarea>
+    <button id="save-news-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        Save News
+    </button>
 </div>
 
 
@@ -224,140 +388,106 @@
 <!-- ************************************************************ -->
 
 <div class="section">
-<h2>Upload Photos to Gallery</h2>
-<input type="file" multiple>
-<button>Upload Photos</button>
+    <h2>Upload Photos to Gallery</h2>
+    <input type="file" multiple id="gallery-file-input">
+    <button id="upload-photos-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+        Upload Photos
+    </button>
 </div>
+
+<script>
+    const subjects = ["English", "Mathematics", "EVS", "Urdu", "Kashmiri"];
+
+    // Function to generate the HTML for a single subject's marks entry
+    function createSubjectEntry(subject) {
+        return `
+            <div class="result-group">
+                <h4 style="color:#003566; font-size:1.1rem; font-weight:700;">${subject}</h4>
+                
+                <label>Formative Assessments (Total 30 Marks)</label>
+                <div class="grid result-input-small">
+                    <input type="number" min="0" max="5" placeholder="FA1 (5)" data-subject="${subject}" data-type="FA1">
+                    <input type="number" min="0" max="5" placeholder="FA2 (5)" data-subject="${subject}" data-type="FA2">
+                    <input type="number" min="0" max="5" placeholder="FA3 (5)" data-subject="${subject}" data-type="FA3">
+                    <input type="number" min="0" max="5" placeholder="FA4 (5)" data-subject="${subject}" data-type="FA4">
+                    <input type="number" min="0" max="5" placeholder="FA5 (5)" data-subject="${subject}" data-type="FA5">
+                    <input type="number" min="0" max="5" placeholder="FA6 (5)" data-subject="${subject}" data-type="FA6">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div>
+                        <label>Co-Curricular Activities (20 Marks)</label>
+                        <input type="number" min="0" max="20" placeholder="Co-Curricular (20)" data-subject="${subject}" data-type="CCA">
+                    </div>
+                    <div>
+                        <label>Summative Assessment (50 Marks)</label>
+                        <input type="number" min="0" max="50" placeholder="SA (50)" data-subject="${subject}" data-type="SA">
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Function to render all subject entries
+    function renderSubjectMarksInputs() {
+        const container = document.getElementById('subject-marks-container');
+        if (container) {
+            container.innerHTML = subjects.map(createSubjectEntry).join('');
+        }
+    }
+
+    // Placeholder function for all Save/Update actions
+    function handleSave(sectionName) {
+        // In a real application, this is where you would collect form data,
+        // sanitize it, and send it to your backend/Firestore.
+        const statusDiv = document.createElement('div');
+        statusDiv.textContent = `[Placeholder] Data for ${sectionName} saved successfully! (In a real app, this updates your database.)`;
+        statusDiv.style.cssText = 'padding: 10px; background: #e6ffed; border: 1px solid #a3e6b4; border-radius: 6px; margin-top: 15px;';
+        
+        const section = document.getElementById(`${sectionName.toLowerCase().replace(/\s/g, '-')}-btn`).closest('.section');
+        section.appendChild(statusDiv);
+        setTimeout(() => section.removeChild(statusDiv), 5000);
+        console.log(`Attempting to save data for: ${sectionName}`);
+    }
+
+    // Placeholder function for document generation
+    function generateDocument(docType) {
+        const statusDiv = document.getElementById('document-status');
+        let docTitle = docType.replace(/-/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        
+        statusDiv.textContent = `[Placeholder] Generating ${docTitle} PDF... Please check your browser's downloads.`;
+        statusDiv.style.display = 'block';
+        statusDiv.style.background = '#fff3e0'; // Light orange for processing
+        statusDiv.style.borderColor = '#ffcc80';
+        
+        setTimeout(() => {
+            statusDiv.textContent = `✅ Successfully generated ${docTitle}.`;
+            statusDiv.style.background = '#e6ffed'; // Light green for success
+            statusDiv.style.borderColor = '#a3e6b4';
+        }, 2000);
+
+        setTimeout(() => {
+            statusDiv.style.display = 'none';
+        }, 6000);
+        console.log(`Attempting to generate: ${docTitle}`);
+    }
+    
+    // --- EVENT LISTENERS ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Render the detailed result entry fields
+        renderSubjectMarksInputs();
+
+        // Attach listeners to the new buttons (using placeholders for now)
+        document.getElementById('save-student-profile-btn').addEventListener('click', () => handleSave('Student Profile'));
+        document.getElementById('save-staff-profile-btn').addEventListener('click', () => handleSave('Staff Profile'));
+        document.getElementById('update-results-btn').addEventListener('click', () => handleSave('Student Results'));
+        document.getElementById('add-notification-btn').addEventListener('click', () => handleSave('Notifications'));
+        document.getElementById('save-news-btn').addEventListener('click', () => handleSave('News & Events'));
+        document.getElementById('upload-photos-btn').addEventListener('click', () => handleSave('Photo Gallery'));
+    });
+</script>
 
 </body>
 </html>
 
-
-
-
-
-
-
-
-
-
-
-        <label>Ration Card Number</label>
-        <input type="text">
-
-        <label>Ration Card Type</label>
-        <input type="text">
-    </div>
-
-    <div>
-        <label>Class Joining</label><input type="text">
-        <label>PEN Number (Transfer)</label><input type="text">
-        <label>APAAR ID</label><input type="text">
-    </div>
-
-</div>
-
-<button>Save Student Profile</button>
-</div>
-
-<!-- ************************************************************ -->
-<!-- ******************** STAFF PROFILE SECTION ***************** -->
-<!-- ************************************************************ -->
-
-<div class="section">
-<h2>Update Staff Profile</h2>
-
-<div class="grid">
-    <div>
-        <label>Name</label><input type="text">
-        <label>Code</label><input type="text">
-    </div>
-
-    <div>
-        <label>Qualification – Academic</label><input type="text">
-        <label>Professional</label><input type="text">
-    </div>
-
-    <div>
-        <label>Designation</label><input type="text">
-        <label>Date of Appointment</label><input type="date">
-        <label>Date of Promotion</label><input type="date">
-        <label>Date of Joining This Institution</label><input type="date">
-    </div>
-</div>
-
-<button>Save Staff Profile</button>
-</div>
-
-
-<!-- ************************************************************ -->
-<!-- ******************** RESULT ENTRY SECTION ****************** -->
-<!-- ************************************************************ -->
-
-<div class="section">
-<h2>Enter Student Result</h2>
-
-<label>Student Name</label><input type="text">
-<label>Admission No.</label><input type="text">
-
-<h3>Subjects</h3>
-
-<div class="grid">
-    <div><label>English</label><input type="number" placeholder="FA1–FA6 + SA"></div>
-    <div><label>Maths</label><input type="number"></div>
-    <div><label>EVS</label><input type="number"></div>
-    <div><label>Urdu & Kashmiri</label><input type="number"></div>
-</div>
-
-<h3>FA Marks (5 marks each)</h3>
-
-<div class="grid">
-    <input type="number" placeholder="FA1">
-    <input type="number" placeholder="FA2">
-    <input type="number" placeholder="FA3">
-    <input type="number" placeholder="FA4">
-    <input type="number" placeholder="FA5">
-    <input type="number" placeholder="FA6">
-</div>
-
-<label>Total (30)</label><input type="number">
-
-<label>Co-Curricular (20)</label><input type="number">
-
-<label>SA (50)</label><input type="number">
-
-<button>Generate Marksheet PDF</button>
-</div>
-
-
-<!-- ************************************************************ -->
-<!-- ************* NOTIFICATIONS + NEWS & EVENTS **************** -->
-<!-- ************************************************************ -->
-
-<div class="section">
-<h2>Notifications & Announcements</h2>
-<label>New Notification</label>
-<textarea rows="3"></textarea>
-<button>Add Notification</button>
-</div>
-
-<div class="section">
-<h2>News & Events</h2>
-<label>Add News Item</label>
-<textarea rows="3"></textarea>
-<button>Save News</button>
-</div>
-
-
-<!-- ************************************************************ -->
-<!-- ********************* PHOTO GALLERY ************************ -->
-<!-- ************************************************************ -->
-
-<div class="section">
-<h2>Upload Photos to Gallery</h2>
-<input type="file" multiple>
-<button>Upload Photos</button>
-</div>
-
-</body>
-</html>

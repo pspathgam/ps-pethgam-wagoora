@@ -5,21 +5,235 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Panel – GPS Pethgam Wagoora</title>
 
+<!-- Load Firebase SDKs -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // --- GLOBAL FIREBASE VARIABLES (Initialized below) ---
+    window.db = null;
+    window.auth = null;
+    window.userId = null;
+    window.appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+    
+    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+    // Utility function to get the Firestore path for public data
+    window.getDocRef = (collectionName, docId) => {
+        if (!window.db || !window.appId || !docId) return null;
+        // Public path: /artifacts/{appId}/public/data/{collectionName}/{docId}
+        return doc(window.db, `artifacts/${window.appId}/public/data/${collectionName}`, docId);
+    };
+
+    // --- FIREBASE INITIALIZATION ---
+    async function initializeFirebase() {
+        try {
+            const app = initializeApp(firebaseConfig);
+            window.auth = getAuth(app);
+            window.db = getFirestore(app);
+            // Log for debugging
+            console.log("Firebase services initialized.");
+
+            // 1. Handle Authentication
+            if (initialAuthToken) {
+                await signInWithCustomToken(window.auth, initialAuthToken);
+            } else {
+                await signInAnonymously(window.auth);
+            }
+            
+            // 2. Set user ID once authenticated
+            onAuthStateChanged(window.auth, (user) => {
+                window.userId = user ? user.uid : null;
+                console.log("User ID:", window.userId || "Anonymous");
+                document.getElementById('auth-status').textContent = window.userId ? `Authenticated (UID: ${window.userId.substring(0, 8)}...)` : 'Anonymous';
+            });
+            
+        } catch (error) {
+            console.error("Firebase Initialization Error:", error);
+            document.getElementById('auth-status').textContent = `Auth Error: ${error.message.substring(0, 50)}...`;
+            document.getElementById('auth-status').style.backgroundColor = '#fcebeb';
+            document.getElementById('auth-status').style.color = '#c53030';
+        }
+    }
+
+    // --- DATA SAVING LOGIC (Exposed globally for buttons) ---
+
+    // Student Profile
+    window.saveStudentProfile = async () => {
+        const studentId = document.getElementById('student-admission-id').value.trim();
+        const saveBtn = document.getElementById('save-student-profile-btn');
+        if (!studentId) { window.showStatus('student-profile', 'Error: Please enter a Student ID.', 'error'); return; }
+        
+        saveBtn.disabled = true;
+        window.showStatus('student-profile', 'Saving Student Profile...', 'loading');
+
+        try {
+            const formData = window.collectFormData('student-profile-form');
+            const docRef = window.getDocRef('students', studentId);
+
+            await setDoc(docRef, { ...formData, lastUpdatedBy: window.userId, admissionId: studentId }, { merge: true });
+            window.showStatus('student-profile', `✅ Student Profile for ID ${studentId} saved successfully!`, 'success');
+        } catch (error) {
+            console.error("Student Save Error:", error);
+            window.showStatus('student-profile', `❌ Failed to save: ${error.message.substring(0, 80)}`, 'error');
+        } finally {
+            saveBtn.disabled = false;
+        }
+    };
+
+    // Staff Profile
+    window.saveStaffProfile = async () => {
+        const staffCode = document.getElementById('staff-code-input').value.trim();
+        const saveBtn = document.getElementById('save-staff-profile-btn');
+        if (!staffCode) { window.showStatus('staff-profile', 'Error: Please enter a Staff Code.', 'error'); return; }
+
+        saveBtn.disabled = true;
+        window.showStatus('staff-profile', 'Saving Staff Profile...', 'loading');
+
+        try {
+            const formData = window.collectFormData('staff-profile-form');
+            const docRef = window.getDocRef('staff', staffCode);
+            
+            await setDoc(docRef, { ...formData, lastUpdatedBy: window.userId, staffCode: staffCode }, { merge: true });
+            window.showStatus('staff-profile', `✅ Staff Profile for Code ${staffCode} saved successfully!`, 'success');
+        } catch (error) {
+            console.error("Staff Save Error:", error);
+            window.showStatus('staff-profile', `❌ Failed to save: ${error.message.substring(0, 80)}`, 'error');
+        } finally {
+            saveBtn.disabled = false;
+        }
+    };
+    
+    // Student Profile Data Loading
+    window.loadStudentProfile = async () => {
+        const studentId = document.getElementById('student-admission-id').value.trim();
+        if (!studentId) { window.showStatus('student-profile', 'Enter a Student ID to load.', 'info'); return; }
+        
+        window.showStatus('student-profile', `Loading profile for ID ${studentId}...`, 'loading');
+
+        try {
+            const docRef = window.getDocRef('students', studentId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                window.fillFormData('student-profile-form', docSnap.data());
+                window.showStatus('student-profile', `Data loaded for ID ${studentId}.`, 'success');
+            } else {
+                window.clearFormData('student-profile-form');
+                document.getElementById('student-admission-id').value = studentId; // Preserve the ID field
+                window.showStatus('student-profile', `No existing profile found for ID ${studentId}. Ready to create a new one.`, 'info');
+            }
+        } catch (error) {
+            console.error("Student Load Error:", error);
+            window.showStatus('student-profile', `❌ Failed to load: ${error.message.substring(0, 80)}`, 'error');
+        }
+    };
+
+    // Staff Profile Data Loading
+    window.loadStaffProfile = async () => {
+        const staffCode = document.getElementById('staff-code-input').value.trim();
+        if (!staffCode) { window.showStatus('staff-profile', 'Enter a Staff Code to load.', 'info'); return; }
+        
+        window.showStatus('staff-profile', `Loading profile for Code ${staffCode}...`, 'loading');
+
+        try {
+            const docRef = window.getDocRef('staff', staffCode);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                window.fillFormData('staff-profile-form', docSnap.data());
+                window.showStatus('staff-profile', `Data loaded for Code ${staffCode}.`, 'success');
+            } else {
+                window.clearFormData('staff-profile-form');
+                document.getElementById('staff-code-input').value = staffCode; // Preserve the ID field
+                window.showStatus('staff-profile', `No existing profile found for Code ${staffCode}. Ready to create a new one.`, 'info');
+            }
+        } catch (error) {
+            console.error("Staff Load Error:", error);
+            window.showStatus('staff-profile', `❌ Failed to load: ${error.message.substring(0, 80)}`, 'error');
+        }
+    };
+    
+    // --- FORM UTILITIES (Collect/Fill/Clear Data) ---
+
+    // Collects data from all form elements within a specific container (sectionId)
+    window.collectFormData = (sectionId) => {
+        const container = document.getElementById(sectionId);
+        const data = {};
+        container.querySelectorAll('input, select, textarea').forEach(input => {
+            if (input.id && input.id !== 'student-photo-upload' && input.id !== 'gallery-file-input') {
+                const key = input.id.replace(/-/g, '_');
+                data[key] = input.value;
+            }
+        });
+        return data;
+    };
+    
+    // Fills form data from an object
+    window.fillFormData = (sectionId, data) => {
+        const container = document.getElementById(sectionId);
+        container.querySelectorAll('input, select, textarea').forEach(input => {
+            const key = input.id.replace(/-/g, '_');
+            if (data[key] !== undefined) {
+                input.value = data[key] || '';
+            }
+        });
+    };
+    
+    // Clears all form data (except IDs)
+    window.clearFormData = (sectionId) => {
+        const container = document.getElementById(sectionId);
+        container.querySelectorAll('input, select, textarea').forEach(input => {
+            const isIdField = input.id === 'student-admission-id' || input.id === 'staff-code-input';
+            if (!isIdField) {
+                input.value = '';
+            }
+        });
+    };
+
+    // --- UI STATUS HANDLING ---
+    const statusClasses = {
+        loading: { bg: '#e0f2fe', border: '#7dd3fc', color: '#0369a1' }, // Blue
+        success: { bg: '#dcfce7', border: '#4ade80', color: '#16a34a' }, // Green
+        error:   { bg: '#fee2e2', border: '#f87171', color: '#dc2626' }, // Red
+        info:    { bg: '#fef3c7', border: '#fcd34d', color: '#d97706' }  // Yellow/Orange
+    };
+    
+    window.showStatus = (sectionId, message, type) => {
+        const statusDiv = document.getElementById(`${sectionId}-status`);
+        const { bg, border, color } = statusClasses[type] || statusClasses.info;
+
+        statusDiv.textContent = message;
+        statusDiv.style.display = 'block';
+        statusDiv.style.backgroundColor = bg;
+        statusDiv.style.borderColor = border;
+        statusDiv.style.color = color;
+
+        // Auto-hide success/info messages
+        if (type === 'success' || type === 'info') {
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+    };
+    
+    // --- APP START ---
+    document.addEventListener('DOMContentLoaded', initializeFirebase);
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
 <style>
-    /* Base Styles */
-    body {
-        font-family: "Nunito", sans-serif;
-        background: #f6f7fb;
-        margin: 0;
-        padding: 0;
-    }
+    /* Base Styles (User's style maintained) */
+    body { font-family: "Nunito", sans-serif; background: #f6f7fb; margin: 0; padding: 0; }
+    h1 { background: #003566; color: white; padding: 15px 15px; font-weight: 800; font-size: 1.8rem; }
     h2 {
         background: #003566;
         color: white;
         padding: 10px 15px;
         border-radius: 8px 8px 0 0;
-        margin: -15px -15px 15px -15px; /* Adjust for section padding */
+        margin: -15px -15px 15px -15px;
         font-weight: 800;
         font-size: 1.5rem;
     }
@@ -60,7 +274,6 @@
         outline: none;
         box-shadow: 0 0 5px rgba(0, 53, 102, 0.2);
     }
-    /* Button Styling */
     button {
         background: #003566;
         color: white;
@@ -83,26 +296,176 @@
     button:active {
         transform: translateY(1px);
     }
-
-    /* Grid Layout */
+    button:disabled {
+        background: #90a4ae;
+        cursor: not-allowed;
+    }
     .grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 20px;
         margin-bottom: 20px;
     }
-
-    /* Specific elements */
     .photo-box {
-        width: 120px;
-        height: 120px;
-        border: 3px dashed #888;
-        border-radius: 10px;
+        width: 120px; height: 120px; border: 3px dashed #888; border-radius: 10px;
+        display: flex; align-items: center; justify-content: center; margin-top: 10px;
+        font-size: 12px; color: #444; background: #fcfcfc;
+    }
+    .result-group {
+        border: 1px solid #e0e0e0;
+        padding: 15px;
+        border-radius: 8px;
+        background: #f9f9f9;
+    }
+    .result-input-small {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+    .document-list { display: flex; flex-wrap: wrap; gap: 15px; }
+    .document-list button { background: #ffc300; color: #000; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); }
+    .document-list button:hover { background: #e6b100; }
+    
+    /* New Status Message Styling */
+    .status-message {
+        padding: 10px;
+        border-radius: 6px;
+        margin-top: 15px;
+        font-weight: 700;
+        border: 1px solid;
+        display: none;
+    }
+    .id-control-group {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 10px;
-        font-size: 12px;
+        gap: 10px;
+        align-items: flex-end;
+    }
+    .id-control-group > div {
+        flex-grow: 1;
+    }
+    .load-btn {
+        background: #505050;
+        margin-top: 4px;
+        padding: 10px 15px;
+    }
+    .load-btn:hover {
+        background: #303030;
+    }
+    
+    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<h1 style="text-align:center;">ADMIN PANEL – GPS Pethgam Wagoora</h1>
+<div id="auth-status" style="text-align:center; padding: 5px; background: #e0e0ff; color: #003566; font-size: 0.9rem; font-weight: 700;">Initializing Authentication...</div>
+
+<!-- ************************************************************ -->
+<!-- ****************** STUDENT PROFILE SECTION ***************** -->
+<!-- ************************************************************ -->
+
+<div class="section">
+    <h2>Update Student Profile</h2>
+    
+    <div class="id-control-group">
+        <div>
+            <label for="student-admission-id">Admission/Student ID (REQUIRED for Load/Save)</label>
+            <input type="text" id="student-admission-id" placeholder="e.g., GPS-001">
+        </div>
+        <button class="load-btn" onclick="window.loadStudentProfile()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.01L10 12"></path><path d="M21 16.01L10 16"></path><path d="M21 8.01L10 8"></path><path d="M10 20v-4a4 4 0 0 1-4-4H2"></path></svg>
+            Load
+        </button>
+    </div>
+    
+    <div id="student-profile-status" class="status-message"></div>
+
+    <form id="student-profile-form">
+        <div class="grid">
+
+            <!-- Photo & ID -->
+            <div class="col-span-1">
+                <label>Student Photo</label>
+                <div class="photo-box">Photo Placeholder</div>
+                <input type="file" id="student-photo-upload">
+                <label for="student-apaar-id">APAAR ID</label><input type="text" id="student-apaar-id">
+            </div>
+
+            <!-- Name Details -->
+            <div class="col-span-1">
+                <label>Student Name</label>
+                <input type="text" placeholder="First Name" id="student-name-first">
+                <input type="text" placeholder="Middle Name" id="student-name-middle" class="mt-2">
+                <input type="text" placeholder="Last Name" id="student-name-last" class="mt-2">
+            </div>
+
+            <!-- Aadhaar Name -->
+            <div class="col-span-1">
+                <label>Name as per Aadhaar</label>
+                <input type="text" placeholder="First Name" id="aadhaar-name-first">
+                <input type="text" placeholder="Middle Name" id="aadhaar-name-middle" class="mt-2">
+                <input type="text" placeholder="Last Name" id="aadhaar-name-last" class="mt-2">
+            </div>
+
+            <!-- Parent Names -->
+            <div class="col-span-1">
+                <label>Father's Name</label><input type="text" id="father-name-first" placeholder="First Name">
+                <input type="text" id="father-name-middle" placeholder="Middle Name" class="mt-2">
+                <input type="text" id="father-name-last" placeholder="Last Name" class="mt-2">
+            </div>
+            <div class="col-span-1">
+                <label>Mother's Name</label><input type="text" id="mother-name-first" placeholder="First Name">
+                <input type="text" id="mother-name-middle" placeholder="Middle Name" class="mt-2">
+                <input type="text" id="mother-name-last" placeholder="Last Name" class="mt-2">
+            </div>
+
+            <!-- Contact & Residence -->
+            <div class="col-span-1">
+                <label>Father's Contact Number</label><input type="tel" id="father-contact">
+                <label>Mother's Contact Number</label><input type="tel" id="mother-contact">
+                <label>Residence</label><input type="text" id="residence">
+            </div>
+
+            <!-- Location & ID -->
+            <div class="col-span-1">
+                <label>Tehsil</label><input type="text" id="tehsil">
+                <label>District</label><input type="text" id="district">
+                <label>Aadhaar Number</label><input type="text" id="aadhaar-number">
+            </div>
+
+            <!-- DOB & Enrollment -->
+            <div class="col-span-1">
+                <label>Date of Birth (DD MM YYYY)</label><input type="text" id="dob-numeric">
+                <label>DOB in Words</label><input type="text" id="dob-words">
+                <label>Class Joining</label><input type="text" id="class-joining">
+                <label>PEN Number (Transfer)</label><input type="text" id="pen-number">
+            </div>
+
+            <!-- Bank & Other Details -->
+            <div class="col-span-1">
+                <label>Bank Account Number</label><input type="text" id="bank-ac-number">
+                <label>Bank Name</label><input type="text" id="bank-name">
+                <label>Bank Branch</label><input type="text" id="bank-branch">
+                <label>IFSC Code</label><input type="text" id="ifsc-code">
+            </div>
+
+            <!-- Category & Health -->
+            <div class="col-span-1">
+                <label>Category</label>
+                <select id="category">
+                    <option value="SC">SC</option>
+                    <option value="ST">ST</option>
+                    <option value="OBC">OBC</option>
+                    <option value="GENERAL" selected>GENERAL</option>
+                </select>
+                <label>Blood Group</label><input type="text" id="blood-group">
+                <label>Ration Card Number</label><input type="text" id="ration-card-number">
+                <label>Ration Card Type</label><input type="text" id="ration-card-type">
+            </div>
+
+        </div>
+    </form>
+    
+    <button id="save-student-profile-btn" onclick="window.saveStudentProfile()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21         font-size: 12px;
         color: #444;
         background: #fcfcfc;
     }

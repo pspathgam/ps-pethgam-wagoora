@@ -1,3 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pethgam Wagoora Winter Assignment Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Tailwind Configuration & Global Styles */
+        :root {
+            --color-admin: #EF4444; /* Red-600 */
+            --color-teacher: #F59E0B; /* Amber-500 */
+            --color-student: #3B82F6; /* Blue-500 */
+        }
+
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-header-admin { border-left: 8px solid var(--color-admin); }
+        .dashboard-header-teacher { border-left: 8px solid var(--color-teacher); }
+        .dashboard-header-student { border-left: 8px solid var(--color-student); }
+        
+        /* Ensure marquee is visible and scrolls */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        /* Utility for quick element hiding */
+        .hidden { display: none !important; }
+
+        /* Custom scrollbar for dark mode */
+        body::-webkit-scrollbar { width: 8px; }
+        body::-webkit-scrollbar-track { background: #1f2937; }
+        body::-webkit-scrollbar-thumb { background: #6b7280; border-radius: 4px; }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 min-h-screen p-4 sm:p-8">
+
+    <div id="app-container" class="max-w-6xl mx-auto">
+
+        <div id="notification-bar" class="marquee-container bg-gray-800 p-2 mb-6 rounded-lg shadow-xl hidden">
+            <p id="notification-text" class="text-sm text-yellow-400 font-semibold" style="animation: marquee 15s linear infinite;"></p>
+        </div>
+        <style>
+            @keyframes marquee {
+                0% { transform: translateX(100%); }
+                100% { transform: translateX(-100%); }
+            }
+        </style>
+
+        <div id="auth-view" class="max-w-md mx-auto p-6 glass-card rounded-xl">
+            <h1 class="text-3xl font-bold text-center text-yellow-400 mb-6">🔑 Portal Access – Zone Wagoora</h1>
+
+            <div id="login-form">
+                <p class="text-center mb-4 text-sm">Use **admin\_pethgam** / **0000** for Admin test.</p>
+                <input id="login-username" type="text" placeholder="Username (Case-Insensitive)" class="w-full p-3 mb-4 rounded-lg bg-gray-800 border-2 border-gray-700 focus:ring-blue-500 focus:border-blue-500">
+                <input id="login-pin" type="password" placeholder="4-6 Digit PIN" maxlength="6" class="w-full p-3 mb-4 rounded-lg bg-gray-800 border-2 border-gray-700 focus:ring-blue-500 focus:border-blue-500">
+                
+                <p id="auth-message" class="text-center mb-4 p-2 text-sm text-red-400 hidden"></p>
+
+                <button onclick="handleLogin()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 font-bold rounded-lg shadow-lg transition duration-200">Login</button>
+                <button onclick="showSignup()" class="w-full mt-4 py-2 bg-gray-600 hover:bg-gray-700 text-sm rounded-lg transition duration-200">Need an Account? Sign Up</button>
+            </div>
+
+            <div id="signup-form" class="hidden">
+                <h2 class="text-2xl font-bold text-center text-yellow-400 mb-4">✍️ New User Registration</h2>
+                <input id="signup-username" type="text" placeholder="Desired Username" class="w-full p-3 mb-4 rounded-lg bg-gray-800 border-2 border-gray-700 focus:ring-blue-500 focus:border-blue-500">
+                <input id="signup-pin" type="password" placeholder="4-6 Digit PIN" maxlength="6" class="w-full p-3 mb-4 rounded-lg bg-gray-800 border-2 border-gray-700 focus:ring-blue-500 focus:border-blue-500">
+                
+                <select id="signup-role" class="w-full p-3 mb-4 rounded-lg bg-gray-800 border-2 border-gray-700 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="Student">Student</option>
+                    <option value="Teacher">Teacher</option>
+                </select>
+
+                <select id="signup-school" class="w-full p-3 mb-4 rounded-lg bg-gray-800 border-2 border-gray-700 focus:ring-blue-500 focus:border-blue-500"></select>
+
+                <button onclick="handleSignup()" class="w-full py-3 bg-green-600 hover:bg-green-700 font-bold rounded-lg shadow-lg transition duration-200">Register</button>
+                <button onclick="showLogin()" class="w-full mt-4 py-2 bg-gray-600 hover:bg-gray-700 text-sm rounded-lg transition duration-200">Back to Login</button>
+            </div>
+        </div>
+
+        <div id="dashboard-view" class="hidden">
+            
+            <header class="flex justify-between items-center p-4 mb-6 glass-card rounded-xl">
+                <h1 id="welcome-message" class="text-2xl font-extrabold">Welcome, <span class="text-yellow-400">User!</span></h1>
+                <button onclick="logoutUser()" class="py-2 px-4 bg-red-600 hover:bg-red-700 font-semibold rounded-lg transition duration-200">Logout</button>
+            </header>
+
+            <nav id="role-nav" class="mb-8 p-4 glass-card rounded-xl shadow-xl flex flex-wrap gap-4"></nav>
+
+            <div id="content-area">
+
+                <div id="admin-dashboard" class="role-dashboard hidden">
+                    <h2 class="text-3xl font-bold mb-6 p-4 bg-red-800/20 rounded-lg dashboard-header-admin">🛡️ Admin Control Panel</h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="p-5 glass-card rounded-xl border-red-500 border-l-4">
+                            <h3 class="text-xl font-semibold mb-3 text-red-400">User Approvals (Pending)</h3>
+                            <div id="pending-users-list" class="space-y-3">
+                                <p>Loading pending signups...</p>
+                            </div>
+                        </div>
+                        <div class="p-5 glass-card rounded-xl border-yellow-500 border-l-4">
+                            <h3 class="text-xl font-semibold mb-3 text-yellow-400">System Limits</h3>
+                            <p>Teachers: <span id="teacher-count" class="font-bold">0</span>/10</p>
+                            <p>Students: <span id="student-count" class="font-bold">0</span>/560</p>
+                            <p>Per Class: <span class="font-bold">70</span> max</p>
+                        </div>
+                        <div class="p-5 glass-card rounded-xl border-green-500 border-l-4">
+                            <h3 class="text-xl font-semibold mb-3 text-green-400">Publish Notification</h3>
+                            <textarea id="admin-notification-input" placeholder="Type announcement here..." rows="3" class="w-full p-2 rounded-lg bg-gray-700 focus:ring-green-500 focus:border-green-500 mb-2"></textarea>
+                            <button onclick="publishNotification()" class="w-full py-2 bg-green-600 hover:bg-green-700 font-bold rounded-lg">Publish Live</button>
+                        </div>
+                    </div>
+
+                    <div class="p-6 glass-card rounded-xl mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-purple-400">🏫 Edit School Names</h3>
+                        <div id="school-edit-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                            <p>Loading 80 schools...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="teacher-dashboard" class="role-dashboard hidden">
+                    <h2 class="text-3xl font-bold mb-6 p-4 bg-amber-800/20 rounded-lg dashboard-header-teacher">👨‍🏫 Teacher: MCQ Management</h2>
+
+                    <div class="p-6 glass-card rounded-xl mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-amber-400">➕ Add New MCQ (Daily Limit: 20)</h3>
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <select id="mcq-class" class="p-3 rounded-lg bg-gray-700">
+                                <option value="" disabled selected>Select Class (1st-8th)</option>
+                                <option value="1">Class 1</option><option value="2">Class 2</option>
+                                <option value="3">Class 3</option><option value="4">Class 4</option>
+                                <option value="5">Class 5</option><option value="6">Class 6</option>
+                                <option value="7">Class 7</option><option value="8">Class 8</option>
+                            </select>
+                            <select id="mcq-subject" class="p-3 rounded-lg bg-gray-700">
+                                <option value="" disabled selected>Select Subject</option>
+                                <option value="Math">Math</option><option value="English">English</option>
+                                <option value="EVS">EVS</option><option value="Urdu">Urdu</option>
+                                <option value="Kashmiri">Kashmiri</option><option value="SST">SST</option>
+                            </select>
+                        </div>
+
+                        <input id="mcq-question" type="text" placeholder="Question Text" class="w-full p-3 mb-3 rounded-lg bg-gray-700">
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <input data-option="1" type="text" placeholder="Option A" class="mcq-option p-3 rounded-lg bg-gray-700">
+                            <input data-option="2" type="text" placeholder="Option B" class="mcq-option p-3 rounded-lg bg-gray-700">
+                            <input data-option="3" type="text" placeholder="Option C" class="mcq-option p-3 rounded-lg bg-gray-700">
+                            <input data-option="4" type="text" placeholder="Option D" class="mcq-option p-3 rounded-lg bg-gray-700">
+                        </div>
+
+                        <select id="mcq-correct" class="w-full p-3 my-4 rounded-lg bg-gray-700">
+                            <option value="" disabled selected>Mark Correct Option (A, B, C or D)</option>
+                            <option value="1">Option A</option><option value="2">Option B</option>
+                            <option value="3">Option C</option><option value="4">Option D</option>
+                        </select>
+
+                        <p id="mcq-add-message" class="text-center mb-2 text-red-400 hidden"></p>
+                        <button onclick="addMCQ()" class="w-full py-3 bg-amber-600 hover:bg-amber-700 font-bold rounded-lg">Save MCQ</button>
+                    </div>
+
+                    <div class="p-6 glass-card rounded-xl">
+                        <h3 class="text-2xl font-bold mb-4 text-amber-400">📋 Manage Your Questions</h3>
+                        <div id="teacher-mcq-list" class="space-y-4">
+                            <p>Load questions based on selected Class/Subject...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="student-dashboard" class="role-dashboard hidden">
+                    <h2 class="text-3xl font-bold mb-6 p-4 bg-blue-800/20 rounded-lg dashboard-header-student">👦 Student: Quiz & Progress</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="p-5 glass-card rounded-xl text-center border-blue-500 border-l-4">
+                            <h3 class="text-xl font-semibold text-blue-400">Total Coins 💰</h3>
+                            <p id="student-coins" class="text-4xl font-bold mt-2">0</p>
+                        </div>
+                        <div class="p-5 glass-card rounded-xl text-center border-yellow-500 border-l-4">
+                            <h3 class="text-xl font-semibold text-yellow-400">Current Trophy 🏆</h3>
+                            <p id="student-trophy" class="text-4xl font-bold mt-2">None</p>
+                        </div>
+                        <div class="p-5 glass-card rounded-xl text-center border-green-500 border-l-4">
+                            <h3 class="text-xl font-semibold text-green-400">MCQs Attempted</h3>
+                            <p id="student-mcqs-attempted" class="text-4xl font-bold mt-2">0</p>
+                        </div>
+                    </div>
+
+                    <div class="p-6 glass-card rounded-xl mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-400">▶️ Start Quiz</h3>
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <select id="quiz-class" class="p-3 rounded-lg bg-gray-700">
+                                <option value="" disabled selected>Select Class</option>
+                                </select>
+                            <select id="quiz-subject" class="p-3 rounded-lg bg-gray-700">
+                                <option value="" disabled selected>Select Subject</option>
+                                </select>
+                        </div>
+                        <button onclick="startQuiz()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 font-bold rounded-lg">Load Quiz</button>
+                        
+                        <div id="mcq-quiz-container" class="mt-6 hidden">
+                            <p id="quiz-status" class="text-center text-lg font-semibold mb-4"></p>
+                            <div id="current-mcq" class="p-4 glass-card rounded-xl">
+                                <p id="mcq-question-text" class="text-xl font-bold mb-4">Question will appear here...</p>
+                                <div id="mcq-options" class="space-y-3">
+                                    </div>
+                                <div id="mcq-feedback" class="text-center text-lg font-bold p-3 mt-4 rounded-lg hidden"></div>
+                                <button onclick="submitAnswer()" class="w-full py-2 mt-4 bg-green-600 hover:bg-green-700 font-bold rounded-lg">Submit Answer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="leaderboard-view" class="role-dashboard hidden">
+                    <h2 class="text-3xl font-bold mb-6 p-4 bg-gray-800/20 rounded-lg dashboard-header-student">📊 Global Leaderboards</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <button onclick="loadLeaderboard('overall')" class="py-3 bg-indigo-600 hover:bg-indigo-700 font-bold rounded-lg">Overall Rank</button>
+                        
+                        <select id="lb-class-select" onchange="loadLeaderboard('class')" class="py-3 px-4 rounded-lg bg-gray-700 font-bold">
+                            <option value="class-default" disabled selected>Class-Wise Rank</option>
+                            </select>
+                        
+                        <div class="flex gap-2">
+                            <select id="lb-subject-class-select" class="py-3 px-2 rounded-lg bg-gray-700 font-bold w-1/2">
+                                <option value="" disabled selected>Class</option>
+                                </select>
+                            <select id="lb-subject-select" onchange="loadLeaderboard('subject')" class="py-3 px-2 rounded-lg bg-gray-700 font-bold w-1/2">
+                                <option value="" disabled selected>Subject-Wise Rank</option>
+                                </select>
+                        </div>
+                    </div>
+
+                    <div class="p-6 glass-card rounded-xl">
+                        <h3 id="leaderboard-title" class="text-2xl font-bold mb-4 text-pink-400">Overall Top 10 Students</h3>
+                        <table class="min-w-full divide-y divide-gray-700">
+                            <thead class="bg-gray-700">
+                                <tr>
+                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Rank</th>
+                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Student Name</th>
+                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Class</th>
+                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider hidden sm:table-cell">School</th>
+                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Trophy</th>
+                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Coins 💰</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboard-body" class="divide-y divide-gray-800">
+                                <tr><td colspan="6" class="p-4 text-center">Select a leaderboard view to begin.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module">
+        // ----------------------------------------------------
+        // 1. FIREBASE CONFIGURATION & IMPORTS
+        // ----------------------------------------------------
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, addDoc, setDoc, doc, getDoc, getDocs, updateDoc, onSnapshot, query, where, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        // !!! REPLACE WITH YOUR ACTUAL CONFIG !!!
+        const firebaseConfig = {
+            apiKey: "your-api-key",
+            authDomain: "your-project-id.firebaseapp.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project-id.appspot.com",
+            messagingSenderId: "your-sender-id",
+            appId: "your-app-id", // Used for artifacts path
+            databaseURL: "https://your-project-id-default-rtdb.firebaseio.com", // for RTDB
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const APP_ID = firebaseConfig.appId;
+
+        // Base path for Firestore collections
+        const ARTIFACTS_PATH = `artifacts/${APP_ID}`;
+
+        // ----------------------------------------------------
+        // 2. GLOBAL STATE & UTILS
+        // ----------------------------------------------------
+        let currentUser = null;
+        let currentRole = null;
+        let userDocRef = null;
+        let quizMCQs = [];
+        let currentQuizIndex = 0;
+
+        const USERS = {}; // Local cache for all user data
+
+        const CLASSES = [1, 2, 3, 4, 5, 6, 7, 8];
+        const SUBJECTS = ['Math', 'English', 'EVS', 'Urdu', 'Kashmiri', 'SST'];
+        const TROPHY_LEVELS = {
+            Bronze: 2500,
+            Silver: 5000,
+            Gold: 7500
+        };
+        const TROPHY_ICONS = {
+            None: '⚪', Bronze: '🥉', Silver: '🥈', Gold: '🥇'
+        };
+
+        const schoolList = {}; // To store actual school names
+
+        // DOM elements
+        const authView = document.getElementById('auth-view');
+        const dashboardView = document.getElementById('dashboard-view');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('sig
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!doctype html>
 <html lang="en">
 <head>

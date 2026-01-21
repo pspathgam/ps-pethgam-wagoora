@@ -3,678 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pethgam Wagoora Winter Assignment Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom Tailwind Configuration & Global Styles */
-        :root {
-            --color-admin: #EF4444; /* Red-600 */
-            --color-teacher: #F59E0B; /* Amber-500 */
-            --color-student: #3B82F6; /* Blue-500 */
-        }
+    <title>Dashboard | Govt. Primary School Pethgam Wagoora</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
 
-        .glass-card {
-            background-color: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-        }
+<div class="dashboard-container">
+    
+    <header class="main-header">
+        <div class="logo-area">
+            <div class="school-logo-placeholder">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <div class="school-name">
+                <h1>Govt. Primary School <span>Pethgam Wagoora</span></h1>
+                <p>Baramulla</p>
+            </div>
+        </div>
+        <div class="user-welcome">
+            <div class="welcome-text">
+                <p>Welcome, <br><strong>Headmaster!</strong></p>
+            </div>
+            <img src="https://via.placeholder.com/50" alt="Headmaster Profile" class="profile-img">
+        </div>
+    </header>
 
-        .dashboard-header-admin { border-left: 8px solid var(--color-admin); }
-        .dashboard-header-teacher { border-left: 8px solid var(--color-teacher); }
-        .dashboard-header-student { border-left: 8px solid var(--color-student); }
+    <section class="stats-row">
+        <div class="stat-card green">
+            <div class="stat-icon"><i class="fas fa-child"></i></div>
+            <div class="stat-info">
+                <p>Total Students</p>
+                <h3>320</h3>
+            </div>
+        </div>
+        <div class="stat-card orange">
+            <div class="stat-icon"><i class="fas fa-user-tie"></i></div>
+            <div class="stat-info">
+                <p>Total Teachers</p>
+                <h3>18</h3>
+            </div>
+        </div>
+        <div class="stat-card purple">
+            <div class="stat-icon"><i class="fas fa-chalkboard"></i></div>
+            <div class="stat-info">
+                <p>Classes</p>
+                <h3>08</h3>
+            </div>
+        </div>
+        <div class="stat-card blue">
+            <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+            <div class="stat-info">
+                <p>Attendance Today</p>
+                <h3>95% Present</h3>
+            </div>
+        </div>
+    </section>
+
+    <main class="content-grid">
         
-        /* Ensure marquee is visible and scrolls */
-        .marquee-container {
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        /* Utility for quick element hiding */
-        .hidden { display: none !important; }
-
-        /* Custom scrollbar for dark mode */
-        body::-webkit-scrollbar { width: 8px; }
-        body::-webkit-scrollbar-track { background: #1f2937; }
-        body::-webkit-scrollbar-thumb { background: #6b7280; border-radius: 4px; }
-    </style>
-</head>
-
-<body class="bg-gray-900 text-gray-100 min-h-screen p-4 sm:p-8">
-
-    <div id="app-container" class="max-w-6xl mx-auto">
-
-        <div id="notification-bar" class="marquee-container bg-gray-800 p-2 mb-6 rounded-lg shadow-xl hidden">
-            <p id="notification-text" class="text-sm text-yellow-400 font-semibold" style="animation: marquee 15s linear infinite;"></p>
-        </div>
-        <style>
-            @keyframes marquee {
-                0% { transform: translateX(100%); }
-                100% { transform: translateX(-100%); }
-            }
-        </style>
-
-        <div id="auth-view" class="max-w-md mx-auto p-6 glass-card rounded-xl">
-            <h1 class="text-3xl font-bold text-center text-yellow-400 mb-6">🔑 Portal Access – Zone Wagoora</h1>
-
-            <div id="login-form">
-                <p class="text-center mb-4 text-sm">Use **admin\_pethgam** / **0000** for Admin test.</p>
-                <input id="login-username" type="text" placeholder="Username (Case-Insensitive)" class="w-full p-3 mb-4 rounded-lg bg-gray-800 border-2 border-gray-700 focus:ring-blue-500 focus:border-blue-500">
-                <input id="login-pin" type="password" placeholder="4-6 Digit PIN" maxlength="6" class="w-full p-3 mb-4 rounded-lg bg-gray-800 border-2 border-gray-700 focus:ring-blue-500 focus:border-blue-500">
-                
-                <p id="auth-message" class="text-center mb-4 p-2 text-sm text-red-400 hidden"></p>
-
-                <button onclick="handleLogin()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 font-bold rounded-lg shadow-lg transition duration-200">Login</button>
-                <button onclick="showSignup()" class="w-full mt-4 py-2 bg-gray-600 hover:bg-gray-700 text-sm rounded-lg transition duration-200">Need an Account? Sign Up</button>
+        <div class="card notice-board">
+            <div class="card-header">
+                <h3>Notice Board</h3>
+                <i class="fas fa-thumbtack"></i>
             </div>
-
-            <div id="signup-form" class="hidden">
-                <h2 class="text-2xl font-bold text-center text-yellow-400 mb-4">✍️ New User Registration</h2>
-                <input id="signup-username" type="text" placeholder="Desired Username" class="w-full p-3 mb-4 rounded-lg bg-gray-800 border-2 border-gray-700 focus:ring-blue-500 focus:border-blue-500">
-                <input id="signup-pin" type="password" placeholder="4-6 Digit PIN" maxlength="6" class="w-full p-3 mb-4 rounded-lg bg-gray-800 border-2 border-gray-700 focus:ring-blue-500 focus:border-blue-500">
-                
-                <select id="signup-role" class="w-full p-3 mb-4 rounded-lg bg-gray-800 border-2 border-gray-700 focus:ring-blue-500 focus:border-blue-500">
-                    <option value="" disabled selected>Select Role</option>
-                    <option value="Student">Student</option>
-                    <option value="Teacher">Teacher</option>
-                </select>
-
-                <select id="signup-school" class="w-full p-3 mb-4 rounded-lg bg-gray-800 border-2 border-gray-700 focus:ring-blue-500 focus:border-blue-500"></select>
-
-                <button onclick="handleSignup()" class="w-full py-3 bg-green-600 hover:bg-green-700 font-bold rounded-lg shadow-lg transition duration-200">Register</button>
-                <button onclick="showLogin()" class="w-full mt-4 py-2 bg-gray-600 hover:bg-gray-700 text-sm rounded-lg transition duration-200">Back to Login</button>
-            </div>
+            <ul id="notice-list">
+                <li><span class="dot purple"></span> PTM on 25th April</li>
+                <li><span class="dot gray"></span> Health Camp on 28th April</li>
+                <li><span class="dot pink"></span> Summer Vacation from 10th June</li>
+            </ul>
+            <button class="view-btn yellow" id="view-notices">View All</button>
         </div>
 
-        <div id="dashboard-view" class="hidden">
-            
-            <header class="flex justify-between items-center p-4 mb-6 glass-card rounded-xl">
-                <h1 id="welcome-message" class="text-2xl font-extrabold">Welcome, <span class="text-yellow-400">User!</span></h1>
-                <button onclick="logoutUser()" class="py-2 px-4 bg-red-600 hover:bg-red-700 font-semibold rounded-lg transition duration-200">Logout</button>
-            </header>
-
-            <nav id="role-nav" class="mb-8 p-4 glass-card rounded-xl shadow-xl flex flex-wrap gap-4"></nav>
-
-            <div id="content-area">
-
-                <div id="admin-dashboard" class="role-dashboard hidden">
-                    <h2 class="text-3xl font-bold mb-6 p-4 bg-red-800/20 rounded-lg dashboard-header-admin">🛡️ Admin Control Panel</h2>
-                    
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                        <div class="p-5 glass-card rounded-xl border-red-500 border-l-4">
-                            <h3 class="text-xl font-semibold mb-3 text-red-400">User Approvals (Pending)</h3>
-                            <div id="pending-users-list" class="space-y-3">
-                                <p>Loading pending signups...</p>
-                            </div>
-                        </div>
-                        <div class="p-5 glass-card rounded-xl border-yellow-500 border-l-4">
-                            <h3 class="text-xl font-semibold mb-3 text-yellow-400">System Limits</h3>
-                            <p>Teachers: <span id="teacher-count" class="font-bold">0</span>/10</p>
-                            <p>Students: <span id="student-count" class="font-bold">0</span>/560</p>
-                            <p>Per Class: <span class="font-bold">70</span> max</p>
-                        </div>
-                        <div class="p-5 glass-card rounded-xl border-green-500 border-l-4">
-                            <h3 class="text-xl font-semibold mb-3 text-green-400">Publish Notification</h3>
-                            <textarea id="admin-notification-input" placeholder="Type announcement here..." rows="3" class="w-full p-2 rounded-lg bg-gray-700 focus:ring-green-500 focus:border-green-500 mb-2"></textarea>
-                            <button onclick="publishNotification()" class="w-full py-2 bg-green-600 hover:bg-green-700 font-bold rounded-lg">Publish Live</button>
-                        </div>
-                    </div>
-
-                    <div class="p-6 glass-card rounded-xl mb-8">
-                        <h3 class="text-2xl font-bold mb-4 text-purple-400">🏫 Edit School Names</h3>
-                        <div id="school-edit-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                            <p>Loading 80 schools...</p>
-                        </div>
-                    </div>
+        <div class="card performance">
+            <h3>Student Performance</h3>
+            <div class="chart-container">
+                <div class="bar-group">
+                    <div class="bar green" style="height: 85%;">A+</div>
+                    <span>3+</span>
                 </div>
-
-                <div id="teacher-dashboard" class="role-dashboard hidden">
-                    <h2 class="text-3xl font-bold mb-6 p-4 bg-amber-800/20 rounded-lg dashboard-header-teacher">👨‍🏫 Teacher: MCQ Management</h2>
-
-                    <div class="p-6 glass-card rounded-xl mb-8">
-                        <h3 class="text-2xl font-bold mb-4 text-amber-400">➕ Add New MCQ (Daily Limit: 20)</h3>
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <select id="mcq-class" class="p-3 rounded-lg bg-gray-700">
-                                <option value="" disabled selected>Select Class (1st-8th)</option>
-                                <option value="1">Class 1</option><option value="2">Class 2</option>
-                                <option value="3">Class 3</option><option value="4">Class 4</option>
-                                <option value="5">Class 5</option><option value="6">Class 6</option>
-                                <option value="7">Class 7</option><option value="8">Class 8</option>
-                            </select>
-                            <select id="mcq-subject" class="p-3 rounded-lg bg-gray-700">
-                                <option value="" disabled selected>Select Subject</option>
-                                <option value="Math">Math</option><option value="English">English</option>
-                                <option value="EVS">EVS</option><option value="Urdu">Urdu</option>
-                                <option value="Kashmiri">Kashmiri</option><option value="SST">SST</option>
-                            </select>
-                        </div>
-
-                        <input id="mcq-question" type="text" placeholder="Question Text" class="w-full p-3 mb-3 rounded-lg bg-gray-700">
-                        
-                        <div class="grid grid-cols-2 gap-4">
-                            <input data-option="1" type="text" placeholder="Option A" class="mcq-option p-3 rounded-lg bg-gray-700">
-                            <input data-option="2" type="text" placeholder="Option B" class="mcq-option p-3 rounded-lg bg-gray-700">
-                            <input data-option="3" type="text" placeholder="Option C" class="mcq-option p-3 rounded-lg bg-gray-700">
-                            <input data-option="4" type="text" placeholder="Option D" class="mcq-option p-3 rounded-lg bg-gray-700">
-                        </div>
-
-                        <select id="mcq-correct" class="w-full p-3 my-4 rounded-lg bg-gray-700">
-                            <option value="" disabled selected>Mark Correct Option (A, B, C or D)</option>
-                            <option value="1">Option A</option><option value="2">Option B</option>
-                            <option value="3">Option C</option><option value="4">Option D</option>
-                        </select>
-
-                        <p id="mcq-add-message" class="text-center mb-2 text-red-400 hidden"></p>
-                        <button onclick="addMCQ()" class="w-full py-3 bg-amber-600 hover:bg-amber-700 font-bold rounded-lg">Save MCQ</button>
-                    </div>
-
-                    <div class="p-6 glass-card rounded-xl">
-                        <h3 class="text-2xl font-bold mb-4 text-amber-400">📋 Manage Your Questions</h3>
-                        <div id="teacher-mcq-list" class="space-y-4">
-                            <p>Load questions based on selected Class/Subject...</p>
-                        </div>
-                    </div>
+                <div class="bar-group">
+                    <div class="bar orange" style="height: 70%;">A+</div>
+                    <span>10%</span>
                 </div>
-
-                <div id="student-dashboard" class="role-dashboard hidden">
-                    <h2 class="text-3xl font-bold mb-6 p-4 bg-blue-800/20 rounded-lg dashboard-header-student">👦 Student: Quiz & Progress</h2>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div class="p-5 glass-card rounded-xl text-center border-blue-500 border-l-4">
-                            <h3 class="text-xl font-semibold text-blue-400">Total Coins 💰</h3>
-                            <p id="student-coins" class="text-4xl font-bold mt-2">0</p>
-                        </div>
-                        <div class="p-5 glass-card rounded-xl text-center border-yellow-500 border-l-4">
-                            <h3 class="text-xl font-semibold text-yellow-400">Current Trophy 🏆</h3>
-                            <p id="student-trophy" class="text-4xl font-bold mt-2">None</p>
-                        </div>
-                        <div class="p-5 glass-card rounded-xl text-center border-green-500 border-l-4">
-                            <h3 class="text-xl font-semibold text-green-400">MCQs Attempted</h3>
-                            <p id="student-mcqs-attempted" class="text-4xl font-bold mt-2">0</p>
-                        </div>
-                    </div>
-
-                    <div class="p-6 glass-card rounded-xl mb-8">
-                        <h3 class="text-2xl font-bold mb-4 text-blue-400">▶️ Start Quiz</h3>
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <select id="quiz-class" class="p-3 rounded-lg bg-gray-700">
-                                <option value="" disabled selected>Select Class</option>
-                                </select>
-                            <select id="quiz-subject" class="p-3 rounded-lg bg-gray-700">
-                                <option value="" disabled selected>Select Subject</option>
-                                </select>
-                        </div>
-                        <button onclick="startQuiz()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 font-bold rounded-lg">Load Quiz</button>
-                        
-                        <div id="mcq-quiz-container" class="mt-6 hidden">
-                            <p id="quiz-status" class="text-center text-lg font-semibold mb-4"></p>
-                            <div id="current-mcq" class="p-4 glass-card rounded-xl">
-                                <p id="mcq-question-text" class="text-xl font-bold mb-4">Question will appear here...</p>
-                                <div id="mcq-options" class="space-y-3">
-                                    </div>
-                                <div id="mcq-feedback" class="text-center text-lg font-bold p-3 mt-4 rounded-lg hidden"></div>
-                                <button onclick="submitAnswer()" class="w-full py-2 mt-4 bg-green-600 hover:bg-green-700 font-bold rounded-lg">Submit Answer</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bar-group">
+                    <div class="bar purple" style="height: 50%;">B%</div>
+                    <span>20%</span>
                 </div>
-
-                <div id="leaderboard-view" class="role-dashboard hidden">
-                    <h2 class="text-3xl font-bold mb-6 p-4 bg-gray-800/20 rounded-lg dashboard-header-student">📊 Global Leaderboards</h2>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                        <button onclick="loadLeaderboard('overall')" class="py-3 bg-indigo-600 hover:bg-indigo-700 font-bold rounded-lg">Overall Rank</button>
-                        
-                        <select id="lb-class-select" onchange="loadLeaderboard('class')" class="py-3 px-4 rounded-lg bg-gray-700 font-bold">
-                            <option value="class-default" disabled selected>Class-Wise Rank</option>
-                            </select>
-                        
-                        <div class="flex gap-2">
-                            <select id="lb-subject-class-select" class="py-3 px-2 rounded-lg bg-gray-700 font-bold w-1/2">
-                                <option value="" disabled selected>Class</option>
-                                </select>
-                            <select id="lb-subject-select" onchange="loadLeaderboard('subject')" class="py-3 px-2 rounded-lg bg-gray-700 font-bold w-1/2">
-                                <option value="" disabled selected>Subject-Wise Rank</option>
-                                </select>
-                        </div>
-                    </div>
-
-                    <div class="p-6 glass-card rounded-xl">
-                        <h3 id="leaderboard-title" class="text-2xl font-bold mb-4 text-pink-400">Overall Top 10 Students</h3>
-                        <table class="min-w-full divide-y divide-gray-700">
-                            <thead class="bg-gray-700">
-                                <tr>
-                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Rank</th>
-                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Student Name</th>
-                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Class</th>
-                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider hidden sm:table-cell">School</th>
-                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Trophy</th>
-                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Coins 💰</th>
-                                </tr>
-                            </thead>
-                            <tbody id="leaderboard-body" class="divide-y divide-gray-800">
-                                <tr><td colspan="6" class="p-4 text-center">Select a leaderboard view to begin.</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="bar-group">
+                    <div class="bar lightblue" style="height: 30%;">2%</div>
+                    <span>C</span>
                 </div>
-
+                <div class="bar-group">
+                    <div class="bar red" style="height: 15%;">S</div>
+                    <span>5%</span>
+                </div>
             </div>
         </div>
 
-    </div>
-
-    <script type="module">
-        // ----------------------------------------------------
-        // 1. FIREBASE CONFIGURATION & IMPORTS
-        // ----------------------------------------------------
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, collection, addDoc, setDoc, doc, getDoc, getDocs, updateDoc, onSnapshot, query, where, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-        // !!! REPLACE WITH YOUR ACTUAL CONFIG !!!
-        const firebaseConfig = {
-            apiKey: "your-api-key",
-            authDomain: "your-project-id.firebaseapp.com",
-            projectId: "your-project-id",
-            storageBucket: "your-project-id.appspot.com",
-            messagingSenderId: "your-sender-id",
-            appId: "your-app-id", // Used for artifacts path
-            databaseURL: "https://your-project-id-default-rtdb.firebaseio.com", // for RTDB
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        const APP_ID = firebaseConfig.appId;
-
-        // Base path for Firestore collections
-        const ARTIFACTS_PATH = `artifacts/${APP_ID}`;
-
-        // ----------------------------------------------------
-        // 2. GLOBAL STATE & UTILS
-        // ----------------------------------------------------
-        let currentUser = null;
-        let currentRole = null;
-        let userDocRef = null;
-        let quizMCQs = [];
-        let currentQuizIndex = 0;
-
-        const USERS = {}; // Local cache for all user data
-
-        const CLASSES = [1, 2, 3, 4, 5, 6, 7, 8];
-        const SUBJECTS = ['Math', 'English', 'EVS', 'Urdu', 'Kashmiri', 'SST'];
-        const TROPHY_LEVELS = {
-            Bronze: 2500,
-            Silver: 5000,
-            Gold: 7500
-        };
-        const TROPHY_ICONS = {
-            None: '⚪', Bronze: '🥉', Silver: '🥈', Gold: '🥇'
-        };
-
-        const schoolList = {}; // To store actual school names
-
-        // DOM elements
-        const authView = document.getElementById('auth-view');
-        const dashboardView = document.getElementById('dashboard-view');
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('sig
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Government Primary School Pet inhgam Wagoora</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    body { margin:0; font-family:"Nunito", sans-serif; background:#f6f7fb; }
-
-    /* Topbar */
-    .topbar {
-      background:#003566; color:white; padding:6px 10px;
-      display:flex; justify-content:space-between; flex-wrap:wrap;
-      font-size:14px;
-    }
-
-    /* MENU BUTTONS (NEW COLORS) */
-    .nav .btn {
-      padding:10px 16px;
-      background:#000080;
-      color:pink;
-      border-radius:6px;
-      margin:0 4px;
-      text-decoration:none;
-      transition:0.3s;
-      font-weight:700;
-    }
-    .nav .btn:hover { background:#800080; }
-
-    /* HERO SLIDER */
-    .hero { height:260px; overflow:hidden; position:relative; }
-    .slides { display:flex; width:300%; animation:slide 18s infinite; }
-    @keyframes slide {
-      0% { transform:translateX(0%); }
-      33% { transform:translateX(-100%); }
-      66% { transform:translateX(-200%); }
-      100% { transform:translateX(0%); }
-    }
-    .slide {
-      width:100%; height:260px; background-size:cover;
-      background-position:center; position:relative;
-      display:flex; align-items:center; padding:20px;
-      color:white;
-    }
-    .slide .content { background:rgba(0,0,0,0.45); padding:20px; border-radius:8px; }
-
-    /* YELLOW SCROLLING NOTIFICATIONS */
-    .ticker {
-      background:#ffeb3b;
-      padding:6px;
-      display:flex;
-      align-items:center;
-      border-bottom:2px solid #d4c000;
-    }
-    .ticker .label { font-weight:bold; margin-right:10px; }
-    .marquee {
-      overflow:hidden; white-space:nowrap;
-    }
-    .marquee p {
-      display:inline-block;
-      animation:marq 12s linear infinite;
-      font-weight:700;
-      color:#333;
-    }
-    @keyframes marq {
-      0% { transform:translateX(100%); }
-      100% { transform:translateX(-100%); }
-    }
-
-    /* COLOURED CARDS */
-    .quick-links {
-      display:flex; gap:12px; padding:12px; flex-wrap:wrap;
-    }
-    .card {
-      flex:1; min-width:200px;
-      background:A1D99B;
-      padding:14px;
-      border-radius:10px;
-      text-align:center;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
-      border-top:4px solid #0077b6;
-    }
-    .card:nth-child(2){ border-top-color:#ff6b6b; }
-    .card:nth-child(3){ border-top-color:#43aa8b; }
-    .card:nth-child(4){ border-top-color:#f3722c; }
-    .card .icon { font-size:32px; font-weight:800; }
-
-    /* SCROLLING GALLERY */
-    .scroll-gallery {
-      white-space:nowrap;
-      overflow-x:auto;
-      padding:10px;
-    }
-    .scroll-gallery img {
-      width:260px;
-      height:150px;
-      object-fit:cover;
-      margin-right:10px;
-      border-radius:10px;
-      display:inline-block;
-    }
-
-    /* OUR HEROES SECTION */
-    .heroes {
-      padding:14px;
-    }
-    .hero-grid {
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .hero-card {
-      width:200px;
-      background:white;
-      border-radius:12px;
-      padding:12px;
-      text-align:center;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
-    }
-    .hero-card img {
-      width:100%; height:180px; object-fit:cover;
-      border-radius:10px;
-    }
-    .hero-card h4 { margin:6px 0 2px; }
-    .hero-card small { color:#444; }
-
-    /* ADMIN PANEL BUTTON */
-    .admin-btn {
-      background:#d62828;
-      color:white;
-      padding:10px 16px;
-      border-radius:6px;
-      text-decoration:none;
-      font-weight:800;
-      display:inline-block;
-      margin:10px;
-    }
-  </style>
-
-</head>
-<body>
-  <!-- Header + nav -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="brand">
-        <img src="assets/images/logo.png" alt="GPS Pethgam Wagoora Logo" onerror="this.src='https://via.placeholder.com/64'">
-        <div>
-          <h1>Government Primary School Pethgam Wagoora</h1>
-          <p>Quality Education for Every Child</p>
-        </div>
-      </div>
-
-      <nav class="nav" aria-label="Main navigation">
-        <a class="btn" href="index.html">Home</a>
-        <a class="btn" href="about.html">About</a>
-        <a class="btn" href="admissions.html">Admissions</a>
-        <a class="btn" href="academics.html">Academics</a>
-        <a class="btn" href="students.html">Students</a>
-        <a class="btn" href="teachers.html">Teachers</a>
-        <a class="btn" href="gallery.html">Gallery</a>
-        <a class="btn" href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-    <!-- NEW ADMIN PANEL BUTTON -->
-    <a class="admin-btn" href="admin.html">ADMIN PANEL</a>
-  </nav>
-</header>
-
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Government Primary School Pethgam Wagoora</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-
-  <!-- Top contact bar -->
-  <div class="topbar">
-    <div class="left">
-      <div><strong>Phone:</strong> 7006261694 | 9596449881</div>
-      <div><strong>Email:</strong> <a href="mailto:pspethgam@gmail.com">pspethgam@gmail.com</a></div>
-      <div class="udise"><strong>UDISE:</strong> 01022202207</div>
-    </div>
-    <div class="right">
-      <div>HOI: Mohammad Ashraf Rather</div>
-    </div>
-  </div>
-
-  <main class="container">
-
-    <!-- HERO -->
-    <section class="hero" aria-label="Hero banner">
-      <div class="slides">
-        <div class="slide" style="background-image:url('assets/images/hero1.jpg')">
-          <div class="content">
-            <h2>Welcome to Government Primary School Pethgam Wagoora</h2>
-            <p>Creating a safe, inclusive and learning-focused environment for our children.</p>
-            <div class="cta-row">
-              <a class="cta" href="admissions.html">Apply Online</a>
-              <a class="cta" href="students.html">Check Results</a>
+        <div class="card events">
+            <h3>Upcoming Events</h3>
+            <div class="event-item">
+                <i class="fas fa-running sports"></i>
+                <div class="event-text">
+                    <p>Sports Day</p>
+                    <small>2nd May 2024</small>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="slide" style="background-image:url('assets/images/hero2.jpg')">
-          <div class="content">
-            <h2>Holistic education that builds character</h2>
-            <p>Activities, learning material and support for every student.</p>
-            <div class="cta-row">
-              <a class="cta" href="academics.html">Syllabus & Time Table</a>
+            <div class="event-item">
+                <i class="fas fa-paint-brush art"></i>
+                <div class="event-text">
+                    <p>Art Competition</p>
+                    <small>5th May 2024</small>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="slide" style="background-image:url('assets/images/hero3.jpg')">
-          <div class="content">
-            <h2>Community driven progress</h2>
-            <p>Parents, teachers, and local community working together.</p>
-            <div class="cta-row">
-              <a class="cta" href="contact.html">Contact Us</a>
+            <div class="event-item">
+                <i class="fas fa-seedling environment"></i>
+                <div class="event-text">
+                    <p>Environment Day</p>
+                    <small>7th June 2024</small>
+                </div>
             </div>
-          </div>
+            <button class="view-btn blue" id="view-calendar">View Calendar</button>
         </div>
-      </div>
-    </section>
+    </main>
 
-    <!-- Ticker / notifications -->
-    <div class="ticker" role="region" aria-label="Latest announcements">
-      <div class="label">Announcements</div>
-      <div class="marquee">
-        <p>
-          Admissions open for Nursery to Grade 5 — Apply online | School reopens on 1st November 2025 | Parent-teacher meeting on 10 December 2025 | Mid-day meal schedule updated.
-        </p>
-      </div>
-    </div>
-
-    <!-- Quick links -->
-    <section class="quick-links">
-      <div class="card">
-        <div class="icon">A</div>
-        <h3>Admissions 2025–26</h3>
-        <p>Online forms & guidance.</p>
-        <a href="admissions.html">Open</a>
-      </div>
-      <div class="card">
-        <div class="icon">B</div>
-        <h3>Biometric Attendance</h3>
-        <p>Teacher & Student attendance portal (Android).</p>
-        <a href="students.html">Open</a>
-      </div>
-      <div class="card">
-        <div class="icon">S</div>
-        <h3>Syllabus & Time Table</h3>
-        <p>Download class-wise syllabus.</p>
-        <a href="academics.html">Open</a>
-      </div>
-      <div class="card">
-        <div class="icon">R</div>
-        <h3>Results</h3>
-        <p>Academic results & mark sheets.</p>
-        <a href="students.html">Open</a>
-      </div>
-    </section>
-
-    <!-- News & events -->
-    <section>
-      <h3>News & Events</h3>
-      <div class="news-grid news-scroll" style="overflow:auto;white-space:nowrap">
-        <article class="news-item" style="display:inline-block; width:320px; margin-right:10px">
-          <h4>Sports Day 2025</h4>
-          <p>Students participated in athletics and traditional games. Photos uploaded to gallery.</p>
-        </article>
-        <article class="news-item" style="display:inline-block; width:320px; margin-right:10px">
-          <h4>Mid-day Meal Update</h4>
-          <p>New menu implemented from 1st Nov 2025. Nutritional guidelines followed.</p>
-        </article>
-        <article class="news-item" style="display:inline-block; width:320px; margin-right:10px">
-          <h4>Admission Notice</h4>
-          <p>Nursery to Grade 5 admissions open. Required documents listed on Admissions page.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Principal + stats -->
-    <section style="margin-top:14px;">
-      <div class="two-col">
-        <div class="principal">
-          <h3>Principal's Message</h3>
-          <p>Welcome to Government Primary School Pethgam Wagoora. Our focus is on fostering curiosity, kindness and excellence in every child. Parents and community are key partners in this journey.</p>
-          <p><strong>- Mohammad Ashraf Rather (HOI)</strong></p>
+    <section class="bottom-grid">
+        <div class="nav-box blue-grad">
+            <i class="fas fa-laptop"></i>
+            <span>E-Learning</span>
         </div>
-
-        <aside class="stats">
-          <h4>School At A Glance</h4>
-          <div class="counter"><strong class="count-to" data-to="320">0</strong><span>Students Enrolled</span></div>
-          <div class="counter"><strong class="count-to" data-to="12">0</strong><span>Teachers</span></div>
-          <div class="counter"><strong class="count-to" data-to="10">0</strong><span>Classrooms</span></div>
-          <div class="counter"><strong class="count-to" data-to="4500">0</strong><span>Library Books</span></div>
-        </aside>
-      </div>
+        <div class="nav-box green-grad">
+            <i class="fas fa-clock"></i>
+            <span>Class Timetable</span>
+        </div>
+        <div class="nav-box teal-grad">
+            <i class="fas fa-camera-retro"></i>
+            <span>Photo Gallery</span>
+        </div>
+        <div class="nav-box orange-grad">
+            <i class="fas fa-apple-alt"></i>
+            <span>Meal Menu</span>
+        </div>
     </section>
 
-    <!-- Gallery preview -->
-    <section style="margin-top:14px;">
-      <h3>Gallery</h3>
-      <div class="gallery-grid">
-        <img src="assets/images/gallery1.jpg" alt="gallery" onerror="this.src='https://via.placeholder.com/320x180'">
-        <img src="assets/images/gallery2.jpg" alt="gallery" onerror="this.src='https://via.placeholder.com/320x180'">
-        <img src="assets/images/gallery3.jpg" alt="gallery" onerror="this.src='https://via.placeholder.com/320x180'">
-        <img src="assets/images/gallery4.jpg" alt="gallery" onerror="this.src='https://via.placeholder.com/320x180'">
-      </div>
-      <p style="margin-top:8px"><a href="gallery.html">View full gallery</a></p>
-    </section>
+    <footer class="footer-links">
+        <div class="f-link"><i class="fas fa-book"></i> Library</div>
+        <div class="f-link"><i class="fas fa-id-badge"></i> Teacher Resources</div>
+        <div class="f-link"><i class="fas fa-user-friends"></i> Parent Portal</div>
+    </footer>
+</div>
 
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="inner">
-      <div>
-        <h4>Government Primary School Pethgam Wagoora</h4>
-        <small>Address: Pethgam Wagoora, (add full postal address here)</small>
-        <small>Phone: 7006261694 | 9596449881 | Email: <a href="mailto:pspethgam@gmail.com">pspethgam@gmail.com</a></small>
-      </div>
-      <div>
-        <h4>Quick Links</h4>
-        <small><a href="admissions.html">Admissions</a> • <a href="academics.html">Academics</a> • <a href="contact.html">Contact</a></small>
-      </div>
-      <div>
-        <h4>Follow</h4>
-        <small>Facebook / X / Instagram (add links)</small>
-      </div>
+<div id="calendar-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>School Academic Calendar</h2>
+        <p>Your calendar for 2024-25 is being loaded...</p>
     </div>
-    <div style="max-width:1200px;margin:auto;padding-top:12px"><small>&copy; 2025 Government Primary School Pethgam Wagoora. All rights reserved.</small></div>
-  </footer>
+</div>
 
-  <script src="assets/js/main.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

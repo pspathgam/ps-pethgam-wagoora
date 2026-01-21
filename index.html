@@ -3,343 +3,324 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Government Primary School Pet inhgam Wagoora</title>
+  <title>Government Primary School Pethgam Wagoora</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
 
   <style>
-    body { margin:0; font-family:"Nunito", sans-serif; background:#f6f7fb; }
+    /* Global Smoothness */
+    html { scroll-behavior: smooth; }
+    body { 
+      margin:0; 
+      font-family:"Nunito", sans-serif; 
+      background:#f0f4f8; 
+      color: #333;
+      overflow-x: hidden;
+    }
 
-    /* Topbar */
+    /* ANIMATIONS */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+
+    @keyframes pulseShadow {
+      0% { box-shadow: 0 5px 15px rgba(214, 40, 40, 0.4); }
+      50% { box-shadow: 0 5px 25px rgba(214, 40, 40, 0.7); }
+      100% { box-shadow: 0 5px 15px rgba(214, 40, 40, 0.4); }
+    }
+
+    /* Topbar 3D Depth */
     .topbar {
-      background:#003566; color:white; padding:6px 10px;
+      background:#003566; color:white; padding:10px 20px;
       display:flex; justify-content:space-between; flex-wrap:wrap;
       font-size:14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      position: relative; z-index: 100;
     }
+    .topbar a { color: #8ecae6; text-decoration: none; }
 
-    /* MENU BUTTONS (NEW COLORS) */
+    /* Header & 3D Nav Buttons */
+    .header { background: white; padding: 15px 0; border-bottom: 1px solid #e0e0e0; }
+    .header-inner { max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; flex-wrap: wrap; }
+    
+    .brand { display: flex; align-items: center; gap: 15px; }
+    .brand h1 { font-size: 22px; margin: 0; color: #003566; }
+    .brand p { margin: 0; font-size: 14px; color: #666; }
+
+    .nav { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
     .nav .btn {
-      padding:10px 16px;
+      padding:10px 18px;
       background:#000080;
       color:pink;
-      border-radius:6px;
-      margin:0 4px;
+      border-radius:8px;
       text-decoration:none;
-      transition:0.3s;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       font-weight:700;
+      box-shadow: 0 4px 0 #000040;
+      display: inline-block;
     }
-    .nav .btn:hover { background:#800080; }
-
-    /* HERO SLIDER */
-    .hero { height:260px; overflow:hidden; position:relative; }
-    .slides { display:flex; width:300%; animation:slide 18s infinite; }
-    @keyframes slide {
-      0% { transform:translateX(0%); }
-      33% { transform:translateX(-100%); }
-      66% { transform:translateX(-200%); }
-      100% { transform:translateX(0%); }
+    .nav .btn:hover { 
+      background:#800080; 
+      transform: translateY(-3px);
+      box-shadow: 0 7px 0 #400040;
     }
-    .slide {
-      width:100%; height:260px; background-size:cover;
-      background-position:center; position:relative;
-      display:flex; align-items:center; padding:20px;
-      color:white;
-    }
-    .slide .content { background:rgba(0,0,0,0.45); padding:20px; border-radius:8px; }
-
-    /* YELLOW SCROLLING NOTIFICATIONS */
-    .ticker {
-      background:#ffeb3b;
-      padding:6px;
-      display:flex;
-      align-items:center;
-      border-bottom:2px solid #d4c000;
-    }
-    .ticker .label { font-weight:bold; margin-right:10px; }
-    .marquee {
-      overflow:hidden; white-space:nowrap;
-    }
-    .marquee p {
-      display:inline-block;
-      animation:marq 12s linear infinite;
-      font-weight:700;
-      color:#333;
-    }
-    @keyframes marq {
-      0% { transform:translateX(100%); }
-      100% { transform:translateX(-100%); }
+    .nav .btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 0px 0 #400040;
     }
 
-    /* COLOURED CARDS */
-    .quick-links {
-      display:flex; gap:12px; padding:12px; flex-wrap:wrap;
-    }
-    .card {
-      flex:1; min-width:200px;
-      background:A1D99B;
-      padding:14px;
-      border-radius:10px;
-      text-align:center;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
-      border-top:4px solid #0077b6;
-    }
-    .card:nth-child(2){ border-top-color:#ff6b6b; }
-    .card:nth-child(3){ border-top-color:#43aa8b; }
-    .card:nth-child(4){ border-top-color:#f3722c; }
-    .card .icon { font-size:32px; font-weight:800; }
-
-    /* SCROLLING GALLERY */
-    .scroll-gallery {
-      white-space:nowrap;
-      overflow-x:auto;
-      padding:10px;
-    }
-    .scroll-gallery img {
-      width:260px;
-      height:150px;
-      object-fit:cover;
-      margin-right:10px;
-      border-radius:10px;
-      display:inline-block;
-    }
-
-    /* OUR HEROES SECTION */
-    .heroes {
-      padding:14px;
-    }
-    .hero-grid {
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .hero-card {
-      width:200px;
-      background:white;
-      border-radius:12px;
-      padding:12px;
-      text-align:center;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
-    }
-    .hero-card img {
-      width:100%; height:180px; object-fit:cover;
-      border-radius:10px;
-    }
-    .hero-card h4 { margin:6px 0 2px; }
-    .hero-card small { color:#444; }
-
-    /* ADMIN PANEL BUTTON */
+    /* Admin Panel Button Styling */
     .admin-btn {
       background:#d62828;
-      color:white;
-      padding:10px 16px;
-      border-radius:6px;
+      color:white !important;
+      padding:10px 20px;
+      border-radius:8px;
       text-decoration:none;
       font-weight:800;
       display:inline-block;
-      margin:10px;
+      margin:15px;
+      animation: pulseShadow 2s infinite;
+      transition: 0.3s;
+    }
+    .admin-btn:hover { transform: scale(1.05); background: #b91d1d; }
+
+    /* HERO SLIDER WITH GLASSMORPHISM */
+    .hero { 
+      height:380px; overflow:hidden; position:relative; 
+      margin: 20px; border-radius: 25px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .slides { display:flex; width:300%; animation:slide 18s infinite; }
+    @keyframes slide {
+      0% { transform:translateX(0%); }
+      30% { transform:translateX(0%); }
+      33% { transform:translateX(-100%); }
+      63% { transform:translateX(-100%); }
+      66% { transform:translateX(-200%); }
+      96% { transform:translateX(-200%); }
+      100% { transform:translateX(0%); }
+    }
+    .slide {
+      width:100%; height:380px; background-size:cover;
+      background-position:center; display:flex; align-items:center; 
+      padding:40px; color:white;
+    }
+    .slide .content { 
+      background:rgba(0,0,0,0.5); 
+      backdrop-filter: blur(8px);
+      padding:30px; border-radius:20px; 
+      border: 1px solid rgba(255,255,255,0.2);
+      max-width: 600px;
+      animation: fadeInUp 1s ease-out;
+    }
+    .cta { 
+      display: inline-block; padding: 12px 24px; background: #ffb703; 
+      color: #023047; text-decoration: none; font-weight: 800; 
+      border-radius: 30px; margin-top: 15px; transition: 0.3s;
+    }
+    .cta:hover { transform: scale(1.1); box-shadow: 0 10px 20px rgba(255,183,3,0.4); }
+
+    /* Ticker */
+    .ticker { background:#ffeb3b; padding:10px; border-bottom:3px solid #fbc02d; display:flex; align-items:center; }
+    .ticker .label { background: #d62828; color: white; padding: 4px 12px; border-radius: 4px; font-weight: bold; margin-right: 15px; }
+
+    /* QUICK LINK CARDS - 3D FLOAT */
+    .quick-links { display:flex; gap:20px; padding:30px 20px; flex-wrap:wrap; max-width: 1200px; margin: auto; }
+    .card {
+      flex:1; min-width:220px;
+      background: white;
+      padding:30px 20px;
+      border-radius:20px;
+      text-align:center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-bottom: 5px solid #0077b6;
+      animation: fadeInUp 0.8s both;
+    }
+    .card:hover { transform: translateY(-15px) rotateX(5deg); box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
+    .card:nth-child(2){ border-bottom-color:#ff6b6b; }
+    .card:nth-child(3){ border-bottom-color:#43aa8b; }
+    .card:nth-child(4){ border-bottom-color:#f3722c; }
+    .card .icon { font-size:40px; margin-bottom: 15px; display: block; }
+    .card a { display: inline-block; margin-top: 15px; color: #003566; font-weight: 800; text-decoration: none; border: 1px solid #003566; padding: 5px 15px; border-radius: 20px; transition: 0.3s; }
+    .card a:hover { background: #003566; color: white; }
+
+    /* Layout Containers */
+    .container { max-width: 1200px; margin: auto; padding: 20px; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+    
+    /* Stats & Principal Section */
+    .principal, .stats { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .counter { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f0f0f0; transition: 0.3s; }
+    .counter:hover { padding-left: 10px; color: #0077b6; background: #fafafa; }
+    .counter strong { font-size: 20px; color: #003566; }
+
+    /* Gallery Hover Effects */
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+    .gallery-grid img { width: 100%; border-radius: 15px; transition: 0.4s; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .gallery-grid img:hover { transform: scale(1.05) rotate(1deg); filter: brightness(1.1); }
+
+    /* Footer */
+    .footer { background: #001d3d; color: white; padding: 60px 20px 20px; margin-top: 50px; border-radius: 50px 50px 0 0; }
+    .footer .inner { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+    .footer h4 { color: #ffb703; margin-bottom: 20px; }
+    .footer a { color: #8ecae6; text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; }
+      .header-inner { justify-content: center; text-align: center; }
+      .nav { justify-content: center; }
     }
   </style>
-
 </head>
+
 <body>
-  <!-- Header + nav -->
+
+  <div class="topbar">
+    <div class="left">
+      <span><strong><i class="fas fa-phone"></i></strong> 7006261694 | 9596449881</span>
+      <span style="margin-left:20px"><strong><i class="fas fa-envelope"></i></strong> <a href="mailto:pspethgam@gmail.com">pspethgam@gmail.com</a></span>
+    </div>
+    <div class="right">
+      <span><strong>UDISE:</strong> 01022202207 | <strong>HOI:</strong> Mohammad Ashraf Rather</span>
+    </div>
+  </div>
+
   <header class="header">
     <div class="header-inner">
       <div class="brand">
-        <img src="assets/images/logo.png" alt="GPS Pethgam Wagoora Logo" onerror="this.src='https://via.placeholder.com/64'">
+        <img src="https://via.placeholder.com/64" alt="Logo" style="border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
         <div>
           <h1>Government Primary School Pethgam Wagoora</h1>
           <p>Quality Education for Every Child</p>
         </div>
       </div>
 
-      <nav class="nav" aria-label="Main navigation">
+      <nav class="nav">
         <a class="btn" href="index.html">Home</a>
         <a class="btn" href="about.html">About</a>
         <a class="btn" href="admissions.html">Admissions</a>
         <a class="btn" href="academics.html">Academics</a>
         <a class="btn" href="students.html">Students</a>
-        <a class="btn" href="teachers.html">Teachers</a>
         <a class="btn" href="gallery.html">Gallery</a>
-        <a class="btn" href="contact.html">Contact</a>
+        <a class="admin-btn" href="admin.html">ADMIN PANEL</a>
       </nav>
     </div>
   </header>
 
-    <!-- NEW ADMIN PANEL BUTTON -->
-    <a class="admin-btn" href="admin.html">ADMIN PANEL</a>
-  </nav>
-</header>
-
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Government Primary School Pethgam Wagoora</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-
-  <!-- Top contact bar -->
-  <div class="topbar">
-    <div class="left">
-      <div><strong>Phone:</strong> 7006261694 | 9596449881</div>
-      <div><strong>Email:</strong> <a href="mailto:pspethgam@gmail.com">pspethgam@gmail.com</a></div>
-      <div class="udise"><strong>UDISE:</strong> 01022202207</div>
-    </div>
-    <div class="right">
-      <div>HOI: Mohammad Ashraf Rather</div>
-    </div>
-  </div>
-
-  <main class="container">
-
-    <!-- HERO -->
-    <section class="hero" aria-label="Hero banner">
+  <main>
+    <section class="hero">
       <div class="slides">
-        <div class="slide" style="background-image:url('assets/images/hero1.jpg')">
+        <div class="slide" style="background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1350&q=80')">
           <div class="content">
-            <h2>Welcome to Government Primary School Pethgam Wagoora</h2>
+            <h2>Welcome to GPS Pethgam Wagoora</h2>
             <p>Creating a safe, inclusive and learning-focused environment for our children.</p>
-            <div class="cta-row">
-              <a class="cta" href="admissions.html">Apply Online</a>
-              <a class="cta" href="students.html">Check Results</a>
-            </div>
+            <a class="cta" href="admissions.html">Apply Now</a>
           </div>
         </div>
-        <div class="slide" style="background-image:url('assets/images/hero2.jpg')">
+        <div class="slide" style="background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1350&q=80')">
           <div class="content">
-            <h2>Holistic education that builds character</h2>
-            <p>Activities, learning material and support for every student.</p>
-            <div class="cta-row">
-              <a class="cta" href="academics.html">Syllabus & Time Table</a>
-            </div>
-          </div>
-        </div>
-        <div class="slide" style="background-image:url('assets/images/hero3.jpg')">
-          <div class="content">
-            <h2>Community driven progress</h2>
-            <p>Parents, teachers, and local community working together.</p>
-            <div class="cta-row">
-              <a class="cta" href="contact.html">Contact Us</a>
-            </div>
+            <h2>Character & Excellence</h2>
+            <p>We focus on holistic education that builds a strong foundation for the future.</p>
+            <a class="cta" href="academics.html">View Syllabus</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Ticker / notifications -->
-    <div class="ticker" role="region" aria-label="Latest announcements">
-      <div class="label">Announcements</div>
-      <div class="marquee">
-        <p>
-          Admissions open for Nursery to Grade 5 — Apply online | School reopens on 1st November 2025 | Parent-teacher meeting on 10 December 2025 | Mid-day meal schedule updated.
-        </p>
-      </div>
+    <div class="ticker">
+      <div class="label">Latest Updates</div>
+      <marquee font-weight="700">
+        Admissions open for Nursery to Grade 5 — Apply online | Parent-teacher meeting on 10 December 2025 | New Mid-day meal schedule implemented.
+      </marquee>
     </div>
 
-    <!-- Quick links -->
     <section class="quick-links">
       <div class="card">
-        <div class="icon">A</div>
-        <h3>Admissions 2025–26</h3>
-        <p>Online forms & guidance.</p>
-        <a href="admissions.html">Open</a>
+        <span class="icon">📝</span>
+        <h3>Admissions</h3>
+        <p>Forms and guidelines for 2025–26 session.</p>
+        <a href="admissions.html">Open Portal</a>
       </div>
       <div class="card">
-        <div class="icon">B</div>
-        <h3>Biometric Attendance</h3>
-        <p>Teacher & Student attendance portal (Android).</p>
-        <a href="students.html">Open</a>
+        <span class="icon">📲</span>
+        <h3>Attendance</h3>
+        <p>Digital Biometric portal for students and staff.</p>
+        <a href="students.html">View Status</a>
       </div>
       <div class="card">
-        <div class="icon">S</div>
-        <h3>Syllabus & Time Table</h3>
-        <p>Download class-wise syllabus.</p>
-        <a href="academics.html">Open</a>
+        <span class="icon">📚</span>
+        <h3>Academics</h3>
+        <p>Download your class Time Table and Syllabus.</p>
+        <a href="academics.html">Download</a>
       </div>
       <div class="card">
-        <div class="icon">R</div>
+        <span class="icon">🏆</span>
         <h3>Results</h3>
-        <p>Academic results & mark sheets.</p>
-        <a href="students.html">Open</a>
+        <p>Access annual performance and mark sheets.</p>
+        <a href="students.html">Check Result</a>
       </div>
     </section>
 
-    <!-- News & events -->
-    <section>
-      <h3>News & Events</h3>
-      <div class="news-grid news-scroll" style="overflow:auto;white-space:nowrap">
-        <article class="news-item" style="display:inline-block; width:320px; margin-right:10px">
-          <h4>Sports Day 2025</h4>
-          <p>Students participated in athletics and traditional games. Photos uploaded to gallery.</p>
-        </article>
-        <article class="news-item" style="display:inline-block; width:320px; margin-right:10px">
-          <h4>Mid-day Meal Update</h4>
-          <p>New menu implemented from 1st Nov 2025. Nutritional guidelines followed.</p>
-        </article>
-        <article class="news-item" style="display:inline-block; width:320px; margin-right:10px">
-          <h4>Admission Notice</h4>
-          <p>Nursery to Grade 5 admissions open. Required documents listed on Admissions page.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Principal + stats -->
-    <section style="margin-top:14px;">
+    <div class="container">
       <div class="two-col">
-        <div class="principal">
-          <h3>Principal's Message</h3>
-          <p>Welcome to Government Primary School Pethgam Wagoora. Our focus is on fostering curiosity, kindness and excellence in every child. Parents and community are key partners in this journey.</p>
+        <section class="principal">
+          <h3 style="color:#003566; border-left: 5px solid #ffb703; padding-left: 15px;">Principal's Message</h3>
+          <p>Welcome to Government Primary School Pethgam Wagoora. Our focus is on fostering curiosity, kindness and excellence in every child. We believe that every student has a unique potential that deserves to be nurtured through modern teaching methods and community support.</p>
           <p><strong>- Mohammad Ashraf Rather (HOI)</strong></p>
-        </div>
+        </section>
 
         <aside class="stats">
-          <h4>School At A Glance</h4>
-          <div class="counter"><strong class="count-to" data-to="320">0</strong><span>Students Enrolled</span></div>
-          <div class="counter"><strong class="count-to" data-to="12">0</strong><span>Teachers</span></div>
-          <div class="counter"><strong class="count-to" data-to="10">0</strong><span>Classrooms</span></div>
-          <div class="counter"><strong class="count-to" data-to="4500">0</strong><span>Library Books</span></div>
+          <h4 style="margin-top:0">School Highlights</h4>
+          <div class="counter"><span>Students Enrolled</span> <strong>320+</strong></div>
+          <div class="counter"><span>Qualified Teachers</span> <strong>12</strong></div>
+          <div class="counter"><span>Smart Classrooms</span> <strong>10</strong></div>
+          <div class="counter"><span>Library Books</span> <strong>4500+</strong></div>
         </aside>
       </div>
-    </section>
 
-    <!-- Gallery preview -->
-    <section style="margin-top:14px;">
-      <h3>Gallery</h3>
-      <div class="gallery-grid">
-        <img src="assets/images/gallery1.jpg" alt="gallery" onerror="this.src='https://via.placeholder.com/320x180'">
-        <img src="assets/images/gallery2.jpg" alt="gallery" onerror="this.src='https://via.placeholder.com/320x180'">
-        <img src="assets/images/gallery3.jpg" alt="gallery" onerror="this.src='https://via.placeholder.com/320x180'">
-        <img src="assets/images/gallery4.jpg" alt="gallery" onerror="this.src='https://via.placeholder.com/320x180'">
-      </div>
-      <p style="margin-top:8px"><a href="gallery.html">View full gallery</a></p>
-    </section>
-
+      <section style="margin-top:40px;">
+        <h3 style="text-align:center; margin-bottom:30px;">School Gallery</h3>
+        <div class="gallery-grid">
+          <img src="https://via.placeholder.com/400x250" alt="Activity 1">
+          <img src="https://via.placeholder.com/400x250" alt="Activity 2">
+          <img src="https://via.placeholder.com/400x250" alt="Activity 3">
+        </div>
+      </section>
+    </div>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="inner">
       <div>
-        <h4>Government Primary School Pethgam Wagoora</h4>
-        <small>Address: Pethgam Wagoora, (add full postal address here)</small>
-        <small>Phone: 7006261694 | 9596449881 | Email: <a href="mailto:pspethgam@gmail.com">pspethgam@gmail.com</a></small>
+        <h4>GPS Pethgam Wagoora</h4>
+        <p><small>Address: Pethgam Wagoora, District Baramulla, Jammu & Kashmir.</small></p>
+        <p><small>Phone: 7006261694 | 9596449881</small></p>
       </div>
       <div>
-        <h4>Quick Links</h4>
-        <small><a href="admissions.html">Admissions</a> • <a href="academics.html">Academics</a> • <a href="contact.html">Contact</a></small>
+        <h4>Useful Links</h4>
+        <ul style="list-style:none; padding:0; font-size:14px;">
+          <li><a href="admissions.html">Admission Forms</a></li>
+          <li><a href="academics.html">School Calendar</a></li>
+          <li><a href="gallery.html">Photo Gallery</a></li>
+        </ul>
       </div>
       <div>
-        <h4>Follow</h4>
-        <small>Facebook / X / Instagram (add links)</small>
+        <h4>Connect</h4>
+        <p><small>Follow our official social media handles for daily school activity updates.</small></p>
       </div>
     </div>
-    <div style="max-width:1200px;margin:auto;padding-top:12px"><small>&copy; 2025 Government Primary School Pethgam Wagoora. All rights reserved.</small></div>
+    <div style="text-align:center; margin-top:40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+      <small>&copy; 2026 Government Primary School Pethgam Wagoora. Created for Excellence.</small>
+    </div>
   </footer>
 
-  <script src="assets/js/main.js"></script>
 </body>
 </html>
+                        
